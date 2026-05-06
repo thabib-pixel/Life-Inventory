@@ -222,6 +222,7 @@
       <div id="modalFields"></div>
       <p class="hint">Your inventory saves on this device using local storage. Use Export Backup after major updates.</p>
       <div class="modal-actions">
+        <button class="btn btn-white" id="modalDeleteBtn" onclick="deleteCurrentItem()" style="display:none;background:#fff1f1;color:#8b1e1e;border-color:#e5b4b4;">Delete Product</button>
         <button class="btn btn-white" id="modalCancelBtn" onclick="closeForm()">Cancel</button>
         <button class="btn btn-black" id="modalSaveBtn" onclick="saveForm()">Save</button>
       </div>
@@ -10109,7 +10110,7 @@ let outfits = load(STORAGE_OUTFITS, starterOutfits);
 const starterOutfitById = Object.fromEntries(starterOutfits.map(o => [o.id, o]));
 starterOutfits.forEach(so => { if (!outfits.some(o => o.id === so.id)) outfits.push(so); });
 save(STORAGE_OUTFITS, outfits);
-let selectedBeautySeasons = ["All Year"], selectedClosetSeasons = ["All Year"], selectedRoles = [], selectedOccasions = [], selectedVibes = [], selectedImage = ""; let previewMode = "hybrid"; let openingCart = [];
+let selectedBeautySeasons = ["All Year"], selectedClosetSeasons = ["All Year"], selectedRoles = [], selectedOccasions = [], selectedVibes = [], selectedImage = ""; let previewMode = "hybrid";
 
 function load(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch(e) { return fallback; } }
 function save(key, value) {
@@ -10148,7 +10149,6 @@ function renderHero() {
     : "A virtual closet to catalog clothes, shoes, bags, accessories, jewelry, outfit ideas, donations, resell items, and borrowed pieces.";
   document.getElementById("actionButtons").innerHTML = activeModule === "beauty"
     ? `<button class="btn btn-black" onclick="openForm()">+ Add Product</button>
-       <button class="btn btn-white" onclick="openOpeningCart()">Opening Cart (<span id="cartCount">${openingCart.length}</span>)</button>
        <button class="btn btn-white" onclick="exportBackup()">Export Backup</button>
        <button class="btn btn-white" onclick="document.getElementById('backupInput')?.click()">Import Backup</button>
        <input id="backupInput" type="file" accept="application/json" style="display:none" onchange="importBackup(event)" />
@@ -10241,7 +10241,9 @@ function visualHtml(image, emoji, brand, subcat) {
     : `<div class="visual-inner"><div class="emoji">${emoji}</div><div class="brand-mini">${esc(brand)}</div><div class="subcat">${esc(subcat)}</div></div>`;
 }
 function productGroupKey(p) {
-  return [p.brand||"", p.name||"", p.subcategory||""].map(x => String(x).toLowerCase().trim()).join("||");
+  // One listing per product: brand + official product name.
+  // Shades, sizes, backup/open status, and quantities appear as options inside the pop-up.
+  return [p.brand||"", p.name||""].map(x => String(x).toLowerCase().trim()).join("||");
 }
 function groupBeautyItems(items) {
   const map = new Map();
@@ -10500,7 +10502,7 @@ function openBeautyGroup(encodedKey) {
   document.getElementById("modalFields").innerHTML = `
     <div class="cart-box">
       <strong>Product Options</strong>
-      <p class="hint" style="margin:6px 0 0;">Similar to a Sephora shade/size pop-up: each shade, size, package status, and quantity is listed below. Use “Add to Opening Cart” when you are opening a backup/unopened package.</p>
+      <p class="hint" style="margin:6px 0 0;">Each shade, size, package status, and quantity is listed below. To update inventory, click Edit and manually change the status or quantity.</p>
     </div>
     ${items.map(p => {
       const img = p.image ? `<img src="${esc(p.image)}" onerror="this.outerHTML='<div class=&quot;mini-img&quot;>${beautyEmoji(p.category)}</div>'" />` : `<div class="mini-img">${beautyEmoji(p.category)}</div>`;
@@ -10513,12 +10515,12 @@ function openBeautyGroup(encodedKey) {
           <div class="chips" style="margin-top:8px;"><span class="chip">${esc(p.category)}</span><span class="chip">${esc((p.seasons||[]).join(", "))}</span>${isRunningLow(p)?'<span class="chip">Running Low</span>':''}${p.discontinued?'<span class="chip chip-discontinued">Discontinued</span>':''}</div>${p.discontinuedReason ? `<div class="variant" style="margin-top:6px;"><strong>Discontinued:</strong> ${esc(p.discontinuedReason)}</div>` : ""}
         </div>
         <div class="variant-actions">
-          <button class="tiny-btn black" onclick="addToOpeningCart(${p.id})">Add to Opening Cart</button>
-          <button class="tiny-btn" onclick="openForm(${p.id})">Edit</button>
+          <button class="tiny-btn black" onclick="openForm(${p.id})">Edit</button>
         </div>
       </div>`;
     }).join("")}`;
   document.getElementById("modalSaveBtn").style.display = "none";
+  document.getElementById("modalDeleteBtn").style.display = "none";
   document.getElementById("modalCancelBtn").textContent = "Close";
   document.getElementById("itemModal").classList.add("open");
 }
@@ -10528,78 +10530,19 @@ function statusLabel(p) {
   if (p.status === "Unopened") return "Unopened";
   return p.status || "Unknown";
 }
-function addToOpeningCart(id) {
-  const p = beautyProducts.find(x => x.id === id);
-  if (!p) return;
-  openingCart.push(id);
-  save(STORAGE_BEAUTY, beautyProducts);
-  alert(`${p.brand} ${p.name}${p.variant ? " - " + p.variant : ""} added to Opening Cart.`);
-  renderHero();
-}
-function openOpeningCart() {
-  document.getElementById("modalEyebrow").textContent = "Beauty Shelf";
-  document.getElementById("modalTitle").textContent = `Opening Cart (${openingCart.length})`;
-  if (!openingCart.length) {
-    document.getElementById("modalFields").innerHTML = `<div class="cart-box">No packages are in your Opening Cart yet. Open a product pop-up and tap “Add to Opening Cart.”</div>`;
-  } else {
-    const counts = openingCart.reduce((acc,id)=>{ acc[id]=(acc[id]||0)+1; return acc; }, {});
-    document.getElementById("modalFields").innerHTML = `
-      <div class="cart-box"><strong>Ready to open?</strong><p class="hint" style="margin:6px 0 0;">Confirming will move one unit from backup/unopened stock into opened/in-use status and update quantities.</p></div>
-      ${Object.entries(counts).map(([id,count]) => {
-        const p = beautyProducts.find(x => x.id == id);
-        if (!p) return "";
-        return `<div class="variant-row">
-          ${p.image ? `<img src="${esc(p.image)}" />` : `<div class="mini-img">${beautyEmoji(p.category)}</div>`}
-          <div><p class="brand" style="margin:0 0 4px;">${esc(p.brand)}</p><div class="name" style="font-size:16px;">${esc(p.name)}</div><div class="variant">${esc(p.variant)} • Open ${count} • Current Qty ${esc(p.quantity)} • ${esc(statusLabel(p))}</div></div>
-          <div class="variant-actions"><button class="tiny-btn" onclick="removeFromOpeningCart(${p.id})">Remove one</button></div>
-        </div>`;
-      }).join("")}`;
-  }
-  document.getElementById("modalSaveBtn").style.display = openingCart.length ? "inline-flex" : "none";
-  document.getElementById("modalSaveBtn").textContent = "Confirm Opened";
-  document.getElementById("modalSaveBtn").onclick = confirmOpeningCart;
-  document.getElementById("modalCancelBtn").textContent = "Close";
-  document.getElementById("itemModal").classList.add("open");
-}
-function removeFromOpeningCart(id) {
-  const idx = openingCart.indexOf(id);
-  if (idx >= 0) openingCart.splice(idx, 1);
-  openOpeningCart();
-  renderHero();
-}
-function confirmOpeningCart() {
-  if (!openingCart.length) return;
-  const ids = [...openingCart];
-  ids.forEach((id, index) => {
-    const p = beautyProducts.find(x => x.id === id);
-    if (!p) return;
-    if (Number(p.quantity || 0) > 1) {
-      p.quantity = Number(p.quantity || 0) - 1;
-      const opened = { ...p, id: Date.now() + index, quantity: 1, lowStockThreshold: 0, status: "In Use", packageState: "Opened / In Use", restockPriority: "No Rush", notes: `${p.notes || ""} Opened from backup/unopened stock.`.trim() };
-      beautyProducts.unshift(opened);
-    } else {
-      p.status = "In Use";
-      p.packageState = "Opened / In Use";
-    }
-  });
-  openingCart = [];
-  save(STORAGE_BEAUTY, beautyProducts);
-  closeForm();
-  render();
-  alert("Opening Cart confirmed. Quantities and opened status were updated.");
-}
 
 function openForm(id=null) {
   editingId = id;
   document.getElementById("modalSaveBtn").style.display = "inline-flex";
   document.getElementById("modalSaveBtn").textContent = "Save";
   document.getElementById("modalSaveBtn").onclick = saveForm;
+  document.getElementById("modalDeleteBtn").style.display = id ? "inline-flex" : "none";
   document.getElementById("modalCancelBtn").textContent = "Cancel";
   if (activeModule === "beauty") openBeautyForm(id);
   else openClosetForm(id);
   document.getElementById("itemModal").classList.add("open");
 }
-function closeForm() { document.getElementById("itemModal").classList.remove("open"); editingId=null; }
+function closeForm() { document.getElementById("itemModal").classList.remove("open"); document.getElementById("modalDeleteBtn").style.display = "none"; editingId=null; }
 function field(id, placeholder, value="", type="text") { return `<input class="field" id="${id}" type="${type}" placeholder="${placeholder}" value="${esc(value)}" />`; }
 function select(id, options, value="") { return `<select class="field" id="${id}">${options.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join("")}</select>`; }
 function textarea(id, placeholder, value="") { return `<textarea class="field" id="${id}" placeholder="${placeholder}">${esc(value)}</textarea>`; }
@@ -10652,12 +10595,51 @@ function handlePhotoUpload(event) {
   if(file.size > 900000) alert("This photo is large. Crop or use a smaller image under 1 MB if saving has issues.");
   const reader = new FileReader(); reader.onload = () => { selectedImage = reader.result; const u=document.getElementById("imageUrl"); if(u) u.value=""; const s=document.getElementById("photoStatus"); if(s) s.textContent="Photo attached"; }; reader.readAsDataURL(file);
 }
+
+function deleteCurrentItem() {
+  if (!editingId) return;
+  if (activeModule === "beauty") {
+    const item = beautyProducts.find(p => p.id === editingId);
+    const label = item ? `${item.brand || ""} ${item.name || ""}${item.variant ? " - " + item.variant : ""}`.trim() : "this product";
+    if (!confirm(`Delete ${label} from Beauty Closet? This cannot be undone unless you re-import a backup.`)) return;
+    beautyProducts = beautyProducts.filter(p => p.id !== editingId);
+    save(STORAGE_BEAUTY, beautyProducts);
+  } else {
+    const item = closetItems.find(p => p.id === editingId);
+    const label = item ? `${item.brand || ""} ${item.name || ""}`.trim() : "this closet item";
+    if (!confirm(`Delete ${label}? This cannot be undone unless you re-import a backup.`)) return;
+    closetItems = closetItems.filter(p => p.id !== editingId);
+    save(STORAGE_CLOSET, closetItems);
+  }
+  closeForm();
+  render();
+}
+
 function saveForm() {
   if (activeModule === "beauty") saveBeautyForm(); else saveClosetForm();
 }
+function isMarkedForRestock(record) {
+  const restock = String(record.restockPriority || "").toLowerCase();
+  const status = String(record.status || "").toLowerCase();
+  return restock.includes("restock") || status.includes("wishlist");
+}
+function shouldAutoDeleteBeauty(record) {
+  return Number(record.quantity || 0) <= 0 && !isMarkedForRestock(record);
+}
 function saveBeautyForm() {
-  const record = { id: editingId || Date.now(), brand: val("brand"), name: val("name"), category: val("category"), subcategory: val("subcategory"), variant: val("variant"), sizeType: val("sizeType"), seasons: selectedBeautySeasons, quantity: num("quantity"), lowStockThreshold: num("lowStockThreshold"), status: val("status"), packageState: statusLabel({status: val("status")}), restockPriority: val("restockPriority"), whereToBuy: val("whereToBuy"), notes: val("notes"), image: selectedImage || val("imageUrl") };
+  const existing = editingId ? beautyProducts.find(p => p.id === editingId) : {};
+  const record = { ...existing, id: editingId || Date.now(), brand: val("brand"), name: val("name"), category: val("category"), subcategory: val("subcategory"), variant: val("variant"), sizeType: val("sizeType"), seasons: selectedBeautySeasons, quantity: num("quantity"), lowStockThreshold: num("lowStockThreshold"), status: val("status"), packageState: statusLabel({status: val("status")}), restockPriority: val("restockPriority"), whereToBuy: val("whereToBuy"), notes: val("notes"), image: selectedImage || val("imageUrl") };
   if(!record.brand || !record.name) return alert("Add at least the brand and product name.");
+
+  if (shouldAutoDeleteBeauty(record)) {
+    beautyProducts = beautyProducts.filter(p => p.id !== record.id);
+    save(STORAGE_BEAUTY, beautyProducts);
+    closeForm();
+    render();
+    alert("Product removed because quantity is 0 and it is not marked to be restocked.");
+    return;
+  }
+
   beautyProducts = editingId ? beautyProducts.map(p=>p.id===editingId?record:p) : [record,...beautyProducts];
   save(STORAGE_BEAUTY, beautyProducts); closeForm(); render();
 }
@@ -10680,7 +10662,7 @@ function resetBeautySamples() { if(confirm("Reset beauty inventory to the saved 
 function resetClosetSamples() { if(confirm("Reset closet inventory to closet sample defaults?")) { closetItems = starterClosetItems; outfits = []; localStorage.removeItem(STORAGE_CLOSET); localStorage.removeItem(STORAGE_OUTFITS); render(); } }
 
 function exportBackup() {
-  const payload = { app:"My Life Shelf", version:5, exportedAt:new Date().toISOString(), beautyProducts, closetItems, outfits };
+  const payload = { app:"My Life Shelf", version:6, exportedAt:new Date().toISOString(), beautyProducts, closetItems, outfits };
   const blob = new Blob([JSON.stringify(payload,null,2)], {type:"application/json"});
   const url = URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=`life-shelf-backup-${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
 }
