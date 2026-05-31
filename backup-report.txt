@@ -1,0 +1,16 @@
+Life Shelf v49.3 Build Report
+Built: 2026-05-31
+Source: latest v49.2 cleaned export + new Beauty Day Look Planner upgrade
+Beauty items: 532
+Home items: 13
+Closet items: 5
+Saved outfits: 1
+Images in /images: 532
+Missing image file references: 0
+Duplicate item IDs: 0
+Beauty routine step fields populated: 532
+Beauty best application notes populated: 532
+Saved day looks included in export schema: yes
+Visible legacy import/reload/restore buttons: removed
+Visible version label: Life Shelf v49.3
+JavaScript syntax check: passed
