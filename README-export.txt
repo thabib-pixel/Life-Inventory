@@ -1,0 +1,1 @@
+Life Shelf v49.5 full site export. Upload index.html, netlify.toml, inventory-data.json, backup-report.txt, README-export.txt, and the images folder to GitHub/Netlify. This version fixes Day Look Planner Skin Prep ordering and adds recommended wait times between steps.
