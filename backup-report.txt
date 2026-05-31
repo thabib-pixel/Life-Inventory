@@ -1,0 +1,14 @@
+Life Shelf v50.2 Export / Bugfix Report
+Exported: 2026-05-31
+Version: Life Shelf v50.2
+Beauty items: 532
+Home items: 13
+Closet items: 5
+Saved outfits: 1
+Images packaged into /images: 532
+Missing image references: 0
+Duplicate item IDs: 0
+JavaScript syntax check: passed
+Day Look Planner: searchable dropdown restored with full dropdown list + filter search
+Day Look save rule: all steps require associated products before saving
+Outdated UI options removed: Import Backup, Reload Current Data, Restore v43, Reload v43
