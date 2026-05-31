@@ -1,0 +1,11 @@
+Life Shelf v49.1 Image Retention Fix Report
+Export source timestamp: 2026-05-31T16:40:15.789Z
+Beauty items: 532
+Home items: 13
+Closet items: 5
+Saved outfits: 1
+Images in /images: 532
+Image references in data: 532
+Missing image file references: 0
+Storage key updated to: v49-1-new-images-2026-05-31-1640
+Notes: This build uses a fresh storage key so old browser localStorage cannot override the newly deployed image paths.
