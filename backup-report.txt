@@ -1,0 +1,28 @@
+Life Shelf v49 Latest Export Validation Report
+Export packaged by ChatGPT: 2026-05-31
+Source export timestamp: 2026-05-31T16:40:15.789Z
+App version in data: v49
+
+Inventory counts:
+- Beauty items: 532
+- Home items: 13
+- Closet items: 5
+- Saved outfits: 1
+
+Image validation:
+- Image files packaged in /images: 532
+- Item image references checked: 532
+- Missing referenced image files: 0
+- Extra image files not directly referenced by inventory-data.json: 0
+
+Data checks:
+- Duplicate section+ID values: 0
+- Possible duplicate beauty product groups by brand + name + variant: 0
+
+Package contents:
+- index.html
+- netlify.toml
+- inventory-data.json
+- backup-report.txt
+- README-export.txt
+- images/
