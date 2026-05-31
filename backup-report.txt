@@ -1,0 +1,12 @@
+Life Shelf v50.0 Bug Run Report
+Beauty items: 532
+Home items: 13
+Closet items: 5
+Saved outfits: 1
+Images in /images: 532
+Image references: 532
+Missing image references: 0
+Duplicate ID check: passed
+Old visible import/reload/restore labels: removed
+Version label: Life Shelf v50.0
+GitHub deployment files: upload index.html, netlify.toml, inventory-data.json, backup-report.txt, README-export.txt, and the full images folder.
