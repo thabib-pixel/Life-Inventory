@@ -1,0 +1,11 @@
+Life Shelf v50.6 Export Report
+Exported: 2026-06-01 02:37:47 AM
+Beauty items: 532
+Home items: 13
+Closet items: 5
+Saved outfits: 1
+Saved day looks: 0
+Images packaged into /images: 532
+Missing image files during export: 0
+App version: v50.6-beauty-oz-field-update
+Data update: removed mL display fields; standardized size display to fl oz; refreshed shade/undertone, coverage/finish, recommended season, makeup compatibility, and wait-time fields where applicable.
