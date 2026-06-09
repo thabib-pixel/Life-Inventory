@@ -1,0 +1,8 @@
+Life Planner v1.5 Export Report
+Exported: 2026-06-09T19:07:52Z
+Beauty items: 532
+Home items: 16
+Closet items: 5
+Images packaged into /images: 532
+Missing image files during export: 0
+App version: v1.5-home-inventory-initial-load-repair
