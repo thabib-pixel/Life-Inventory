@@ -1,0 +1,10 @@
+Life Planner v1.0 Export Report
+Exported: 6/9/2026, 5:20:30 PM
+Beauty items: 532
+Home items: 16
+Closet items: 5
+Saved outfits: 1
+Saved day looks: 0
+Images packaged into /images: 532
+Missing image files during export: 0
+App version: v1.0-life-planner-shell
