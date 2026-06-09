@@ -1,1 +1,0 @@
-Upload index.html, netlify.toml, inventory-data.json, backup-report.txt, README-export.txt, and images/ to GitHub/Netlify. This is the Life Planner v1.0 homepage shell with Beauty, Closet, and Home tabs.
