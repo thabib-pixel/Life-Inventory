@@ -1,7 +1,0 @@
-Life Planner v1.4 Export Report
-Beauty items: 532
-Home items: 16
-Closet items: 5
-Images packaged into /images: 532
-Missing image files during export: 0
-App version: v1.4-life-planner-display-repair
