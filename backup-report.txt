@@ -1,0 +1,9 @@
+Life Planner v1.12 Export Report
+Exported: finalized in ChatGPT
+Beauty items: 532
+Home items: preserved
+Closet items: preserved
+Cleaning Routines Dashboard: preserved
+Daily Hub Calendar: added
+Daily Hub navigation: fixed
+Images: preserved
