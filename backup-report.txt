@@ -1,7 +1,0 @@
-Life Planner v3.1 Export Report
-- Real-time Friday 6/26 update from 11:41 AM.
-- Everything remaining pushed to start at 12 PM.
-- Protects ScriptMed Advisor hard deadline.
-- Billu lunch/grooming is first active block.
-- OTRF is conditional if ScriptMed is usable.
-- Optional/admin items moved off today.
