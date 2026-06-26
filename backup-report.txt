@@ -1,0 +1,5 @@
+Life Planner v3.5 Export Report
+- Hourly daily view now uses duration-based blocks that visually span the full time range.
+- Timed blocks can be dragged to another hour in the hourly view.
+- Milad blocks 6:30 PM to 10:00 PM.
+- Tonight extends to about 2 AM with late work/admin flex, Love Island, New Moon, and reflection.
