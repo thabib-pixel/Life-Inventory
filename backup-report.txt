@@ -1,6 +1,0 @@
-Life Planner v2.0 Export Report
-- Source: approved v1.16 Life Planner Calendar build.
-- Version updated to v2.0.
-- Beauty/Home/Closet data preserved from user's latest site export.
-- Smooth 'N Shine Polishing Curl Activator Mousse remains removed.
-- Life Planner calendar is included.
