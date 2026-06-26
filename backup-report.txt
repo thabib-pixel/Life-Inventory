@@ -1,0 +1,6 @@
+Life Planner v2.2 Export Report
+- Reminders/alerts display at the top, not as hourly blocks.
+- True blocked time remains in hourly planner.
+- Color-coordinated calendar categories added.
+- Clickable calendar item detail panel added with notes/subtasks/outfit/makeup/meeting/deadline fields.
+- Right-side post-it planning panel added with sample placeholders.
