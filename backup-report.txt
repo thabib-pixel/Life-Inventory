@@ -1,6 +1,0 @@
-Life Planner v2.3 Export Report
-- QA fix for active Life Planner renderer.
-- Weekly and monthly views are color-coordinated.
-- Calendar item clicks open the details modal without navigating away.
-- Details modal includes notes, subtasks, outfit, makeup, meeting notes, discussion points/questions, deadline status.
-- Right-side Planning Post-Its panel is included.
