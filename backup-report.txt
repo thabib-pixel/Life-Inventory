@@ -1,0 +1,5 @@
+Life Planner v2.4 Export Report
+- Paydays, office closed, birthdays, payment due dates, and deadline dates display as all-day top strips with no times.
+- Post-its can be dragged to calendar dates and persist as assigned tasks.
+- Assigned post-its disappear from unassigned side panel and show across month/week/day views.
+- Calendar detail modal now shows context-specific fields by item type.
