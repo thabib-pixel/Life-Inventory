@@ -1,5 +1,0 @@
-Life Planner v2.1 Export Report
-- Built from v2.0 GitHub upload files.
-- Calendar display now uses freshBlocks only.
-- Added user-provided events/reminders/paydays/office closures/birthdays/payment due reminders.
-- Prior calendar task blocks are not displayed in Life Planner calendar.
