@@ -1,2 +1,0 @@
-Life Planner v1.15 Export Report
-Planner layout, expanded tasks, completion collapse, corrected June 10 schedule.
