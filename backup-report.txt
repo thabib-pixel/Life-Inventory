@@ -1,5 +1,0 @@
-Life Planner v2.5 Export Report
-- Starts Life Planner on Friday 6/26 daily view.
-- Uses fixed times only when the user specified them; other tasks are placed by best judgment.
-- Long blocked-time items include exact step checklists in item details.
-- Adds updated post-its: house restock, groceries, laundry, Billu vet, big projects, balcony, Pilates, Amazon returns.
