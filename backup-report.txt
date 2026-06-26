@@ -1,7 +1,0 @@
-Life Planner v3.3 Export Report
-- Real-time Friday schedule shifted to 12:30 PM.
-- Protects Billu lunch/grooming, ScriptMed hard EOD deadline, and Milad prep.
-- OTRF becomes conditional.
-- Optional/admin items moved off today.
-- Adds late-night flex block for one urgent slipped task only.
-- Rest block is Love Island OR New Moon/reflection based on energy.
