@@ -1,0 +1,4 @@
+Life Shelf v5.1 Export Report
+- Added 26 Aritzia closet items.
+- Life Planner tab remains removed.
+- Beauty, Home, Closet inventory and images preserved.
