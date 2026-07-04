@@ -1,0 +1,6 @@
+Life Shelf v6.0 Export Report
+- Clean new site build, not patched from old Life Planner versions.
+- Navigation is only Beauty, Closet, and Home.
+- Life Planner calendar/tabs/loaders removed.
+- Latest v5.1 inventory data embedded in index.html.
+- Aritzia closet additions included.
