@@ -1,7 +1,0 @@
-Life Shelf v6.1 Export Report
-- Built from v6.0 inventory data.
-- Restored left sidebar navigation.
-- Restored item Details and Edit Item Details flows.
-- Added Add Item, local autosave, Reset Local Edits, and Export Updated JSON functionality.
-- Navigation remains Beauty, Closet, Home only.
-- Life Planner calendar/tabs/loaders remain removed.
