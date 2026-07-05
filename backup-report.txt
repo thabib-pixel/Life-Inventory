@@ -1,9 +1,0 @@
-Life Tracker v6.6 Export Report
-- Beauty items recategorized into finalized Skin, Makeup, Body, Hair, Nails sections.
-- Subcategories and sub-subcategories added per user finalized structure.
-- Filters added below categories: All Year, Fall/Winter, Spring/Summer, Travel Friendly Items.
-- Totals now reflect current filtered/grouped context.
-- Same brand/product cards are grouped with combined quantities, sizes, and shades.
-- Sample placeholder closet cards removed.
-- Beauty image coverage preserved.
-- Life Planner remains removed.
