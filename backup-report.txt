@@ -1,7 +1,0 @@
-Life Shelf v6.2 Export Report
-- Built from v6.1 data.
-- Restored filtered category sidebar area for Beauty, Home, and Closet.
-- Beauty filters include Section, Category, Subcategory, Brand, Status, Package State, and Location.
-- Home filters include Room/Area, Category, Subcategory, Brand, Status, Package State, and Location.
-- Edit details, Add Item, local autosave, Export JSON, Reset Edits retained.
-- Life Planner calendar/tabs/loaders remain removed.
