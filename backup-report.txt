@@ -1,8 +1,0 @@
-Life Shelf v6.3 Export Report
-- Built from v6.2 inventory data.
-- Updated visual style to be prettier and closer to the earlier Life Shelf look.
-- Beauty, Closet, Home tabs moved to top horizontal navigation.
-- Sidebar is now per-tab filter/actions area, not the primary tab nav.
-- Filtered category sidebar retained for Beauty, Home, and Closet.
-- Edit details, Add Item, local autosave, Export JSON, Reset Edits retained.
-- Life Planner calendar/tabs/loaders remain removed.
