@@ -1,0 +1,13 @@
+Life Tracker v6.5 Export Report
+- Built from v6.4 inventory data.
+- Header reduced and made lighter/daintier.
+- Layout widened to use more horizontal screen space.
+- Beauty/Closet/Home links only underline on hover or when selected.
+- Sidebar category UI refined to match mock more closely.
+- Sidebar shows main categories by default; subcategories expand only after selecting a category.
+- Beauty sidebar uses finalized Skin, Makeup, Body, Hair, and Nails categories with alphabetical subcategories.
+- Sub-sub-categories added for Makeup Remover, Face Masks, and Tools.
+- Beauty product cards hide In Use/status text and show quantity only.
+- Cards aggregate all sizes and all shades found for the same brand/product name.
+- Edit, delete, add item, local autosave, reset local edits, and export JSON retained.
+- Life Planner calendar/tabs/loaders remain removed.
