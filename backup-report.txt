@@ -1,8 +1,0 @@
-Life Tracker v6.7 Export Report
-- Built from v6.6.
-- Beauty Add New Product opens a custom form matching the provided mock.
-- Beauty Edit icon opens the same form populated with the selected grouped product.
-- Add Variant adds another Size / Shades-Variants / Quantity / Image Upload row.
-- Per-variant image upload stores a browser-local data URL for that variant.
-- Save creates/updates grouped product variant records in Beauty inventory.
-- Existing v6.6 category cleanup, grouped cards, filters, and Life Planner removal retained.
