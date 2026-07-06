@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v7.1 export with product card refresh after Beauty save",
+  "exportType": "Life Tracker v7.2 export with safer Beauty save patch",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -38105,14 +38105,14 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v7.1-card-reflect-save-fix",
+  "appVersion": "v7.2-safe-beauty-save-patch",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
-    "version": "v7.1",
+    "version": "v7.2",
     "removed": true,
     "removedModule": "Life Planner",
-    "releaseNotes": "Life Planner remains removed. v7.1 fixes Beauty add/edit save reflection on product cards, makes Shade/Variant optional, and forces immediate product card refresh after saving."
+    "releaseNotes": "Life Planner remains removed. v7.2 patches Beauty save errors with a safer save function, existing-image preservation, immediate card refresh, and improved error reporting."
   },
-  "version": "v7.1"
+  "version": "v7.2"
 }

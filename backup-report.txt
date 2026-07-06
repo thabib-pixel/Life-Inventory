@@ -1,10 +1,10 @@
-Life Tracker v7.1 Export Report
-- Built from v7.0.
-- Beauty Add/Edit changes now force a fresh product card render after Save.
-- Product Name, Brand, Category, Subcategory, Size, Quantity, Image, Description, Directions, and filters save into records and reflect on the grouped card.
-- Shade / Variant is optional and no longer required.
-- Save clears active search/category filters after saving so the edited card is immediately visible.
-- Save remains direct button-driven and does not rely on native form submit validation.
-- Export Updated JSON downloads v7.1 edited inventory.
+Life Tracker v7.2 Export Report
+- Built from v7.1.
+- Patches Beauty Add/Edit Save script error.
+- Save now captures editing state before closing the modal.
+- Existing product images are preserved when editing without uploading a new image.
+- Save refreshes the Beauty product cards after saving.
+- Shade / Variant remains optional.
+- Error alert now displays the actual script error message if another issue occurs.
 - Product view modal, image switching, sidebar filters, grouped cards, and Life Planner removal retained.
 - JavaScript syntax check passed.
