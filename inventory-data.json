@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v7.2 export with safer Beauty save patch",
+  "exportType": "Life Tracker v7.3 static GitHub Pages deploy package",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -38105,14 +38105,14 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v7.2-safe-beauty-save-patch",
+  "appVersion": "v7.3-static-deploy-clean",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
-    "version": "v7.2",
+    "version": "v7.3",
     "removed": true,
     "removedModule": "Life Planner",
-    "releaseNotes": "Life Planner remains removed. v7.2 patches Beauty save errors with a safer save function, existing-image preservation, immediate card refresh, and improved error reporting."
+    "releaseNotes": "Life Planner remains removed. v7.3 keeps the v7.2 Beauty save patch and adds a static deploy cleanup package with .nojekyll for GitHub Pages."
   },
-  "version": "v7.2"
+  "version": "v7.3"
 }
