@@ -1,11 +1,10 @@
-Life Tracker v8.4 Export Report
-- Built from v8.3.
-- Integrated the user's uploaded v8.3 exported JSON as the source of truth.
-- Closet items with images retained: 13.
-- Closet total gallery images retained: 22.
-- Closet items with multiple images retained: 9.
-- Normalized Closet image fields into image, imageGallery, images, and imageCount.
-- Embedded the same image-retaining inventory data into index.html.
-- Export Updated JSON retains Closet image galleries.
-- Reliable save-state patch, image compression, Closet thumbnails, Active Wear, Accessories, Desi category, Try-On separation, Beauty save patch, and Life Planner removal retained.
+Life Tracker v8.7 Export Report
+- Built from v8.6.
+- Added Shoes as a Closet category with Boots, Flats, Heels, Sandals, Sneakers, and Other Shoes.
+- Added first functional Try-On Studio screen behind the Try-On sidebar button.
+- Try-On Studio keeps header/sidebar and shows a mannequin panel plus searchable Closet inventory list.
+- Try-On filters support multiple selected filters with AND-style narrowing.
+- Selecting items places them on mannequin zones: head, eyes, upper body, lower body, full body, shoes, bag, or jewelry.
+- Added hairstyle selector inside mannequin panel.
+- Closet images, view mode, IndexedDB storage, reliable save patch, Active Wear, Accessories, Desi category, Beauty save patch, and Life Planner removal retained.
 - JavaScript syntax check passed.
