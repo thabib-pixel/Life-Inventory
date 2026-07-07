@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v8.1 package with Closet multi-image support, Active Wear, and Accessories",
+  "exportType": "Life Tracker v8.2 package with Closet image retention patch",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -33846,15 +33846,15 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v8.1-closet-multi-image-accessories",
+  "appVersion": "v8.2-closet-image-retention",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
-    "version": "v8.1",
+    "version": "v8.2",
     "removed": true,
     "removedModule": "Life Planner",
-    "releaseNotes": "Life Planner remains removed. v8.1 adds multiple image upload/preview for Closet items, Active Wear and Accessories categories, removes the Desi checkbox from Closet forms, and visually separates the Try-On sidebar button."
+    "releaseNotes": "Life Planner remains removed. v8.2 patches Closet image retention so uploaded images are stored in imageGallery/images, persisted to browser storage, included in exported JSON, and migrated from prior v8.1/v8.0 browser storage when available."
   },
-  "version": "v8.1",
+  "version": "v8.2",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }

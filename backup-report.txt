@@ -1,11 +1,11 @@
-Life Tracker v8.1 Export Report
-- Built from v8.0.
-- Added multiple image upload/preview for Closet items so front/back/detail photos can be saved.
-- Existing Closet images were normalized into imageGallery/images arrays while keeping image as the primary first photo.
-- Added Active Wear category.
-- Added Accessories category with Bags, Sunglasses, Eyeglasses, Jewelry, Belts, Scarves, and Other Accessories.
-- Removed Desi checkbox from the Closet add/edit form because Desi exists as its own category.
-- Removed Desi from Closet sidebar filters; Desi is now handled by category.
-- Try-On sidebar button is visually separated with spacing and a top border.
-- Preserved Beauty safe save patch, product card refresh, Shade/Variant optional behavior, .nojekyll, and Life Planner removal.
+Life Tracker v8.2 Export Report
+- Built from v8.1.
+- Patched Closet image retention.
+- Multiple Closet images save to imageGallery and images arrays.
+- Primary image remains item.image for card display.
+- Existing v8.1/v8.0 browser storage can migrate into v8.2 when images exist.
+- Export Updated JSON normalizes and includes Closet imageGallery/images.
+- Images are compressed before browser storage to reduce quota issues.
+- Closet cards show front/back/detail thumbnails when multiple photos exist.
+- Active Wear, Accessories, Desi category, Try-On separation, Beauty safe save patch, and Life Planner removal retained.
 - JavaScript syntax check passed.

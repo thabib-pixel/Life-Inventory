@@ -1,3 +1,3 @@
-Life Tracker v8.1 static deploy package.
-This package adds Closet multi-image support, Active Wear, Accessories, removes the Desi checkbox, and separates Try-On.
+Life Tracker v8.2 static deploy package.
+This package patches Closet image retention: multiple uploaded images are saved into imageGallery/images, persisted to browser storage, and included in Export Updated JSON.
 Upload root files together: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, deploy-check.txt.
