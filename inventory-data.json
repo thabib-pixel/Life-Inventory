@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v8.0 package with Closet add/edit functionality",
+  "exportType": "Life Tracker v8.1 package with Closet multi-image support, Active Wear, and Accessories",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -32088,7 +32088,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Turtleneck%20Bodysuit/120402046.html?color=2819",
       "productId": "120402046",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2007,
@@ -32126,7 +32128,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Float%20Cami%20Bodysuit/118754073.html?color=28537",
       "productId": "118754073",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2008,
@@ -32163,7 +32167,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/BUTTER%20Cheeky%20Hi-Rise%205%22%20Short/116698059.html?color=19049",
       "productId": "116698059",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2009,
@@ -32198,7 +32204,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/LIFE%20Mini%20Bra%20Top%20-%20A%2FB%20Cup/116685063.html?color=19049",
       "productId": "116685063",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2010,
@@ -32237,7 +32245,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/LIFE%20Essential%20Capsleeve%20T-Shirt/125775012.html?color=19049",
       "productId": "125775012",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2011,
@@ -32275,7 +32285,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Muscle%20Tank/118416047.html?color=15104",
       "productId": "118416047",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2012,
@@ -32312,7 +32324,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Deakins%20Poplin%20Short/124741013.html?color=34395",
       "productId": "124741013",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2013,
@@ -32351,7 +32365,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Request%20Micro%20Tube%20Skort/125383004.html?color=1274",
       "productId": "125383004",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2014,
@@ -32388,7 +32404,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Deakins%20Poplin%20Short/124740001.html?color=1274",
       "productId": "124740001",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2015,
@@ -32426,7 +32444,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Muscle%20Tank/118416007.html?color=1274",
       "productId": "118416007",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2016,
@@ -32465,7 +32485,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Enrapture%20Maxi%20Tube%20Dress/118760115.html?color=34373",
       "productId": "118760115",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2017,
@@ -32502,7 +32524,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Cozy%20Sweatfleece%20Perfect%20Zip%20Hoodie/116269271.html?color=19631",
       "productId": "116269271",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2018,
@@ -32539,7 +32563,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Cozy%20Sweatfleece%20Mega%20Cargo%E2%84%A2%20Sweatpant/116230013.html?color=1274",
       "productId": "116230013",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2019,
@@ -32576,7 +32602,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/BUTTER%20Limit%20Zip%20Longsleeve/116764048.html?color=1274",
       "productId": "116764048",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2020,
@@ -32614,7 +32642,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Soft%20Feels%E2%84%A2%20All-Time%20T-Shirt/115849010.html?color=1274",
       "productId": "115849010",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2021,
@@ -32652,7 +32682,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Original%20Contour%20Prosperity%20Crew%20Bodysuit/118755014.html?color=30751",
       "productId": "118755014",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2022,
@@ -32689,7 +32721,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Cozy%20Sweatfleece%20Mega%20Cargo%E2%84%A2%20Sweatpant/116224041.html?color=4425_2",
       "productId": "116224041",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2023,
@@ -32727,7 +32761,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/BUTTER%20Shake-It%20Jumpsuit/116756012.html?color=1274",
       "productId": "116756012",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2024,
@@ -32765,7 +32801,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Soft%20Feels%E2%84%A2%20All-Time%20T-Shirt/115849016.html?color=1275",
       "productId": "115849016",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2025,
@@ -32802,7 +32840,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Waypoint%20Windbreaker/114497009.html?color=19049",
       "productId": "114497009",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2026,
@@ -32840,7 +32880,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Contour%20Squareneck%20Longsleeve%20Bodysuit/73936004.html?color=1274",
       "productId": "73936004",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2027,
@@ -32878,7 +32920,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Contour%20Squareneck%20Longsleeve%20Bodysuit/73936027.html?color=1275",
       "productId": "73936027",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2028,
@@ -32916,7 +32960,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Contour%20Tank%20Bodysuit/69983027.html?color=1275",
       "productId": "69983027",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2029,
@@ -32954,7 +33000,9 @@
       "productUrl": "https://www.aritzia.com/us/en/product/Contour%20Tank%20Bodysuit/69983519.html?color=23834",
       "productId": "69983519",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2030,
@@ -32993,7 +33041,9 @@
       "productUrl": "",
       "productId": "manual-organic-soft-contour-vneck-jumpsuit",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     },
     {
       "id": 2031,
@@ -33030,7 +33080,9 @@
       "productUrl": "",
       "productId": "92041",
       "dateAdded": "2026-07-04",
-      "lastUpdated": "2026-07-04"
+      "lastUpdated": "2026-07-04",
+      "imageGallery": [],
+      "images": []
     }
   ],
   "homeItems": [
@@ -33794,15 +33846,15 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v8.0-closet-add-edit",
+  "appVersion": "v8.1-closet-multi-image-accessories",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
-    "version": "v8.0",
+    "version": "v8.1",
     "removed": true,
     "removedModule": "Life Planner",
-    "releaseNotes": "Life Planner remains removed. v8.0 integrates the latest exported inventory JSON, adds Closet add/edit functionality, Closet image upload/preview, Desi category, Try-On sidebar placeholder, and updated Closet filters."
+    "releaseNotes": "Life Planner remains removed. v8.1 adds multiple image upload/preview for Closet items, Active Wear and Accessories categories, removes the Desi checkbox from Closet forms, and visually separates the Try-On sidebar button."
   },
-  "version": "v8.0",
+  "version": "v8.1",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }
