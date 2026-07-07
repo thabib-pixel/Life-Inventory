@@ -1,8 +1,11 @@
-Life Tracker v8.3 Export Report
-- Built from v8.2.
-- Patched reliable save state for Beauty, Closet, and generic Home edits.
-- Save now clears Editing state, closes modal, refreshes cards, and shows Saved confirmation.
-- Persist now writes to v8.3 storage, current STORAGE_KEY, and latest backup key.
-- Export Updated JSON forces a save/normalize first, then exports latest browser inventory.
-- Closet image retention, imageGallery/images, compression, thumbnails, Active Wear, Accessories, Desi category, Try-On separation, and Beauty safe save patch retained.
+Life Tracker v8.4 Export Report
+- Built from v8.3.
+- Integrated the user's uploaded v8.3 exported JSON as the source of truth.
+- Closet items with images retained: 13.
+- Closet total gallery images retained: 22.
+- Closet items with multiple images retained: 9.
+- Normalized Closet image fields into image, imageGallery, images, and imageCount.
+- Embedded the same image-retaining inventory data into index.html.
+- Export Updated JSON retains Closet image galleries.
+- Reliable save-state patch, image compression, Closet thumbnails, Active Wear, Accessories, Desi category, Try-On separation, Beauty save patch, and Life Planner removal retained.
 - JavaScript syntax check passed.
