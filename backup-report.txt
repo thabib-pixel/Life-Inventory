@@ -1,0 +1,10 @@
+Life Tracker v8.0 Export Report
+- Built from v7.5.
+- Integrated latest exported inventory JSON into inventory-data.json and embedded index.html data.
+- Added Closet Add/Edit form with brand, clothing item name, category, subcategory, size, color, fabric material, seasonal dropdown, image upload, and image preview.
+- Added Desi category with Desi Clothes, Desi Bags, Desi Jewelry, and Desi Accessories.
+- Added Try-On sidebar placeholder for future development.
+- Updated Closet sidebar filters to Fall/Winter, Spring/Summer, All Year, Desi, Special Events, and Co-ord Sets.
+- Removed Travel Friendly from rendered sidebar filters.
+- Preserved Beauty safe save patch, product card refresh, Shade/Variant optional behavior, .nojekyll, and Life Planner removal.
+- JavaScript syntax check passed.
