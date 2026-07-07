@@ -1,9 +1,0 @@
-Life Tracker v7.3 Export Report
-- Built from v7.2.
-- Keeps v7.2 Beauty safe save patch.
-- Keeps Shade / Variant optional.
-- Keeps product card refresh after Save.
-- Keeps view modal, image switching, filters, grouped cards, and Life Planner removal.
-- Adds .nojekyll for GitHub Pages static deployment.
-- Adds deploy-check.txt as a lightweight deploy marker.
-- JavaScript syntax check passed.
