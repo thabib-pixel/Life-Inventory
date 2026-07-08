@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v9.8 package with fixed draggable Try-On placement",
+  "exportType": "Life Tracker v9.9 package with upper-body underlay removed",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -34420,7 +34420,7 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v9.8",
+  "appVersion": "v9.9",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
@@ -34429,6 +34429,6 @@
     "removedModule": "Life Planner",
     "releaseNotes": "Life Planner remains removed. v8.7 adds Shoes to Closet categories and introduces the first functional Try-On Studio with a mannequin layout, hairstyle selector, searchable Closet inventory, multi-select filters, and click-to-place outfit items by body area."
   },
-  "version": "v9.8",
+  "version": "v9.9",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }
