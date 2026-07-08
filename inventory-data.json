@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v9.13 package with outlined white clothing-safe try-on cutouts",
+  "exportType": "Life Tracker v9.16 package with pre-generated transparent try-on cutouts",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -32218,7 +32218,8 @@
       "season": "Fall/Winter",
       "lifeFilters": [
         "Fall/Winter"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-03-closet-aritzia-120402046-2819.png"
     },
     {
       "id": 2007,
@@ -32278,7 +32279,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-04-closet-aritzia-118754073-28537.png"
     },
     {
       "id": 2008,
@@ -32337,7 +32339,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-05-closet-aritzia-116698059-19049.png"
     },
     {
       "id": 2009,
@@ -32394,7 +32397,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-06-closet-aritzia-116685063-19049.png"
     },
     {
       "id": 2010,
@@ -32453,7 +32457,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-07-closet-aritzia-125775012-19049.png"
     },
     {
       "id": 2011,
@@ -32511,7 +32516,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-08-closet-aritzia-118416047-15104.png"
     },
     {
       "id": 2012,
@@ -32570,7 +32576,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-09-closet-aritzia-124741013-34395.png"
     },
     {
       "id": 2013,
@@ -32629,7 +32636,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-10-closet-aritzia-125383004-1274.png"
     },
     {
       "id": 2014,
@@ -32688,7 +32696,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-11-closet-aritzia-124740001-1274.png"
     },
     {
       "id": 2015,
@@ -32746,7 +32755,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-12-closet-aritzia-118416007-1274.png"
     },
     {
       "id": 2016,
@@ -32807,7 +32817,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-13-closet-aritzia-118760115-34373.png"
     },
     {
       "id": 2017,
@@ -32864,7 +32875,8 @@
       "season": "Fall/Winter",
       "lifeFilters": [
         "Fall/Winter"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-14-closet-aritzia-116269271-19631.png"
     },
     {
       "id": 2018,
@@ -32923,7 +32935,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-15-closet-aritzia-116230013-1274.png"
     },
     {
       "id": 2019,
@@ -32982,7 +32995,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-16-closet-aritzia-116764048-1274.png"
     },
     {
       "id": 2020,
@@ -33040,7 +33054,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-17-closet-aritzia-115849010-1274.png"
     },
     {
       "id": 2021,
@@ -33100,7 +33115,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-18-closet-aritzia-118755014-30751.png"
     },
     {
       "id": 2022,
@@ -33157,7 +33173,8 @@
       "season": "Fall/Winter",
       "lifeFilters": [
         "Fall/Winter"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-19-closet-aritzia-116224041-4425-2.png"
     },
     {
       "id": 2023,
@@ -33217,7 +33234,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-20-closet-aritzia-116756012-1274.png"
     },
     {
       "id": 2024,
@@ -33275,7 +33293,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-21-closet-aritzia-115849016-1275.png"
     },
     {
       "id": 2025,
@@ -33334,7 +33353,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-22-closet-aritzia-114497009-19049.png"
     },
     {
       "id": 2026,
@@ -33394,7 +33414,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-23-closet-aritzia-73936004-1274.png"
     },
     {
       "id": 2027,
@@ -33454,7 +33475,8 @@
       "season": "All Year",
       "lifeFilters": [
         "All Year"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-24-closet-aritzia-73936027-1275.png"
     },
     {
       "id": 2028,
@@ -33514,7 +33536,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-25-closet-aritzia-69983027-1275.png"
     },
     {
       "id": 2029,
@@ -33574,7 +33597,8 @@
       "season": "Spring/Summer",
       "lifeFilters": [
         "Spring/Summer"
-      ]
+      ],
+      "tryOnCutoutImage": "images/tryon-cutouts/tryon-cutout-26-closet-aritzia-69983519-23834.png"
     },
     {
       "id": 2030,
@@ -34420,7 +34444,7 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v9.15",
+  "appVersion": "v9.16",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
@@ -34429,6 +34453,6 @@
     "removedModule": "Life Planner",
     "releaseNotes": "Life Planner remains removed. v8.7 adds Shoes to Closet categories and introduces the first functional Try-On Studio with a mannequin layout, hairstyle selector, searchable Closet inventory, multi-select filters, and click-to-place outfit items by body area."
   },
-  "version": "v9.15",
+  "version": "v9.16",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }
