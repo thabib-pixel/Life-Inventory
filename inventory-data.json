@@ -34420,7 +34420,7 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v9.14",
+  "appVersion": "v9.15",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
@@ -34429,6 +34429,6 @@
     "removedModule": "Life Planner",
     "releaseNotes": "Life Planner remains removed. v8.7 adds Shoes to Closet categories and introduces the first functional Try-On Studio with a mannequin layout, hairstyle selector, searchable Closet inventory, multi-select filters, and click-to-place outfit items by body area."
   },
-  "version": "v9.14",
+  "version": "v9.15",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }
