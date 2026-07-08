@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v8.7 package with Try-On Studio and Shoes category",
+  "exportType": "Life Tracker v9.3 package with uploaded mannequin image",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -34420,7 +34420,7 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v8.7-try-on-studio",
+  "appVersion": "v9.3",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
@@ -34429,6 +34429,6 @@
     "removedModule": "Life Planner",
     "releaseNotes": "Life Planner remains removed. v8.7 adds Shoes to Closet categories and introduces the first functional Try-On Studio with a mannequin layout, hairstyle selector, searchable Closet inventory, multi-select filters, and click-to-place outfit items by body area."
   },
-  "version": "v8.7",
+  "version": "v9.3",
   "lastLocalEdit": "2026-07-06T20:56:22.785Z"
 }
