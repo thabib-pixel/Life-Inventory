@@ -1,3 +1,1 @@
-Life Tracker v8.7 GitHub upload files.
-Upload index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, and deploy-check.txt to the repo root.
-v8.7 adds Shoes and first Try-On Studio functionality.
+Life Tracker v9.4 GitHub upload files. v9.4 keeps the mannequin image unchanged, changes the Try-On background to white, and adds clothing cutout processing for selected Closet items.

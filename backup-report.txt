@@ -1,10 +1,6 @@
-Life Tracker v8.7 Export Report
-- Built from v8.6.
-- Added Shoes as a Closet category with Boots, Flats, Heels, Sandals, Sneakers, and Other Shoes.
-- Added first functional Try-On Studio screen behind the Try-On sidebar button.
-- Try-On Studio keeps header/sidebar and shows a mannequin panel plus searchable Closet inventory list.
-- Try-On filters support multiple selected filters with AND-style narrowing.
-- Selecting items places them on mannequin zones: head, eyes, upper body, lower body, full body, shoes, bag, or jewelry.
-- Added hairstyle selector inside mannequin panel.
-- Closet images, view mode, IndexedDB storage, reliable save patch, Active Wear, Accessories, Desi category, Beauty save patch, and Life Planner removal retained.
-- JavaScript syntax check passed.
+Life Tracker v9.4 Export Report
+- Built from v9.3.
+- Try-On mannequin image retained unchanged.
+- Try-On mannequin box/stage background changed to white.
+- Added browser-side white/near-white background removal for selected Closet item images so items place more like cutouts instead of white boxes.
+- Existing Closet, Beauty, Home data retained.
