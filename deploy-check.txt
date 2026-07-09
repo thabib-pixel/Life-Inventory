@@ -1,1 +1,1 @@
-Life Tracker v9.4 static deploy package. Upload all root files together: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, deploy-check.txt.
+Life Tracker v10.1 upload package. Upload all root files together: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, deploy-check.txt. v10.1 loads inventory-data.json externally to fix header tab loading and includes updated Closet taxonomy and try-on cutouts.

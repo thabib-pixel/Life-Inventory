@@ -1,6 +1,1 @@
-Life Tracker v9.4 Export Report
-- Built from v9.3.
-- Try-On mannequin image retained unchanged.
-- Try-On mannequin box/stage background changed to white.
-- Added browser-side white/near-white background removal for selected Closet item images so items place more like cutouts instead of white boxes.
-- Existing Closet, Beauty, Home data retained.
+Life Tracker v10.1 upload package. Upload all root files together: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, deploy-check.txt. v10.1 loads inventory-data.json externally to fix header tab loading and includes updated Closet taxonomy and try-on cutouts.
