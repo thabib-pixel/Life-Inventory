@@ -212,7 +212,7 @@
 .tryon-selected-pill-v87.active{background:#f5e7da;border-color:#9a6a3a;}
 
 
-/* ===== v11.0 Beauty/Home image upload refinements ===== */
+/* ===== v11.1 Beauty/Home image upload refinements ===== */
 .v110-upload-area{border:1px dashed #c9ad91;border-radius:22px;background:#fff8f1;padding:14px;display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;margin-top:8px}
 .v110-upload-preview{width:92px;height:92px;border-radius:18px;background:#f4eee8;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#8c725f;font-size:13px;text-align:center}
 .v110-upload-preview img{width:100%;height:100%;object-fit:cover}
@@ -225,7 +225,7 @@
 .v110-zero-box h3{margin:0 0 8px;font-size:24px}.v110-zero-box p{margin:0 0 18px;color:#6b3c15;line-height:1.4}.v110-zero-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}.v110-zero-actions button{border:1px solid #8a572c;border-radius:999px;background:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.v110-zero-actions button.primary{background:#8a572c;color:#fff}
 </style></head>
 <body><div class="page">
-<header class="hero landing" id="hero"><div class="logo-row"><h1 class="logo">LIFE TRACKER</h1><span class="version">v 11.0</span></div><nav class="top-nav"><button class="nav-link" data-tab="beauty">BEAUTY</button><button class="nav-link" data-tab="closet">CLOSET</button><button class="nav-link" data-tab="home">HOME</button></nav></header>
+<header class="hero landing" id="hero"><div class="logo-row"><h1 class="logo">LIFE TRACKER</h1><span class="version">v 11.1</span></div><nav class="top-nav"><button class="nav-link" data-tab="beauty">BEAUTY</button><button class="nav-link" data-tab="closet">CLOSET</button><button class="nav-link" data-tab="home">HOME</button></nav></header>
 <section class="app-layout hidden" id="appLayout"><aside class="sidebar"><h2 class="side-title" id="sidebarTitle">BEAUTY CATEGORIES</h2><div id="sidebarContent"></div><div class="sidebar-divider"></div><h3 class="filter-title">Filters</h3><div id="filterContent"></div><div class="sidebar-actions"><button class="btn small" onclick="clearFilters()">Clear Filters</button><button class="btn small" onclick="downloadJSON()">Export Updated JSON</button><button class="btn small" onclick="resetLocalEdits()">Reset Local Edits</button><div id="saveState" class="saved">Saved</div></div></aside>
 <main class="inventory-panel"><div class="qty-label">Qty: <span id="qtyTiny">—</span></div><div class="inventory-head"><div><h2 class="section-title" id="sectionTitle">BEAUTY INVENTORY</h2><div class="total"><span id="totalCount">0</span> TOTAL</div><div id="activeFilters" class="active-filters"></div></div><div class="search-row"><input class="search" id="search" placeholder="Search brand, product, category..." /><button class="btn add" onclick="addNewItem()">+ Add New Product</button></div></div><div id="grid" class="grid"></div></main></section></div>
 <div class="modal-backdrop" id="detailsBackdrop" onclick="closeDetails(event)"><div class="modal" onclick="event.stopPropagation()"><div class="modal-head"><h2 id="detailsTitle">Item Details</h2><button class="close-x" onclick="closeDetails()">×</button></div><div id="detailsContent"></div></div></div>
@@ -238,7 +238,7 @@
   </div>
 </div>
 <script>
-const EMBEDDED_INVENTORY = {"exportType": "Life Tracker v11.0 external inventory placeholder", "appVersion": "v11.0", "version": "v11.0", "beautyProducts": [], "closetItems": [], "homeItems": [], "outfits": [], "dayLooks": [], "savedLooks": [], "dailyHub": {"removed": true}};let inventory=loadInventory(),currentTab=null,searchText='',filters={},expandedMajor='',expandedSub='',editing=null;
+const EMBEDDED_INVENTORY = {"exportType": "Life Tracker v11.1 external inventory placeholder", "appVersion": "v11.1", "version": "v11.1", "beautyProducts": [], "closetItems": [], "homeItems": [], "outfits": [], "dayLooks": [], "savedLooks": [], "dailyHub": {"removed": true}};let inventory=loadInventory(),currentTab=null,searchText='',filters={},expandedMajor='',expandedSub='',editing=null;
 const collectionMap={beauty:{label:'BEAUTY INVENTORY',sidebar:'BEAUTY CATEGORIES',key:'beautyProducts'},closet:{label:'CLOSET INVENTORY',sidebar:'CLOSET CATEGORIES',key:'closetItems'},home:{label:'HOME INVENTORY',sidebar:'HOME CATEGORIES',key:'homeItems'}};
 const beautyMajor=[
 {name:'Skin',subs:[{name:'Eye Care',children:[]},{name:'Eye Creams',children:[]},{name:'Face Masks',children:['Exfoliating Masks','Hydrating Masks','Sheet Masks']},{name:'Face Wash',children:[]},{name:'Lip Treatments',children:[]},{name:'Makeup Remover',children:['Cleansing Balms','Micellar Water','Oil Cleansers']},{name:'Moisturizers',children:[]},{name:'Serums',children:[]},{name:'SPF',children:[]},{name:'Spot Treatments',children:[]},{name:'Toners',children:[]},{name:'Tools',children:['Face Towels','Facial Razors']}]},
@@ -261,7 +261,7 @@ function renderSidebar(){document.getElementById('sidebarTitle').textContent=col
 function uniq(a){return [...new Set(a.map(x=>String(x||'').trim()).filter(Boolean))].join(', ')}function sumQty(items){let n=items.reduce((s,i)=>s+(Number(itemQty(i))||0),0);return n||''}function cardHTML(group){let item=group.items[0],qty=sumQty(group.items),sizes=uniq(group.items.map(itemSize)),shades=uniq(group.items.map(itemShade)),img=item.image?`<img src="${esc(item.image)}">`:'',tags=uniq(group.items.flatMap(i=>i.lifeFilters||i.seasons||[]).slice(0,3)).split(', ').filter(Boolean);return `<article class="card"><div class="status-row"><span class="qty">Qty: ${esc(qty)}</span></div><div class="imgbox">${img}</div><div class="card-main"><div><div class="brand">${esc(itemBrand(item))}</div><div class="name">${esc(itemName(item))}</div></div><div class="icon-row"><button class="icon-btn" onclick="openEdit(${group.index})">✎</button><button class="icon-btn" onclick="deleteGroup(${group.index})">🗑</button></div></div><div class="details"><div>${sizes?esc(sizes):''}</div><div><em>${shades?'Shades: '+esc(shades):''}</em></div><div>${esc(itemCategory(item))}${itemSub(item)?' / '+esc(itemSub(item)):''}</div><div>${esc(item.location||item.storageLocation||item.roomArea||'')}</div></div><div class="tag-row">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></article>`}
 function renderAll(){if(!currentTab)return;let rows=filteredItems(),groups=groupRows(rows);renderSidebar();document.getElementById('sectionTitle').textContent=collectionMap[currentTab].label;document.getElementById('totalCount').textContent=groups.length;document.getElementById('qtyTiny').textContent=rows.reduce((s,r)=>s+(Number(itemQty(r.item))||0),0)||'—';document.getElementById('activeFilters').innerHTML=[filters.major,filters.sub,filters.subsub,filters.filter,searchText?`Search: ${searchText}`:null].filter(Boolean).map(x=>`<span class="filter-pill">${esc(x)}</span>`).join('');let grid=document.getElementById('grid');if(!groups.length){grid.className='';grid.innerHTML='<div class="empty">No items found.</div>';return}grid.className='grid';grid.innerHTML=groups.map(cardHTML).join('')}
 const commonFields=['name','fullProductName','brand','brandName','lifeCategory','lifeSubcategory','lifeSubSubcategory','category','subcategory','subSubcategory','color','shade','shades','size','sizeDisplay','status','quantity','openQuantity','unopenedQuantity','location','storageLocation','notes','image','productUrl','productId','lifeFilters','seasons'];function editableFields(i){let keys=new Set(commonFields.filter(k=>k in i||['name','brand','category','subcategory','quantity','location','notes','image'].includes(k)));Object.keys(i).forEach(k=>{if(!['id','stableId','dateAdded','lastUpdated','updatedAt'].includes(k)&&typeof i[k]!=='object')keys.add(k)});return [...keys]}function valueToInput(v){if(Array.isArray(v))return v.join(', ');if(v&&typeof v==='object')return JSON.stringify(v);return v??''}function parseVal(k,v,o){if(['quantity','openQuantity','unopenedQuantity','backupQuantity','id'].includes(k)){if(v==='')return'';let n=Number(v);return Number.isNaN(n)?v:n}if(Array.isArray(o)||k==='seasons'||k==='lifeFilters')return v.split(',').map(s=>s.trim()).filter(Boolean);return v}
-function openEdit(idx){let i=currentList()[idx];if(!i)return;editing={tab:currentTab,index:idx};document.getElementById('editTitle').textContent='Edit: '+itemName(i);document.getElementById('editFields').innerHTML=editableFields(i).map(k=>{let val=valueToInput(i[k]),long=['notes','description','productUrl','image'].includes(k)||String(val).length>70;return `<div class="field ${long?'full':''}"><label>${esc(k)}</label>${long?`<textarea name="${esc(k)}" oninput="markUnsaved()">${esc(val)}</textarea>`:`<input name="${esc(k)}" value="${esc(val)}" oninput="markUnsaved()">`}</div>`}).join('');document.getElementById('editBackdrop').style.display='flex'}function closeEdit(e){if(e&&e.target&&e.target.id!=='editBackdrop')return;document.getElementById('editBackdrop').style.display='none';editing=null}function saveEdit(e){e.preventDefault();if(!editing)return;let item=inventory[collectionMap[editing.tab].key][editing.index],fd=new FormData(document.getElementById('editForm'));for(let [k,v] of fd.entries())item[k]=parseVal(k,v,item[k]);item.lastUpdated=new Date().toISOString().slice(0,10);persist();closeEdit();renderAll()}function deleteGroup(idx){if(!confirm('Delete this item from this browser copy?'))return;currentList().splice(idx,1);persist();renderAll()}function deleteEditingItem(){if(editing){deleteGroup(editing.index);closeEdit()}}function addNewItem(){let list=currentList(),now=Date.now(),base={id:now,stableId:`${currentTab}-${now}`,name:'Full Product Name',brand:'Brand Name',lifeCategory:currentTab==='beauty'?'Skin':'',lifeSubcategory:'',category:currentTab==='beauty'?'Skin':'',subcategory:'',quantity:1,location:'',notes:'',image:'',lifeFilters:['All Year'],dateAdded:new Date().toISOString().slice(0,10),lastUpdated:new Date().toISOString().slice(0,10)};list.unshift(base);persist();renderAll();openEdit(0)}function downloadJSON(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v11_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)}function resetLocalEdits(){if(!confirm('Reset browser edits and return to packaged v10.2 inventory?'))return;localStorage.removeItem(STORAGE_KEY);inventory=clone(EMBEDDED_INVENTORY);renderAll()}function closeDetails(e){document.getElementById('detailsBackdrop').style.display='none'}
+function openEdit(idx){let i=currentList()[idx];if(!i)return;editing={tab:currentTab,index:idx};document.getElementById('editTitle').textContent='Edit: '+itemName(i);document.getElementById('editFields').innerHTML=editableFields(i).map(k=>{let val=valueToInput(i[k]),long=['notes','description','productUrl','image'].includes(k)||String(val).length>70;return `<div class="field ${long?'full':''}"><label>${esc(k)}</label>${long?`<textarea name="${esc(k)}" oninput="markUnsaved()">${esc(val)}</textarea>`:`<input name="${esc(k)}" value="${esc(val)}" oninput="markUnsaved()">`}</div>`}).join('');document.getElementById('editBackdrop').style.display='flex'}function closeEdit(e){if(e&&e.target&&e.target.id!=='editBackdrop')return;document.getElementById('editBackdrop').style.display='none';editing=null}function saveEdit(e){e.preventDefault();if(!editing)return;let item=inventory[collectionMap[editing.tab].key][editing.index],fd=new FormData(document.getElementById('editForm'));for(let [k,v] of fd.entries())item[k]=parseVal(k,v,item[k]);item.lastUpdated=new Date().toISOString().slice(0,10);persist();closeEdit();renderAll()}function deleteGroup(idx){if(!confirm('Delete this item from this browser copy?'))return;currentList().splice(idx,1);persist();renderAll()}function deleteEditingItem(){if(editing){deleteGroup(editing.index);closeEdit()}}function addNewItem(){let list=currentList(),now=Date.now(),base={id:now,stableId:`${currentTab}-${now}`,name:'Full Product Name',brand:'Brand Name',lifeCategory:currentTab==='beauty'?'Skin':'',lifeSubcategory:'',category:currentTab==='beauty'?'Skin':'',subcategory:'',quantity:1,location:'',notes:'',image:'',lifeFilters:['All Year'],dateAdded:new Date().toISOString().slice(0,10),lastUpdated:new Date().toISOString().slice(0,10)};list.unshift(base);persist();renderAll();openEdit(0)}function downloadJSON(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v11_1-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)}function resetLocalEdits(){if(!confirm('Reset browser edits and return to packaged v10.2 inventory?'))return;localStorage.removeItem(STORAGE_KEY);inventory=clone(EMBEDDED_INVENTORY);renderAll()}function closeDetails(e){document.getElementById('detailsBackdrop').style.display='none'}
 document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));document.getElementById('search').addEventListener('input',e=>{searchText=e.target.value;renderAll()});
 </script><!-- v6.8 previous marker retained from v6.7 base: corrected categories filters below sidebar grouped cards no samples contextual totals no In Use on cards Life Planner removed --><!-- sub-list open validation marker: subcategories are hidden by default and expand after selecting main category -->
 
@@ -399,7 +399,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     indices.forEach(i=>currentList().splice(i,1));
     persist(); renderAll();
   };
-  window.downloadJSON=function(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v11_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)};
+  window.downloadJSON=function(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v11_1-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)};
 })();
 </script>
 
@@ -805,7 +805,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -1095,7 +1095,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -1482,7 +1482,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -1780,7 +1780,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+      a.download = 'life-tracker-v11_1-edited-inventory-data.json';
       a.click();
       URL.revokeObjectURL(a.href);
     };
@@ -2477,7 +2477,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -2689,7 +2689,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -2944,7 +2944,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -3471,7 +3471,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v11_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v11_1-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -3489,17 +3489,17 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
 
 <script>
-/* ===== v11.0 external inventory loader ===== */
+/* ===== v11.1 external inventory loader ===== */
 (function(){
   window.__lifeTrackerV101ExternalInventoryLoaded = true;
   async function loadExternalInventoryV101(){
     try{
-      const response = await fetch('inventory-data.json?v=11_0_' + Date.now(), {cache:'no-store'});
+      const response = await fetch('inventory-data.json?v=11_1_' + Date.now(), {cache:'no-store'});
       if(!response.ok) throw new Error('inventory-data.json failed: ' + response.status);
       const data = await response.json();
-      data.appVersion = 'v11.0';
-      data.version = 'v11.0';
-      data.exportType = 'Life Tracker v11.0 package with latest exported inventory, Beauty/Home image upload fixes, Beauty zero-quantity restock/remove prompt, and Home card title order update';
+      data.appVersion = 'v11.1';
+      data.version = 'v11.1';
+      data.exportType = 'Life Tracker v11.1 package with latest exported inventory, Beauty/Home image upload fixes, Beauty zero-quantity restock/remove prompt, and Home card title order update';
       window.inventory = data;
       if(typeof inventory !== 'undefined') inventory = data;
       try{
@@ -3507,15 +3507,15 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         localStorage.removeItem('lifeTracker_v8_7_inventory');
       }catch(e){}
       const saveState = document.getElementById('saveState');
-      if(saveState){ saveState.textContent = 'Loaded v11.0'; saveState.className = 'saved'; }
+      if(saveState){ saveState.textContent = 'Loaded v11.1'; saveState.className = 'saved'; }
       if(typeof renderAll === 'function' && currentTab) renderAll();
-      console.log('Life Tracker v11.0 external inventory loaded', {
+      console.log('Life Tracker v11.1 external inventory loaded', {
         beauty: data.beautyProducts?.length || 0,
         closet: data.closetItems?.length || 0,
         home: data.homeItems?.length || 0
       });
     }catch(error){
-      console.error('v11.0 external inventory load failed', error);
+      console.error('v11.1 external inventory load failed', error);
       const grid = document.getElementById('grid');
       if(grid) grid.innerHTML = '<div class="empty">Inventory failed to load. Please confirm inventory-data.json was uploaded with index.html.</div>';
     }
@@ -3526,7 +3526,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 </script>
 
 <script>
-/* ===== v11.0 targeted fixes: Beauty/Home upload + Beauty zero quantity prompt + Home title order ===== */
+/* ===== v11.1 targeted fixes: Beauty/Home upload + Beauty zero quantity prompt + Home title order ===== */
 (function(){
   window.__lifeTrackerV110TargetedFixesLoaded = true;
   const esc110 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -3660,7 +3660,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(typeof safeCloseEditV83==='function') safeCloseEditV83(); else { const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null; }
       if(typeof refreshAfterSaveV83==='function') refreshAfterSaveV83(); else renderAll();
       return false;
-    }catch(err){ console.error('v11.0 Beauty save failed:',err); alert('Save failed: '+(err&&err.message?err.message:String(err))); return false; }
+    }catch(err){ console.error('v11.1 Beauty save failed:',err); alert('Save failed: '+(err&&err.message?err.message:String(err))); return false; }
   };
 
   function homeFormHTMLV110(item){
@@ -3682,7 +3682,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     if(!file) return;
     const preview=document.getElementById('homeImagePreviewV110');
     try{ const dataUrl=await imageFileToDataUrlV110(file); preview.dataset.image=dataUrl; preview.innerHTML=`<img src="${dataUrl}">`; if(typeof markUnsaved==='function') markUnsaved(); }
-    catch(err){ console.error('v11.0 home image upload failed',err); alert('Image upload failed. Try another image.'); }
+    catch(err){ console.error('v11.1 home image upload failed',err); alert('Image upload failed. Try another image.'); }
   };
 
   window.openHomeFormV110 = function(mode,index=null){
@@ -3722,7 +3722,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(typeof safeCloseEditV83==='function') safeCloseEditV83(); else {const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null;}
       if(typeof refreshAfterSaveV83==='function') refreshAfterSaveV83(); else renderAll();
       return false;
-    }catch(err){ console.error('v11.0 home save failed',err); alert('Home save failed: '+(err&&err.message?err.message:String(err))); return false; }
+    }catch(err){ console.error('v11.1 home save failed',err); alert('Home save failed: '+(err&&err.message?err.message:String(err))); return false; }
   };
 
   window.cardHTML = window.cardHTMLV83 = window.cardHTMLV110 = function(group){
@@ -3763,8 +3763,121 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const result=oldRenderAllV110();
     return result;
   };
-  console.log('Life Tracker v11.0 targeted fixes loaded: Beauty upload, Home upload, Beauty zero quantity prompt, Home card name order.');
+  console.log('Life Tracker v11.1 targeted fixes loaded: Beauty upload, Home upload, Beauty zero quantity prompt, Home card name order.');
 })();
 </script>
 
+
+<script>
+/* ===== v11.1 Home inventory restore patch ===== */
+(function(){
+  const baseRenderAllV111 = window.renderAll;
+  const baseSetTabV111 = window.setTab;
+  function escV111(v){
+    return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function homeItemsV111(){
+    if(!window.inventory && typeof inventory !== 'undefined') window.inventory = inventory;
+    if(typeof inventory !== 'undefined') return inventory.homeItems || (inventory.homeItems = []);
+    return [];
+  }
+  function txtV111(i){ return JSON.stringify(i || {}).toLowerCase(); }
+  function nameV111(i){ return i.fullProductName || i.name || i.itemName || 'Home Item'; }
+  function brandV111(i){ return i.brandName || i.brand || ''; }
+  function catV111(i){ return i.lifeCategory || i.category || 'Home'; }
+  function subV111(i){ return i.lifeSubcategory || i.subcategory || ''; }
+  function qtyV111(i){ return Number(i.quantity ?? i.qty ?? 0) || 0; }
+  function normV111(v){ return String(v || '').trim(); }
+  function uniqueV111(arr){ return [...new Set(arr.map(normV111).filter(Boolean))]; }
+  function groupedHomeV111(rows){
+    const map = new Map();
+    rows.forEach(r => {
+      const key = ['home', brandV111(r.item).toLowerCase(), nameV111(r.item).toLowerCase(), r.item.stableId || r.item.id || r.index].join('|');
+      if(!map.has(key)) map.set(key,{items:[],index:r.index,key});
+      map.get(key).items.push(r.item);
+    });
+    return [...map.values()];
+  }
+  function homeRowsV111(){
+    let rows = homeItemsV111().map((item,index)=>({item,index}));
+    if(searchText && String(searchText).trim()) rows = rows.filter(r => txtV111(r.item).includes(String(searchText).trim().toLowerCase()));
+    if(filters && filters.major) rows = rows.filter(r => catV111(r.item) === filters.major);
+    if(filters && filters.sub) rows = rows.filter(r => subV111(r.item) === filters.sub);
+    if(filters && filters.filter){
+      rows = rows.filter(r => [...(r.item.lifeFilters||[]), ...(r.item.seasons||[]), ...(r.item.tags||[]), ...(r.item.homeTags||[])].map(normV111).includes(filters.filter));
+    }
+    return rows;
+  }
+  function homeMajorDynamicV111(){
+    const items = homeItemsV111();
+    const cats = uniqueV111(items.map(catV111));
+    return cats.map(c => ({name:c, subs: uniqueV111(items.filter(i=>catV111(i)===c).map(subV111)).map(s=>({name:s,children:[]}))}));
+  }
+  window.homeMajorDynamicV111 = homeMajorDynamicV111;
+  window.toggleHomeMajorV111 = function(n){ expandedMajor = expandedMajor === n ? '' : n; filters.major = expandedMajor || ''; filters.sub=''; filters.subsub=''; expandedSub=''; renderAll(); };
+  window.toggleHomeSubV111 = function(m,s){ expandedMajor=m; expandedSub = expandedSub === s ? '' : s; filters.major=m; filters.sub=expandedSub || ''; filters.subsub=''; renderAll(); };
+  window.renderHomeSidebarV111 = function(){
+    const title=document.getElementById('sidebarTitle'), content=document.getElementById('sidebarContent'), filterContent=document.getElementById('filterContent');
+    if(!title || !content || !filterContent) return;
+    title.textContent='HOME CATEGORIES';
+    const rowsAll=homeItemsV111().map((item,index)=>({item,index}));
+    const majors=homeMajorDynamicV111();
+    content.innerHTML = majors.map(m => {
+      const safeM=String(m.name).replace(/'/g,"\\'");
+      const majorCount = groupedHomeV111(rowsAll.filter(r=>catV111(r.item)===m.name)).length;
+      const subs=(m.subs||[]).map(s=>{
+        const safeS=String(s.name).replace(/'/g,"\\'");
+        const subCount=groupedHomeV111(rowsAll.filter(r=>catV111(r.item)===m.name && subV111(r.item)===s.name)).length;
+        return `<button class="sub-btn ${filters.sub===s.name?'active':''}" onclick="toggleHomeSubV111('${escV111(safeM)}','${escV111(safeS)}')">${escV111(s.name)} <span style="font-size:12px">(${subCount})</span></button>`;
+      }).join('');
+      return `<button class="major-cat ${filters.major===m.name?'active':''}" onclick="toggleHomeMajorV111('${escV111(safeM)}')">${escV111(m.name)} <span style="font-size:14px;color:#8c725f">(${majorCount})</span></button><div class="sub-list ${expandedMajor===m.name?'open':''}">${subs}</div>`;
+    }).join('');
+    const filterNames = uniqueV111(homeItemsV111().flatMap(i => [...(i.lifeFilters||[]), ...(i.seasons||[]), ...(i.tags||[]), ...(i.homeTags||[])]));
+    filterContent.innerHTML = filterNames.map(f=>`<button class="filter-btn ${filters.filter===f?'active':''}" onclick="toggleFilterV83('${escV111(String(f).replace(/'/g,"\\'"))}')">${escV111(f)}</button>`).join('');
+  };
+  window.homeCardHTMLV111 = function(group){
+    const item=group.items[0] || {};
+    const imgItem=group.items.find(i=>i.image) || item;
+    const imgSrc=imgItem.image || '';
+    const img=imgSrc ? `<img src="${escV111(imgSrc)}">` : 'Image';
+    const qty=(group.items||[]).reduce((s,i)=>s+qtyV111(i),0) || qtyV111(item) || 0;
+    const tags=uniqueV111(group.items.flatMap(i=>i.lifeFilters||i.seasons||i.homeTags||i.tags||[])).slice(0,3);
+    const size=uniqueV111(group.items.map(i=>i.sizeDisplay||i.size||i.variant||''));
+    return `<article class="card" data-product-key="${escV111(group.key||'')}">
+      <div class="status-row"><span class="qty">Qty: ${escV111(qty)}</span></div>
+      <div class="imgbox">${img}</div>
+      <div class="card-main"><div><div class="brand">${escV111(nameV111(item))}</div><div class="name">${escV111(brandV111(item))}</div></div><div class="icon-row"><button class="icon-btn" type="button" onclick="event.stopPropagation(); openHomeFormV110('edit',${group.index})">✎</button><button class="icon-btn" type="button" onclick="event.stopPropagation(); deleteGroupV83(${group.index})">🗑</button></div></div>
+      <div class="details"><div>${size.length?escV111(size.join(', ')):''}</div><div>${escV111(catV111(item))}${subV111(item)?' / '+escV111(subV111(item)):''}</div><div>${escV111(item.location||item.storageLocation||item.roomArea||'')}</div></div>
+      <div class="tag-row">${tags.map(t=>`<span class="tag">${escV111(t)}</span>`).join('')}</div>
+    </article>`;
+  };
+  window.renderHomeInventoryV111 = function(){
+    const rows=homeRowsV111();
+    const groups=groupedHomeV111(rows);
+    renderHomeSidebarV111();
+    const section=document.getElementById('sectionTitle'), total=document.getElementById('totalCount'), qty=document.getElementById('qtyTiny'), active=document.getElementById('activeFilters'), grid=document.getElementById('grid');
+    if(section) section.textContent='HOME INVENTORY';
+    if(total) total.textContent=groups.length;
+    if(qty) qty.textContent=rows.reduce((s,r)=>s+qtyV111(r.item),0) || '—';
+    if(active) active.innerHTML=[filters.major,filters.sub,filters.filter,searchText?`Search: ${searchText}`:null].filter(Boolean).map(x=>`<span class="filter-pill">${escV111(x)}</span>`).join('');
+    if(!grid) return;
+    if(!groups.length){ grid.className=''; grid.innerHTML='<div class="empty">No home inventory items found.</div>'; return; }
+    grid.className='grid';
+    grid.innerHTML=groups.map(homeCardHTMLV111).join('');
+  };
+  window.renderAll = window.renderAllV83 = function(){
+    if(currentTab === 'home') return renderHomeInventoryV111();
+    return typeof baseRenderAllV111 === 'function' ? baseRenderAllV111.apply(this, arguments) : undefined;
+  };
+  window.setTab = function(tab){
+    if(typeof baseSetTabV111 === 'function'){
+      const out = baseSetTabV111.apply(this, arguments);
+      if(tab === 'home') setTimeout(renderHomeInventoryV111, 0);
+      return out;
+    }
+    currentTab=tab; searchText=''; filters={}; expandedMajor=''; expandedSub=''; renderAll();
+  };
+  console.log('Life Tracker v11.1 Home restore patch loaded', {homeItems: homeItemsV111().length});
+})();
+</script>
 </body></html>
