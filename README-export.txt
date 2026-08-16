@@ -1,12 +1,4 @@
-Life Tracker v11.0 GitHub upload package.
+Life Tracker v11.2 GitHub upload package
 
-Upload these root files/folders to GitHub Pages:
-index.html
-inventory-data.json
-images/
-README-export.txt
-backup-report.txt
-deploy-check.txt
-.nojekyll
-
-Includes latest exported inventory plus targeted Beauty/Home fixes requested for v11.0. Closet is preserved as-is.
+Use these files at the GitHub Pages repository root.
+Includes latest exported Beauty and Closet inventory updates, preserves existing Beauty/Closet behavior, and fixes Home inventory edit functionality.
