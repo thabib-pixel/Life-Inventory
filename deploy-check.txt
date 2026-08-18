@@ -1,3 +1,3 @@
-v13.0 deploy check:
-Upload root files to GitHub Pages and hard refresh.
-Required root files: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, deploy-check.txt, .nojekyll
+v13.1 deploy check:
+Header and browser tab title updated to v13.1.
+Upload all root files and hard refresh after GitHub Pages deploy.

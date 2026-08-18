@@ -1,6 +1,5 @@
-v13.0 backup report:
-- Latest exported JSON preserved as inventory-data.json.
-- Closet category/subcategory updates applied.
-- Closet Fabric Material field removed from add/edit.
-- Closet checkbox fields are category-specific.
-- Closet cards show Sub-Category instead of photo count and display selected checkbox tags below Category/Sub-Category.
+v13.1 backup report:
+Beauty items: 526
+Closet items: 86
+Home items: 21
+Closet taxonomy/card display updates applied.
