@@ -1,5 +1,1 @@
-v13.1 backup report:
-Beauty items: 526
-Closet items: 86
-Home items: 21
-Closet taxonomy/card display updates applied.
+Life Tracker v13.2 backup package created with Beauty 526, Closet 86, Home 21. Home section form/card update retained.

@@ -1,243 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Life Tracker v13.2</title>
-<style>
-:root{--page:#f9dfbf;--cream:#fff9f4;--panel:#fff8f1;--card:#fffefd;--ink:#15110e;--brown:#8a572c;--brown-dark:#6b3c15;--muted:#8c725f;--line:#d7bca2;--line-dark:#8d7b6b;--soft:#efc291;--danger:#8c2f24}
-*{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;font-weight:300} button,input,textarea{font:inherit}
-.page{min-height:100vh;padding:14px 8px 38px;width:100%}
-.hero{width:calc(100vw - 38px);margin:0 auto;background:rgba(255,249,244,.92);border:1.5px solid #15110d;border-radius:42px;min-height:205px;padding:34px 58px 38px}
-.hero.landing{min-height:355px} .logo-row{display:flex;justify-content:center;align-items:baseline;gap:14px}
-.logo{font-family:Georgia,"Times New Roman",serif;font-weight:500;color:var(--brown-dark);font-size:58px;letter-spacing:.045em;margin:0;line-height:1}
-.version{font-size:20px;color:#5c090d;font-weight:300;letter-spacing:.02em}
-.top-nav{display:grid;grid-template-columns:repeat(3,1fr);align-items:center;gap:20px;margin-top:70px;text-align:center}
-.nav-link{border:0;background:transparent;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-size:31px;letter-spacing:.08em;text-decoration:none;cursor:pointer;padding:8px 12px;font-weight:300}
-.nav-link:hover,.nav-link.active{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.2px;color:var(--brown-dark)}
-.app-layout{width:calc(100vw - 90px);margin:52px 0 0 82px;display:grid;grid-template-columns:335px minmax(0,1fr);gap:42px;align-items:start}
-.sidebar{background:rgba(255,248,241,.95);min-height:850px;padding:36px 36px 44px}
-.side-title{margin:0 0 24px;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
-.major-cat{width:100%;background:white;border:0;border-radius:10px;min-height:54px;margin:16px 0 0;font-size:22px;font-weight:300;cursor:pointer;color:#111}
-.major-cat.active{box-shadow:inset 0 0 0 1.5px var(--soft);color:var(--brown-dark)}
-.sub-list{display:none;padding:16px 0 18px;text-align:center} .sub-list.open{display:block}
-.sub-btn{display:block;border:0;background:transparent;margin:3px auto;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:17px;line-height:1.18;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
-.sub-btn.active{font-weight:600;color:var(--brown-dark)} .sub-sub-list{display:none;margin:8px 0 11px} .sub-sub-list.open{display:block}
-.sub-sub-btn{display:block;border:0;background:transparent;margin:2px auto;color:#9d6b40;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:15px;text-decoration:none;cursor:pointer}
-.sub-sub-btn:hover,.sub-sub-btn.active{text-decoration:underline;color:var(--brown-dark)}
-.sidebar-divider{height:1.5px;background:#191919;margin:30px 0 26px} .filter-title{font-family:Georgia,"Times New Roman",serif;font-size:27px;font-style:italic;font-weight:600;color:var(--brown);margin:0 0 12px 16px}
-.filter-btn{display:block;border:0;background:transparent;margin:5px 0 5px 18px;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:18px;text-align:left;cursor:pointer}
-.filter-btn:hover,.filter-btn.active{text-decoration:underline;color:var(--brown-dark)} .sidebar-actions{margin-top:26px;display:grid;gap:9px}
-.inventory-panel{background:rgba(255,248,241,.95);border:1px solid var(--line-dark);min-height:850px;padding:34px 46px 44px;position:relative}
-.inventory-head{display:grid;grid-template-columns:minmax(350px,1fr) minmax(360px,460px);gap:22px;align-items:start}
-.section-title{margin:0;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-size:34px;letter-spacing:.07em;font-weight:600}
-.total{margin-top:10px;color:var(--brown);font-family:Georgia,"Times New Roman",serif;font-size:23px;letter-spacing:.03em} .search-row{display:grid;gap:34px;justify-items:end}
-.qty-label{writing-mode:vertical-rl;text-orientation:mixed;position:absolute;top:15px;left:47%;font-size:12px}
-.search{width:100%;height:34px;border:1px solid #777;border-radius:6px;padding:0 15px;font-size:19px;font-style:italic;color:#777;background:white;font-weight:300}
-.btn{border:0;border-radius:7px;padding:11px 20px;cursor:pointer;background:white;color:#1d1d1d;font-weight:300} .btn.add{background:var(--soft);color:white;font-style:italic;font-size:18px}
-.btn.small{font-size:14px;padding:9px 13px;border:1px solid #cda983;color:var(--brown);background:#fffdfb} .btn.danger{background:var(--danger);color:#fff}
-.active-filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0} .filter-pill{background:white;border:1px solid #d0aa83;border-radius:999px;padding:6px 11px;color:var(--brown);font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:42px 28px;margin-top:72px}
-.card{background:white;border-radius:38px;padding:24px 22px 22px;min-height:405px;position:relative;box-shadow:0 4px 9px rgba(0,0,0,.01)}
-.status-row{position:absolute;top:36px;left:32px;right:32px;display:flex;justify-content:flex-end;gap:8px;font-size:15px;z-index:2} .status-row .qty{font-size:15px}
-.imgbox{background:#d7d7d7;height:225px;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden;margin-bottom:16px} .imgbox img{width:100%;height:100%;object-fit:cover}
-.card-main{display:grid;grid-template-columns:1fr auto;gap:8px} .brand{font-weight:700;font-size:20px;margin-bottom:2px} .name{font-size:19px;line-height:1.18}
-.icon-row{display:flex;gap:8px;font-size:22px} .icon-btn{border:0;background:transparent;cursor:pointer;font-size:21px;line-height:1;padding:0}
-.details{margin-top:14px;font-size:15px;line-height:1.25} .details em{font-style:italic} .tag-row{display:flex;gap:11px;flex-wrap:wrap;margin-top:18px}
-.tag{background:#e8bd87;color:white;border-radius:6px;padding:8px 20px;font-size:13px} .empty{background:white;border-radius:22px;padding:40px;text-align:center;color:var(--muted);margin-top:50px} .hidden{display:none!important}
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:99} .modal{background:#fffaf5;border:1px solid var(--line);border-radius:28px;max-width:860px;width:100%;max-height:90vh;overflow:auto;padding:28px}
-.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px} .modal h2{font-family:Georgia,'Times New Roman',serif;color:var(--brown);font-size:32px;margin:0 0 20px;font-weight:500} .close-x{border:0;background:transparent;font-size:28px;cursor:pointer}
-.detail-grid{display:grid;grid-template-columns:190px 1fr;gap:10px 16px;font-size:15px} .detail-grid div:nth-child(odd){font-weight:700;color:var(--brown)} .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px} .field{display:flex;flex-direction:column;gap:6px} .field.full{grid-column:1/-1} .field label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--brown);font-weight:700} .field input,.field textarea{border:1px solid #cdb198;border-radius:10px;padding:11px 12px;background:white} .field textarea{min-height:90px;resize:vertical} .edit-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px} .saved{color:#47714e;font-weight:700} .unsaved{color:var(--danger);font-weight:700}
 
-/* ===== v6.7 Beauty Add/Edit Variant Form ===== */
-.beauty-form-modal{max-width:1180px;background:#fff8f1;border:1px solid #15110d;border-radius:0;padding:42px 62px 48px}
-.beauty-form-title{font-family:Georgia,'Times New Roman',serif;color:#8a572c;font-size:36px;font-weight:700;letter-spacing:.03em;margin:0 0 54px}
-.beauty-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 44px;align-items:end}
-.beauty-field label,.variant-label,.beauty-checkbox label{display:block;color:#6b0707;font-weight:700;text-transform:uppercase;font-size:22px;margin:0 0 10px}
-.beauty-field input,.beauty-field select,.beauty-field textarea{width:100%;border:1px solid #8e8e8e;border-radius:5px;background:#fff;height:38px;padding:6px 10px;font-size:18px}
-.beauty-field textarea{height:105px;resize:vertical;border-radius:18px}
-.beauty-field.full{grid-column:1/-1}
-.variant-wrap{grid-column:1/-1;margin-top:22px}
-.variant-row{display:grid;grid-template-columns:minmax(210px,1.25fr) minmax(320px,1.75fr) 110px 58px 32px;gap:28px;align-items:end;margin-bottom:10px}
-.variant-row input{width:100%;height:38px;border:1px solid #8e8e8e;border-radius:5px;background:#fff;padding:6px 10px;font-size:18px}
-.variant-upload{width:50px;height:42px;border:0;background:#f4f6f8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer}
-.variant-remove{border:0;background:transparent;color:#6b0707;font-size:22px;cursor:pointer;padding:4px}
-.add-variant{border:0;background:transparent;color:#6b0707;font-style:italic;font-size:20px;cursor:pointer;margin:4px 0 55px 4px}
-.checkbox-grid{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px 70px;margin:20px 0 48px}
-.checkbox-group{display:grid;grid-template-columns:repeat(2,max-content);gap:22px 36px;align-items:center}
-.beauty-check{display:flex;align-items:center;gap:12px;color:#6b0707;font-style:italic;font-size:20px}
-.beauty-check input{width:24px;height:24px}
-.beauty-form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:30px}
-.beauty-form-actions .btn{min-width:235px;background:#eac291;color:#fff;font-style:italic;font-size:20px}
-.variant-image-note{font-size:12px;color:#8c725f;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:900px){.beauty-form-modal{padding:26px 20px}.beauty-form-grid,.checkbox-grid{grid-template-columns:1fr}.variant-row{grid-template-columns:1fr}.beauty-form-actions{justify-content:stretch}.beauty-form-actions .btn{width:100%;min-width:0}.checkbox-group{grid-template-columns:1fr}}
-
-
-/* ===== v6.7 View-Only Product Modal ===== */
-.product-view-modal{max-width:1230px;background:#fff8f1;border:0;border-radius:0;padding:34px 48px 48px;color:#8a572c}
-.product-view-close{position:absolute;top:24px;right:34px;border:0;background:transparent;color:#8a572c;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:700;cursor:pointer}
-.product-view-grid{display:grid;grid-template-columns:500px minmax(420px,1fr);gap:62px;align-items:start}
-.product-main-image{width:100%;height:490px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#111;font-size:28px}
-.product-main-image img{width:100%;height:100%;object-fit:contain;background:#fff}
-.product-description-block{margin-top:82px;color:#8a572c}
-.product-description-block h3{font-family:Georgia,'Times New Roman',serif;font-size:25px;font-weight:700;margin:0 0 18px;text-transform:uppercase}
-.product-description-block p{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.45;color:#8a572c;margin:0 0 34px}
-.product-view-brand{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;text-transform:uppercase;margin:18px 0 14px;color:#8a572c}
-.product-view-name{font-family:Georgia,'Times New Roman',serif;font-size:42px;font-weight:400;margin:0 0 42px;color:#8a572c;line-height:1.05}
-.variant-size-group{margin:26px 0 32px}
-.variant-size-title{font-family:Georgia,'Times New Roman',serif;font-size:23px;color:#8a572c;margin:0 0 18px}
-.variant-option{display:grid;grid-template-columns:82px 1fr;gap:24px;align-items:center;margin:14px 0;border:0;background:transparent;color:#8a572c;text-align:left;cursor:pointer;width:100%;padding:0}
-.variant-option.active .variant-thumb{outline:2px solid #8a572c}
-.variant-thumb{width:82px;height:82px;background:#bfbfbf;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.variant-thumb img{width:100%;height:100%;object-fit:cover}
-.variant-text{font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1.25;color:#8a572c}
-.variant-desc{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;color:#111;background:#fff;padding:0 4px}
-.view-tag-row{display:flex;gap:22px;flex-wrap:wrap;margin-top:80px}
-.view-tag{background:#eac291;color:#fff;border-radius:7px;min-width:185px;text-align:center;padding:15px 28px;font-size:22px}
-@media(max-width:900px){.product-view-modal{padding:28px 20px}.product-view-grid{grid-template-columns:1fr;gap:26px}.product-main-image{height:350px}.product-description-block{margin-top:30px}.product-view-name{font-size:32px}.view-tag{min-width:120px;font-size:17px}.variant-text{font-size:19px}}
-
-@media(max-width:1050px){.page{padding:10px}.hero{width:calc(100vw - 20px);border-radius:30px;padding:28px 16px;min-height:250px}.logo{font-size:39px}.version{font-size:17px}.top-nav{margin-top:48px;gap:4px}.nav-link{font-size:23px}.app-layout{width:calc(100vw - 20px);margin:30px auto 0;grid-template-columns:1fr;gap:22px}.sidebar{min-height:auto;padding:24px}.inventory-panel{padding:24px;min-height:600px}.inventory-head{grid-template-columns:1fr}.search-row{justify-items:stretch;gap:16px}.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:40px;gap:24px}.form-grid,.detail-grid{grid-template-columns:1fr}}
-
-
-
-
-/* ===== v8.3 Reliable Save State + Closet Image Retention ===== */
-.closet-form-modal{max-width:1180px;background:#fff8f1;border:1px solid #15110d;border-radius:0;padding:42px 62px 48px}
-.closet-image-tools{grid-column:1/-1;display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:28px;align-items:start;margin-top:8px}
-.closet-image-preview{width:100%;min-height:260px;background:#f1efec;border:1px dashed #c8aa8b;border-radius:18px;display:flex;align-items:center;justify-content:center;color:#8c725f;font-size:20px;overflow:hidden}
-.closet-image-preview img{width:100%;height:260px;object-fit:cover}
-.closet-upload-controls{display:grid;gap:12px;align-content:start}
-.closet-upload-note{font-size:14px;color:#8c725f;font-style:italic}
-.closet-save-note{font-size:13px;color:#6f594a;line-height:1.4}
-.closet-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:10px;margin-top:8px}
-.closet-gallery-thumb{position:relative;height:82px;border:1px solid #d9c5b2;background:#f4eee8;border-radius:12px;overflow:hidden}
-.closet-gallery-thumb img{width:100%;height:100%;object-fit:cover}
-.closet-gallery-thumb button{position:absolute;top:4px;right:4px;border:1px solid #6b4f3d;background:#fff8f1;border-radius:999px;width:22px;height:22px;font-size:12px;line-height:18px;cursor:pointer}
-.closet-card-thumbs{display:flex;gap:6px;margin-top:8px}
-.closet-card-thumbs img{width:34px;height:34px;object-fit:cover;border-radius:8px;border:1px solid #d9c5b2;background:#f4eee8}
-.closet-extra-tags{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,max-content);gap:22px 36px;align-items:center;margin:6px 0 18px}
-.closet-tryon-note{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#8a572c;text-align:center;margin:14px 0 2px;font-size:16px}
-.tryon-separator{margin-top:26px;padding-top:18px;border-top:1px solid rgba(140,114,95,.42)}
-.tryon-major{letter-spacing:.08em;background:#f5eee7!important;border-color:#8a572c!important}
-.save-toast-v83{position:fixed;bottom:24px;right:24px;background:#15110d;color:#fff8f1;border:1px solid #c8aa8b;padding:12px 18px;border-radius:999px;font-size:14px;letter-spacing:.02em;z-index:99999;box-shadow:0 8px 22px rgba(0,0,0,.16);opacity:0;transform:translateY(8px);transition:.22s ease}
-.save-toast-v83.show{opacity:1;transform:translateY(0)}
-.save-state-v83{font-size:13px;color:#6f594a;margin-top:8px;font-style:italic}
-@media(max-width:900px){.closet-form-modal{padding:26px 20px}.closet-image-tools{grid-template-columns:1fr}.closet-extra-tags{grid-template-columns:1fr}.save-toast-v83{right:14px;bottom:14px}}
-
-
-/* ===== v8.6 View Mode Restored Enhancements ===== */
-.view-mode-thumbs-v86{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:10px;margin-top:14px}
-.view-mode-thumb-v86{height:78px;border:1px solid #d9c5b2;border-radius:12px;background:#f4eee8;overflow:hidden;cursor:pointer}
-.view-mode-thumb-v86 img{width:100%;height:100%;object-fit:cover}
-.view-mode-section-v86{margin-top:28px;color:#8a572c}
-.view-mode-section-v86 h3{font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:700;margin:0 0 12px;text-transform:uppercase}
-.view-mode-details-v86{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.55;color:#8a572c;display:grid;gap:7px}
-.card{cursor:pointer}
-.icon-row .icon-btn{cursor:pointer}
-
-
-/* ===== v8.7 Try-On Studio + Shoes Category ===== */
-.tryon-studio-v87{display:grid;grid-template-columns:minmax(320px,42%) minmax(420px,58%);gap:34px;align-items:start;margin-top:22px}
-.tryon-mannequin-panel-v87{background:#fff;border:1px solid #18130f;min-height:760px;position:relative;padding:24px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
-.tryon-mannequin-title-v87{font-family:Georgia,'Times New Roman',serif;font-size:28px;color:#4f2a1f;letter-spacing:.03em;text-transform:uppercase;margin:0}
-.tryon-hairstyle-row-v87{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-family:Georgia,'Times New Roman',serif;color:#7b241d}
-.tryon-hairstyle-row-v87 label,.tryon-hairstyle-row-v87 select{display:none}
-.tryon-avatar-stage-v87{background:#fff;border:1px solid #18130f;position:relative;overflow:hidden;min-height:600px;display:flex;align-items:center;justify-content:center;padding:18px}
-.tryon-avatar-v87{width:310px;height:638px;position:relative}
-.tryon-base-img-v87{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;pointer-events:none;user-select:none}
-.tryon-zone-v87{position:absolute;z-index:10;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.tryon-zone-v87 img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 5px 7px rgba(0,0,0,.18));mix-blend-mode:multiply}
-.tryon-zone-top-v87{top:94px;left:50%;transform:translateX(-50%);width:178px;height:210px}
-.tryon-zone-bottom-v87{top:242px;left:50%;transform:translateX(-50%);width:182px;height:238px}
-.tryon-zone-fullbody-v87{top:88px;left:50%;transform:translateX(-50%);width:205px;height:418px}
-.tryon-zone-shoes-v87{top:564px;left:50%;transform:translateX(-50%);width:176px;height:62px;gap:4px}
-.tryon-zone-head-v87{top:10px;left:50%;transform:translateX(-50%);width:138px;height:90px}
-.tryon-zone-eyes-v87{top:64px;left:50%;transform:translateX(-50%);width:90px;height:28px}
-.tryon-zone-bag-v87{top:208px;right:-6px;width:116px;height:188px}
-.tryon-zone-jewelry-v87{top:86px;left:50%;transform:translateX(-50%);width:104px;height:82px}
-.tryon-selected-strip-v87{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.tryon-selected-pill-v87{border:1px solid #c8aa8b;background:#fffaf5;border-radius:999px;padding:6px 10px;font-family:Georgia,'Times New Roman',serif;font-size:12px;color:#7b241d}
-.tryon-right-v87{display:grid;gap:16px}
-.tryon-controls-v87{display:flex;gap:12px;align-items:center;justify-content:flex-end;position:relative}
-.tryon-search-v87{width:min(460px,70%);height:38px;border:1px solid #18130f;border-radius:8px;background:#fffaf5;padding:0 14px;font-size:16px;font-style:italic}
-.tryon-filter-button-v87{border:0;background:transparent;font-size:34px;cursor:pointer;line-height:1;color:#18130f}
-.tryon-filter-popover-v87{position:absolute;right:0;top:48px;width:250px;background:#fffaf5;border:1px solid #18130f;padding:22px 24px;z-index:30;box-shadow:0 10px 24px rgba(0,0,0,.12)}
-.tryon-filter-popover-v87 h3{font-size:22px;color:#7b0000;margin:0 0 12px;text-transform:uppercase;letter-spacing:.04em}
-.tryon-filter-list-v87{display:grid;gap:7px}
-.tryon-filter-list-v87 label{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#7b0000;font-size:18px;display:flex;gap:8px;align-items:center}
-.tryon-filter-list-v87 input{width:20px;height:20px}
-.tryon-results-v87{display:grid;grid-template-columns:repeat(3,minmax(140px,1fr));gap:14px}
-.tryon-item-tile-v87{background:#d8eaf9;border:1px solid #18130f;min-height:236px;padding:10px;display:grid;grid-template-rows:1fr auto;gap:8px;cursor:pointer}
-.tryon-item-tile-v87:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.12)}
-.tryon-item-img-v87{background:#edf5fb;border:1px solid rgba(0,0,0,.08);height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#7b241d;font-family:Georgia,'Times New Roman',serif}
-.tryon-item-img-v87 img{width:100%;height:100%;object-fit:cover}
-.tryon-item-meta-v87{font-family:Georgia,'Times New Roman',serif;color:#4f2a1f;font-size:14px;line-height:1.25}
-.tryon-item-meta-v87 strong{display:block;font-size:15px;color:#18130f}
-.tryon-empty-v87{border:1px dashed #c8aa8b;padding:30px;text-align:center;color:#7b241d;font-family:Georgia,'Times New Roman',serif;font-style:italic}
-.tryon-clear-v87{border:1px solid #8a572c;background:#8a572c;color:#fffaf5;border-radius:999px;padding:8px 14px;font-family:Georgia,'Times New Roman',serif;cursor:pointer}
-@media(max-width:1100px){.tryon-studio-v87{grid-template-columns:1fr}.tryon-results-v87{grid-template-columns:repeat(2,minmax(140px,1fr))}.tryon-search-v87{width:100%}}
-
-
-/* ===== v9.9 Try-On refinement: white stage + better clothing cutouts ===== */
-.tryon-mannequin-panel-v87{background:#fff!important;}
-.tryon-avatar-stage-v87{background:#fff!important;}
-.tryon-item-cutout-v94{mix-blend-mode:normal!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.20))!important;}
-.tryon-zone-top-v87 img{width:112%;height:112%;object-fit:contain;transform:translateY(2px);}
-.tryon-zone-bottom-v87 img{width:118%;height:118%;object-fit:contain;transform:translateY(-8px);}
-.tryon-zone-fullbody-v87 img{width:116%;height:116%;object-fit:contain;transform:translateY(-2px);}
-.tryon-zone-shoes-v87 img{width:108%;height:108%;object-fit:contain;}
-.tryon-zone-bag-v87 img{width:100%;height:100%;object-fit:contain;}
-.tryon-zone-head-v87 img,.tryon-zone-eyes-v87 img,.tryon-zone-jewelry-v87 img{width:100%;height:100%;object-fit:contain;}
-.tryon-zone-bag-v87 img{width:100%;height:100%;object-fit:contain;}
-
-
-/* ===== v9.9 fixed Try-On placement ===== */
-.tryon-avatar-stage-v87{background:#fff!important;}
-.tryon-avatar-v87{width:332px!important;height:682px!important;position:relative;}
-.tryon-base-img-v87{background:#fff!important;}
-.tryon-zone-v87{z-index:12!important;pointer-events:none!important;}
-.tryon-draggable-v97{position:absolute;left:50%;top:50%;transform-origin:center center;cursor:grab;pointer-events:auto!important;touch-action:none;user-select:none;z-index:30;}
-.tryon-draggable-v97.dragging{cursor:grabbing;}
-.tryon-draggable-v97 img{display:block;width:100%;height:100%;object-fit:contain;background:transparent!important;box-shadow:none!important;filter:drop-shadow(0 0 1.6px rgba(125,112,98,.95)) drop-shadow(0 1px 2px rgba(70,55,45,.55)) drop-shadow(0 6px 10px rgba(0,0,0,.16))!important;mix-blend-mode:normal!important;}
-.tryon-zone-top-v87{top:102px!important;left:50%!important;transform:translateX(-50%)!important;width:186px!important;height:214px!important;}
-.tryon-zone-bottom-v87{top:254px!important;left:50%!important;transform:translateX(-50%)!important;width:188px!important;height:242px!important;}
-.tryon-zone-fullbody-v87{top:96px!important;left:50%!important;transform:translateX(-50%)!important;width:214px!important;height:428px!important;}
-.tryon-zone-shoes-v87{top:602px!important;left:50%!important;transform:translateX(-50%)!important;width:184px!important;height:68px!important;gap:4px!important;}
-.tryon-zone-head-v87{top:12px!important;left:50%!important;transform:translateX(-50%)!important;width:146px!important;height:94px!important;}
-.tryon-zone-eyes-v87{top:72px!important;left:50%!important;transform:translateX(-50%)!important;width:96px!important;height:30px!important;}
-.tryon-zone-bag-v87{top:220px!important;right:-8px!important;width:126px!important;height:196px!important;}
-.tryon-zone-jewelry-v87{top:92px!important;left:50%!important;transform:translateX(-50%)!important;width:112px!important;height:84px!important;}
-.tryon-controls-mini-v97{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;font-family:Georgia,'Times New Roman',serif;color:#7b241d;font-size:13px;}
-.tryon-controls-mini-v97 .btn{border:1px solid #c8aa8b;background:#fffaf5;border-radius:999px;padding:5px 10px;cursor:pointer;color:#7b241d;}
-.tryon-instructions-v97{font-size:12px;color:#8c725f;font-style:italic;margin-top:2px;}
-.tryon-selected-pill-v87.active{background:#f5e7da;border-color:#9a6a3a;}
-
-
-/* ===== v11.2 Beauty/Home image upload refinements ===== */
-.v110-upload-area{border:1px dashed #c9ad91;border-radius:22px;background:#fff8f1;padding:14px;display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;margin-top:8px}
-.v110-upload-preview{width:92px;height:92px;border-radius:18px;background:#f4eee8;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#8c725f;font-size:13px;text-align:center}
-.v110-upload-preview img{width:100%;height:100%;object-fit:cover}
-.v110-upload-copy{font-size:13px;color:#8c725f;line-height:1.35}
-.v110-upload-btn{border:1px solid #8a572c;background:#fff;color:#6b3c15;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer;margin-top:8px}
-.variant-row.v110-variant-row{grid-template-columns:1fr 1fr 110px 220px 30px;align-items:end}
-.variant-upload.v110-visible-upload{width:auto;height:auto;border-radius:999px;padding:10px 12px;font-size:13px;font-weight:800;background:#fff;border:1px solid #8a572c;color:#6b3c15}
-.v110-zero-modal{position:fixed;inset:0;background:rgba(0,0,0,.24);display:flex;align-items:center;justify-content:center;z-index:9999}
-.v110-zero-box{width:min(440px,92vw);background:#fffaf4;border-radius:28px;padding:24px;border:1px solid #d7bca2;box-shadow:0 10px 30px rgba(0,0,0,.12);color:#15110e}
-.v110-zero-box h3{margin:0 0 8px;font-size:24px}.v110-zero-box p{margin:0 0 18px;color:#6b3c15;line-height:1.4}.v110-zero-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}.v110-zero-actions button{border:1px solid #8a572c;border-radius:999px;background:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.v110-zero-actions button.primary{background:#8a572c;color:#fff}
-</style></head>
-<body><div class="page">
-<header class="hero landing" id="hero"><div class="logo-row"><h1 class="logo">LIFE TRACKER</h1><span class="version">v 13.2</span></div><nav class="top-nav"><button class="nav-link" data-tab="beauty">BEAUTY</button><button class="nav-link" data-tab="closet">CLOSET</button><button class="nav-link" data-tab="home">HOME</button></nav></header>
-<section class="app-layout hidden" id="appLayout"><aside class="sidebar"><h2 class="side-title" id="sidebarTitle">BEAUTY CATEGORIES</h2><div id="sidebarContent"></div><div class="sidebar-divider"></div><h3 class="filter-title">Filters</h3><div id="filterContent"></div><div class="sidebar-actions"><button class="btn small" onclick="clearFilters()">Clear Filters</button><button class="btn small" onclick="downloadJSON()">Export Updated JSON</button><button class="btn small" onclick="resetLocalEdits()">Reset Local Edits</button><div id="saveState" class="saved">Saved</div></div></aside>
-<main class="inventory-panel"><div class="qty-label">Qty: <span id="qtyTiny">—</span></div><div class="inventory-head"><div><h2 class="section-title" id="sectionTitle">BEAUTY INVENTORY</h2><div class="total"><span id="totalCount">0</span> TOTAL</div><div id="activeFilters" class="active-filters"></div></div><div class="search-row"><input class="search" id="search" placeholder="Search brand, product, category..." /><button class="btn add" onclick="addNewItem()">+ Add New Product</button></div></div><div id="grid" class="grid"></div></main></section></div>
-<div class="modal-backdrop" id="detailsBackdrop" onclick="closeDetails(event)"><div class="modal" onclick="event.stopPropagation()"><div class="modal-head"><h2 id="detailsTitle">Item Details</h2><button class="close-x" onclick="closeDetails()">×</button></div><div id="detailsContent"></div></div></div>
-<div class="modal-backdrop" id="editBackdrop" onclick="closeEdit(event)">
-  <div class="modal beauty-form-modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><button class="close-x" onclick="closeEdit()">×</button></div>
-    <form id="editForm" novalidate onsubmit="return false;">
-      <div id="editFields"></div>
-    </form>
-  </div>
-</div>
-<script>
 const EMBEDDED_INVENTORY = {"exportType": "Life Tracker v13.2 external inventory placeholder", "appVersion": "v13.2", "version": "v13.2", "beautyProducts": [], "closetItems": [], "homeItems": [], "outfits": [], "dayLooks": [], "savedLooks": [], "dailyHub": {"removed": true}};let inventory=loadInventory(),currentTab=null,searchText='',filters={},expandedMajor='',expandedSub='',editing=null;
 const collectionMap={beauty:{label:'BEAUTY INVENTORY',sidebar:'BEAUTY CATEGORIES',key:'beautyProducts'},closet:{label:'CLOSET INVENTORY',sidebar:'CLOSET CATEGORIES',key:'closetItems'},home:{label:'HOME INVENTORY',sidebar:'HOME CATEGORIES',key:'homeItems'}};
 const beautyMajor=[
@@ -263,9 +24,9 @@ function renderAll(){if(!currentTab)return;let rows=filteredItems(),groups=group
 const commonFields=['name','fullProductName','brand','brandName','lifeCategory','lifeSubcategory','lifeSubSubcategory','category','subcategory','subSubcategory','color','shade','shades','size','sizeDisplay','status','quantity','openQuantity','unopenedQuantity','location','storageLocation','notes','image','productUrl','productId','lifeFilters','seasons'];function editableFields(i){let keys=new Set(commonFields.filter(k=>k in i||['name','brand','category','subcategory','quantity','location','notes','image'].includes(k)));Object.keys(i).forEach(k=>{if(!['id','stableId','dateAdded','lastUpdated','updatedAt'].includes(k)&&typeof i[k]!=='object')keys.add(k)});return [...keys]}function valueToInput(v){if(Array.isArray(v))return v.join(', ');if(v&&typeof v==='object')return JSON.stringify(v);return v??''}function parseVal(k,v,o){if(['quantity','openQuantity','unopenedQuantity','backupQuantity','id'].includes(k)){if(v==='')return'';let n=Number(v);return Number.isNaN(n)?v:n}if(Array.isArray(o)||k==='seasons'||k==='lifeFilters')return v.split(',').map(s=>s.trim()).filter(Boolean);return v}
 function openEdit(idx){let i=currentList()[idx];if(!i)return;editing={tab:currentTab,index:idx};document.getElementById('editTitle').textContent='Edit: '+itemName(i);document.getElementById('editFields').innerHTML=editableFields(i).map(k=>{let val=valueToInput(i[k]),long=['notes','description','productUrl','image'].includes(k)||String(val).length>70;return `<div class="field ${long?'full':''}"><label>${esc(k)}</label>${long?`<textarea name="${esc(k)}" oninput="markUnsaved()">${esc(val)}</textarea>`:`<input name="${esc(k)}" value="${esc(val)}" oninput="markUnsaved()">`}</div>`}).join('');document.getElementById('editBackdrop').style.display='flex'}function closeEdit(e){if(e&&e.target&&e.target.id!=='editBackdrop')return;document.getElementById('editBackdrop').style.display='none';editing=null}function saveEdit(e){e.preventDefault();if(!editing)return;let item=inventory[collectionMap[editing.tab].key][editing.index],fd=new FormData(document.getElementById('editForm'));for(let [k,v] of fd.entries())item[k]=parseVal(k,v,item[k]);item.lastUpdated=new Date().toISOString().slice(0,10);persist();closeEdit();renderAll()}function deleteGroup(idx){if(!confirm('Delete this item from this browser copy?'))return;currentList().splice(idx,1);persist();renderAll()}function deleteEditingItem(){if(editing){deleteGroup(editing.index);closeEdit()}}function addNewItem(){let list=currentList(),now=Date.now(),base={id:now,stableId:`${currentTab}-${now}`,name:'Full Product Name',brand:'Brand Name',lifeCategory:currentTab==='beauty'?'Skin':'',lifeSubcategory:'',category:currentTab==='beauty'?'Skin':'',subcategory:'',quantity:1,location:'',notes:'',image:'',lifeFilters:['All Year'],dateAdded:new Date().toISOString().slice(0,10),lastUpdated:new Date().toISOString().slice(0,10)};list.unshift(base);persist();renderAll();openEdit(0)}function downloadJSON(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v13_2-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)}function resetLocalEdits(){if(!confirm('Reset browser edits and return to packaged v13.2 inventory?'))return;localStorage.removeItem(STORAGE_KEY);inventory=clone(EMBEDDED_INVENTORY);renderAll()}function closeDetails(e){document.getElementById('detailsBackdrop').style.display='none'}
 document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));document.getElementById('search').addEventListener('input',e=>{searchText=e.target.value;renderAll()});
-</script><!-- v6.8 previous marker retained from v6.7 base: corrected categories filters below sidebar grouped cards no samples contextual totals no In Use on cards Life Planner removed --><!-- sub-list open validation marker: subcategories are hidden by default and expand after selecting main category -->
 
-<script>
+;
+
 /* ===== v6.7 Beauty Variant Form Overrides ===== */
 (function(){
   function _esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -401,11 +162,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   };
   window.downloadJSON=function(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v13_2-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)};
 })();
-</script>
 
-<!-- v6.8 previous marker retained from v6.7 base: custom Beauty Add New Item and Edit Item variant form, per-variant image upload, add variant rows, grouped product save, Life Planner removed -->
+;
 
-<script>
 /* ===== v6.7 Product View-Only Modal Overrides ===== */
 (function(){
   function _esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -479,11 +238,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     return `<article class="card"><div class="status-row"><span class="qty">Qty: ${_esc(qty)}</span></div><div class="imgbox" onclick="openProductViewV67(${group.index})" style="cursor:pointer">${img}</div><div class="card-main"><div onclick="openProductViewV67(${group.index})" style="cursor:pointer"><div class="brand">${_esc(itemBrand(item))}</div><div class="name">${_esc(itemName(item))}</div></div><div class="icon-row"><button class="icon-btn" onclick="openEdit(${group.index})">✎</button><button class="icon-btn" onclick="deleteGroup(${group.index})">🗑</button></div></div><div class="details" onclick="openProductViewV67(${group.index})" style="cursor:pointer"><div>${sizes?_esc(sizes):''}</div><div><em>${shades?'Shades: '+_esc(shades):''}</em></div><div>${_esc(itemCategory(item))}${itemSub(item)?' / '+_esc(itemSub(item)):''}</div><div>${_esc(item.location||item.storageLocation||item.roomArea||'')}</div></div><div class="tag-row">${tags.map(t=>`<span class="tag">${_esc(t)}</span>`).join('')}</div></article>`;
   };
 })();
-</script>
 
-<!-- v6.8 previous marker retained from v6.7 base: view-only product modal, grouped variants by size and shade, clickable mini images switch main image, descriptions and directions displayed, Beauty add/edit variant form retained, Life Planner removed -->
+;
 
-<script>
 /* ===== v6.8 Final Edit/View Functionality Fix ===== */
 (function(){
   const esc8 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -811,11 +568,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   };
   window.__lifeTrackerV68FixLoaded = true;
 })();
-</script>
 
-<!-- v6.8 QA validation markers: final direct renderAll cardHTML edit view overrides loaded, view modal class applied, edit modal class applied, variant form saves grouped products, Life Planner removed -->
+;
 
-<script>
 /* ===== v7.0 Beauty Save Flow Fix ===== */
 (function(){
   const esc70 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1102,11 +857,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
   window.__lifeTrackerV70SaveFixLoaded = true;
 })();
-</script>
 
-<!-- v7.0 QA validation markers: Beauty save flow fixed with direct Save button, no native submit blocking, grouped edit replacement, localStorage persistence, Life Planner removed -->
+;
 
-<script>
 /* ===== v7.1 Product Card Save Reflection Fix ===== */
 (function(){
   const esc71 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1489,11 +1242,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
   window.__lifeTrackerV71CardSaveFixLoaded = true;
 })();
-</script>
 
-<!-- v7.1 QA validation markers: product card refresh after save, shade variant optional, filters cleared after save for visibility, direct Save button retained, Life Planner removed -->
+;
 
-<script>
 /* ===== v7.2 Safe Beauty Save Patch ===== */
 (function(){
   const esc72 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1766,11 +1517,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
   window.__lifeTrackerV72SafeSaveLoaded = true;
 })();
-</script>
 
-<!-- v7.2 QA validation markers: safe Beauty save, preserves existing images, clearer error messages, shade optional, card refresh retained, Life Planner removed -->
+;
 
-<script>
 /* ===== v7.3 Static Deploy Marker ===== */
 (function(){
   window.__lifeTrackerV73StaticDeployLoaded = true;
@@ -1786,16 +1535,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     };
   }
 })();
-</script>
 
-<!-- v7.3 QA validation markers: static GitHub Pages package, .nojekyll included, v7.2 safe save retained, Life Planner removed -->
+;
 
-
-
-
-
-
-<script>
 /* ===== v8.3 Reliable Save State Patch ===== */
 (function(){
   window.__lifeTrackerV83ReliableSaveLoaded = true;
@@ -2489,12 +2231,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
   console.log('Life Tracker v8.3 loaded with reliable save-state patch.');
 })();
-</script>
 
-<!-- v8.3 QA validation markers: reliable save state, editing clears after save, all tabs persist to v8.3 storage, cards refresh after save, export includes latest saved data, Life Planner removed -->
+;
 
-
-<script>
 /* ===== v8.5 IndexedDB Storage Patch ===== */
 (function(){
   window.__lifeTrackerV85IndexedDBStorageLoaded = true;
@@ -2730,11 +2469,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
   hydrateFromIndexedDBV85();
 })();
-</script>
 
-<!-- v8.5 QA validation markers: IndexedDB image storage enabled, localStorage full-inventory saves disabled, quota alert removed, closet images retained, export includes latest data, Life Planner removed -->
+;
 
-<script>
 /* ===== v8.6 Updated Closet Images + View Mode Restored ===== */
 (function(){
   window.__lifeTrackerV86ViewModeRestoredLoaded = true;
@@ -2955,11 +2692,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     closetGalleryImageCount: (inventory.closetItems || []).reduce((sum,i) => sum + closetImagesV86(i).length, 0)
   });
 })();
-</script>
 
-<!-- v8.6 QA validation markers: updated closet images integrated, click-to-view card mode restored, closet gallery view mode, IndexedDB storage retained, Life Planner removed -->
+;
 
-<script>
 /* ===== v8.7 Try-On Studio + Shoes Category ===== */
 (function(){
   window.__lifeTrackerV87TryOnStudioLoaded = true;
@@ -3482,13 +3217,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     closetImages: (inventory.closetItems || []).reduce((sum,i) => sum + closetImagesV87(i).length, 0)
   });
 })();
-</script>
 
-<!-- v8.7 QA validation markers: Shoes category added, Try-On Studio enabled, mannequin outfit placement, hairstyle selector, searchable closet list, multi-select filters, IndexedDB retained, Life Planner removed -->
+;
 
-
-
-<script>
 /* ===== v13.2 external inventory loader ===== */
 (function(){
   window.__lifeTrackerV101ExternalInventoryLoaded = true;
@@ -3536,9 +3267,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadExternalInventoryV101);
   else loadExternalInventoryV101();
 })();
-</script>
 
-<script>
+;
+
 /* ===== v11.2 targeted fixes: Beauty/Home upload + Beauty zero quantity prompt + Home title order ===== */
 (function(){
   window.__lifeTrackerV110TargetedFixesLoaded = true;
@@ -3778,10 +3509,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   };
   console.log('Life Tracker v13.2 targeted fixes loaded: Beauty upload, Home upload, Beauty zero quantity prompt, Home card name order.');
 })();
-</script>
 
+;
 
-<script>
 /* ===== v13.2 Home inventory restore patch ===== */
 (function(){
   const baseRenderAllV111 = window.renderAll;
@@ -3892,10 +3622,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   };
   console.log('Life Tracker v13.2 Home restore patch loaded', {homeItems: homeItemsV111().length});
 })();
-</script>
 
+;
 
-<script>
 /* ===== v13.2 Home edit click/save fix - keep Beauty and Closet behavior unchanged ===== */
 (function(){
   window.__lifeTrackerV112HomeEditFixLoaded = true;
@@ -4066,10 +3795,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   };
   console.log('Life Tracker v13.2 Home edit fix loaded.');
 })();
-</script>
 
+;
 
-<script>
 /* ===== v13.2 QA retention patch: keep newest packaged JSON, then preserve in-browser edits safely ===== */
 (function(){
   window.__lifeTrackerV113RetentionPatchLoaded = true;
@@ -4162,9 +3890,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     a.href=URL.createObjectURL(blob); a.download='life-tracker-v13_2-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);
   };
 })();
-</script>
 
-<script>
+;
+
 /* ===== v13.2 Closet taxonomy, add/edit checkbox rules, and card display patch ===== */
 (function(){
   window.__lifeTrackerV130ClosetPatchLoaded = true;
@@ -4537,11 +4265,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   normalizeInventoryV130();
   console.log('Life Tracker v13.2 Closet patch loaded', {closet:(inventory.closetItems||[]).length});
 })();
-</script>
 
+;
 
-
-<script>
 /* ===== v13.2 targeted Home Inventory category/form/card patch ===== */
 (function(){
   const VERSION132 = 'v13.2';
@@ -4622,7 +4348,6 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         <div class="beauty-field"><label>CATEGORY</label><select id="homeCategoryV132" onchange="refreshHomeSubcategoryV132(); markUnsaved();"><option value=""></option>${categoryOptions132(cat)}</select></div>
         <div class="beauty-field"><label>SUB-CATEGORY</label><select id="homeSubcategoryV132" onchange="markUnsaved()"><option value=""></option>${subcategoryOptions132(cat,p.subcategory||'')}</select></div>
         <div class="beauty-field"><label>SCENT</label><input id="homeScentV132" value="${esc132(p.scent||'')}" oninput="markUnsaved()"></div>
-        <div class="beauty-field"><label>COLOR</label><input id="homeColorV132" value="${esc132(p.color||'')}" oninput="markUnsaved()"></div>
         <div class="beauty-field"><label>SIZE</label><input id="homeSizeV132" value="${esc132(p.size||'')}" oninput="markUnsaved()"></div>
         <div class="beauty-field"><label>QUANTITY</label><input id="homeQuantityV132" type="number" min="0" value="${esc132(p.quantity ?? 1)}" oninput="markUnsaved()"></div>
         <div class="beauty-field full"><label>PRODUCT IMAGE</label><div class="v110-upload-area"><div class="v110-upload-preview" id="homeImagePreviewV132" data-image="${esc132(p.image||'')}">${p.image?`<img src="${esc132(p.image)}">`:'No image'}</div><div class="v110-upload-copy">Upload or replace the product image for this home inventory item.<br><button class="v110-upload-btn" type="button" onclick="document.getElementById('homeImageInputV132').click()">Upload Image</button><input id="homeImageInputV132" type="file" accept="image/*" style="display:none" onchange="handleHomeImageV132(this)"></div></div></div>
@@ -4674,7 +4399,6 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       const category = document.getElementById('homeCategoryV132')?.value || '';
       const subcategory = document.getElementById('homeSubcategoryV132')?.value || '';
       const scent = (document.getElementById('homeScentV132')?.value || '').trim();
-      const color = (document.getElementById('homeColorV132')?.value || '').trim();
       const size = (document.getElementById('homeSizeV132')?.value || '').trim();
       const qtyRaw = document.getElementById('homeQuantityV132')?.value;
       const quantity = qtyRaw === '' ? 0 : Number(qtyRaw);
@@ -4688,7 +4412,6 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         category, lifeCategory:category,
         subcategory, lifeSubcategory:subcategory,
         scent,
-        color,
         size, sizeDisplay:size,
         quantity: Number.isFinite(quantity) ? quantity : 0,
         direction, directions:direction, notes:direction,
@@ -4750,9 +4473,11 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const detailValues = [catSub, itemScent132(item), itemColor132(item)].filter(v=>String(v||'').trim());
     const tags = homeTags132(item).slice(0,3);
     return `<article class="card" data-product-key="${esc132(group.key||'')}">
+      <div class="status-row"><span class="qty">Qty: ${esc132(itemQty132(item))}</span></div>
       <div class="imgbox">${img}</div>
       <div class="card-main"><div><div class="brand">${esc132(itemName132(item))}</div></div><div class="icon-row"><button class="icon-btn" type="button" onclick="event.stopPropagation(); openHomeFormV132('edit',${group.index})">✎</button><button class="icon-btn" type="button" onclick="event.stopPropagation(); deleteGroupV83(${group.index})">🗑</button></div></div>
       <div class="details">${detailValues.map(v=>`<div>${esc132(v)}</div>`).join('')}</div>
+      <div class="tag-row">${tags.map(t=>`<span class="tag">${esc132(t)}</span>`).join('')}</div>
     </article>`;
   };
 
@@ -4792,6 +4517,3 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   normalizeHomeInventory132();
   console.log('Life Tracker v13.2 Home patch loaded', {home:(inventory.homeItems||[]).length});
 })();
-</script>
-
-</body></html>

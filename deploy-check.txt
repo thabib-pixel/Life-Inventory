@@ -1,3 +1,1 @@
-v13.1 deploy check:
-Header and browser tab title updated to v13.1.
-Upload all root files and hard refresh after GitHub Pages deploy.
+v13.2 deploy check: Home Add/Edit category dropdowns, Product Name-only form, Scent, Color, Size, Quantity, upload image, Direction field, Restock Soon checkbox, and Home card value-only details patched.
