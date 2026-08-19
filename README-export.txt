@@ -1,1 +1,1 @@
-Life Tracker v13.2 GitHub package. Upload these root files to GitHub Pages: index.html, inventory-data.json, images/, README-export.txt, backup-report.txt, .nojekyll, deploy-check.txt.
+Life Tracker v14.0 GitHub Pages package. Upload index.html, inventory-data.json, the images folder, .nojekyll, backup-report.txt, deploy-check.txt, and README-export.txt to the repository root.

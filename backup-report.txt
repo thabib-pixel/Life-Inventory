@@ -1,1 +1,1 @@
-Life Tracker v13.2 backup package created with Beauty 526, Closet 86, Home 21. Home section form/card update retained.
+Life Tracker v14.0 backup created from v13.2 source JSON (2). Counts preserved and v14.0 taxonomy/UI changes applied.

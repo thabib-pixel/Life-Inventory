@@ -1,1 +1,1 @@
-v13.2 deploy check: Home Add/Edit category dropdowns, Product Name-only form, Scent, Color, Size, Quantity, upload image, Direction field, Restock Soon checkbox, and Home card value-only details patched.
+Life Tracker v14.0 deploy check: root package includes index.html, inventory-data.json, images/, .nojekyll, README-export.txt, backup-report.txt, and deploy-check.txt.
