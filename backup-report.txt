@@ -1,15 +1,6 @@
-Life Tracker v15.0 Backup Report
-
-Package built: 2026-08-23T12:57:00-04:00
-Source JSON: life-tracker-v14_0-edited-inventory-data (4).json
-
-Counts:
-- Beauty products: 526
-- Closet items: 125
-- Home items: 30
-- Outfits: 1
-- Day looks: 0
-- Saved looks: 0
-
-Pending update applied:
-- Added Home → Kitchen & Dining → Seasonings & Spices.
+Life Tracker v16.0 backup/report
+Source baseline: life-tracker-v15_0-edited-inventory-data (1)(1).json
+Built at: 2026-08-27T12:42:00-04:00
+Beauty: 526
+Closet: 146
+Home: 30

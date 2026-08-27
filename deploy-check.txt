@@ -1,16 +1,3 @@
-Life Tracker v15.0 Deploy Check
-
-Upload these items to the GitHub Pages repository root:
-- index.html
-- inventory-data.json
-- images/
-- README-export.txt
-- backup-report.txt
-- deploy-check.txt
-- .nojekyll
-
-After upload, hard refresh the site.
-Expected visible version: v 15.0
-Expected browser title: Life Tracker v15.0
-Expected export download filename: life-tracker-v15_0-edited-inventory-data.json
-Expected Home sub-category update: Kitchen & Dining includes Seasonings & Spices.
+Life Tracker v16.0 deploy check
+Root files required: index.html, inventory-data.json, images/, .nojekyll
+Upload ZIP contents to the GitHub Pages repository root.
