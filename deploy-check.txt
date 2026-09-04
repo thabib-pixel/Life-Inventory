@@ -1,3 +1,1 @@
-Life Tracker v16.0 deploy check
-Root files required: index.html, inventory-data.json, images/, .nojekyll
-Upload ZIP contents to the GitHub Pages repository root.
+Life Tracker v17.0 deploy check: upload root contents to GitHub Pages. .nojekyll included.
