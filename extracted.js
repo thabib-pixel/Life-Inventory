@@ -1,5 +1,5 @@
 
-const EMBEDDED_INVENTORY = {"exportType": "Life Tracker v17.0 external inventory placeholder", "appVersion": "v17.0", "version": "v17.0", "beautyProducts": [], "closetItems": [], "homeItems": [], "outfits": [], "dayLooks": [], "savedLooks": [], "dailyHub": {"removed": true}};let inventory=loadInventory(),currentTab=null,searchText='',filters={},expandedMajor='',expandedSub='',editing=null;
+const EMBEDDED_INVENTORY = {"exportType": "Life Tracker v18.0 external inventory placeholder", "appVersion": "v18.0", "version": "v18.0", "beautyProducts": [], "closetItems": [], "homeItems": [], "outfits": [], "dayLooks": [], "savedLooks": [], "dailyHub": {"removed": true}};let inventory=loadInventory(),currentTab=null,searchText='',filters={},expandedMajor='',expandedSub='',editing=null;
 const collectionMap={beauty:{label:'BEAUTY INVENTORY',sidebar:'BEAUTY CATEGORIES',key:'beautyProducts'},closet:{label:'CLOSET INVENTORY',sidebar:'CLOSET CATEGORIES',key:'closetItems'},home:{label:'HOME INVENTORY',sidebar:'HOME CATEGORIES',key:'homeItems'}};
 const beautyMajor=[
 {name:'Skin',subs:[{name:'Eye Care',children:[]},{name:'Eye Creams',children:[]},{name:'Face Masks',children:['Exfoliating Masks','Hydrating Masks','Sheet Masks']},{name:'Face Wash',children:[]},{name:'Lip Treatments',children:[]},{name:'Makeup Remover',children:['Cleansing Balms','Micellar Water','Oil Cleansers']},{name:'Moisturizers',children:[]},{name:'Serums',children:[]},{name:'SPF',children:[]},{name:'Spot Treatments',children:[]},{name:'Toners',children:[]},{name:'Tools',children:['Face Towels','Facial Razors']}]},
@@ -22,7 +22,7 @@ function renderSidebar(){document.getElementById('sidebarTitle').textContent=col
 function uniq(a){return [...new Set(a.map(x=>String(x||'').trim()).filter(Boolean))].join(', ')}function sumQty(items){let n=items.reduce((s,i)=>s+(Number(itemQty(i))||0),0);return n||''}function cardHTML(group){let item=group.items[0],qty=sumQty(group.items),sizes=uniq(group.items.map(itemSize)),shades=uniq(group.items.map(itemShade)),img=item.image?`<img src="${esc(item.image)}">`:'',tags=uniq(group.items.flatMap(i=>i.lifeFilters||i.seasons||[]).slice(0,3)).split(', ').filter(Boolean);return `<article class="card"><div class="status-row"><span class="qty">Qty: ${esc(qty)}</span></div><div class="imgbox">${img}</div><div class="card-main"><div><div class="brand">${esc(itemBrand(item))}</div><div class="name">${esc(itemName(item))}</div></div><div class="icon-row"><button class="icon-btn" onclick="openEdit(${group.index})">✎</button><button class="icon-btn" onclick="deleteGroup(${group.index})">🗑</button></div></div><div class="details"><div>${sizes?esc(sizes):''}</div><div><em>${shades?'Shades: '+esc(shades):''}</em></div><div>${esc(itemCategory(item))}${itemSub(item)?' / '+esc(itemSub(item)):''}</div><div>${esc(item.location||item.storageLocation||item.roomArea||'')}</div></div><div class="tag-row">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></article>`}
 function renderAll(){if(!currentTab)return;let rows=filteredItems(),groups=groupRows(rows);renderSidebar();document.getElementById('sectionTitle').textContent=collectionMap[currentTab].label;document.getElementById('totalCount').textContent=groups.length;document.getElementById('qtyTiny').textContent=rows.reduce((s,r)=>s+(Number(itemQty(r.item))||0),0)||'—';document.getElementById('activeFilters').innerHTML=[filters.major,filters.sub,filters.subsub,filters.filter,searchText?`Search: ${searchText}`:null].filter(Boolean).map(x=>`<span class="filter-pill">${esc(x)}</span>`).join('');let grid=document.getElementById('grid');if(!groups.length){grid.className='';grid.innerHTML='<div class="empty">No items found.</div>';return}grid.className='grid';grid.innerHTML=groups.map(cardHTML).join('')}
 const commonFields=['name','fullProductName','brand','brandName','lifeCategory','lifeSubcategory','lifeSubSubcategory','category','subcategory','subSubcategory','color','shade','shades','size','sizeDisplay','status','quantity','openQuantity','unopenedQuantity','location','storageLocation','notes','image','productUrl','productId','lifeFilters','seasons'];function editableFields(i){let keys=new Set(commonFields.filter(k=>k in i||['name','brand','category','subcategory','quantity','location','notes','image'].includes(k)));Object.keys(i).forEach(k=>{if(!['id','stableId','dateAdded','lastUpdated','updatedAt'].includes(k)&&typeof i[k]!=='object')keys.add(k)});return [...keys]}function valueToInput(v){if(Array.isArray(v))return v.join(', ');if(v&&typeof v==='object')return JSON.stringify(v);return v??''}function parseVal(k,v,o){if(['quantity','openQuantity','unopenedQuantity','backupQuantity','id'].includes(k)){if(v==='')return'';let n=Number(v);return Number.isNaN(n)?v:n}if(Array.isArray(o)||k==='seasons'||k==='lifeFilters')return v.split(',').map(s=>s.trim()).filter(Boolean);return v}
-function openEdit(idx){let i=currentList()[idx];if(!i)return;editing={tab:currentTab,index:idx};document.getElementById('editTitle').textContent='Edit: '+itemName(i);document.getElementById('editFields').innerHTML=editableFields(i).map(k=>{let val=valueToInput(i[k]),long=['notes','description','productUrl','image'].includes(k)||String(val).length>70;return `<div class="field ${long?'full':''}"><label>${esc(k)}</label>${long?`<textarea name="${esc(k)}" oninput="markUnsaved()">${esc(val)}</textarea>`:`<input name="${esc(k)}" value="${esc(val)}" oninput="markUnsaved()">`}</div>`}).join('');document.getElementById('editBackdrop').style.display='flex'}function closeEdit(e){if(e&&e.target&&e.target.id!=='editBackdrop')return;document.getElementById('editBackdrop').style.display='none';editing=null}function saveEdit(e){e.preventDefault();if(!editing)return;let item=inventory[collectionMap[editing.tab].key][editing.index],fd=new FormData(document.getElementById('editForm'));for(let [k,v] of fd.entries())item[k]=parseVal(k,v,item[k]);item.lastUpdated=new Date().toISOString().slice(0,10);persist();closeEdit();renderAll()}function deleteGroup(idx){if(!confirm('Delete this item from this browser copy?'))return;currentList().splice(idx,1);persist();renderAll()}function deleteEditingItem(){if(editing){deleteGroup(editing.index);closeEdit()}}function addNewItem(){let list=currentList(),now=Date.now(),base={id:now,stableId:`${currentTab}-${now}`,name:'Full Product Name',brand:'Brand Name',lifeCategory:currentTab==='beauty'?'Skin':'',lifeSubcategory:'',category:currentTab==='beauty'?'Skin':'',subcategory:'',quantity:1,location:'',notes:'',image:'',lifeFilters:['All Year'],dateAdded:new Date().toISOString().slice(0,10),lastUpdated:new Date().toISOString().slice(0,10)};list.unshift(base);persist();renderAll();openEdit(0)}function downloadJSON(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v17_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)}function resetLocalEdits(){if(!confirm('Reset browser edits and return to packaged v17.0 inventory?'))return;localStorage.removeItem(STORAGE_KEY);inventory=clone(EMBEDDED_INVENTORY);renderAll()}function closeDetails(e){document.getElementById('detailsBackdrop').style.display='none'}
+function openEdit(idx){let i=currentList()[idx];if(!i)return;editing={tab:currentTab,index:idx};document.getElementById('editTitle').textContent='Edit: '+itemName(i);document.getElementById('editFields').innerHTML=editableFields(i).map(k=>{let val=valueToInput(i[k]),long=['notes','description','productUrl','image'].includes(k)||String(val).length>70;return `<div class="field ${long?'full':''}"><label>${esc(k)}</label>${long?`<textarea name="${esc(k)}" oninput="markUnsaved()">${esc(val)}</textarea>`:`<input name="${esc(k)}" value="${esc(val)}" oninput="markUnsaved()">`}</div>`}).join('');document.getElementById('editBackdrop').style.display='flex'}function closeEdit(e){if(e&&e.target&&e.target.id!=='editBackdrop')return;document.getElementById('editBackdrop').style.display='none';editing=null}function saveEdit(e){e.preventDefault();if(!editing)return;let item=inventory[collectionMap[editing.tab].key][editing.index],fd=new FormData(document.getElementById('editForm'));for(let [k,v] of fd.entries())item[k]=parseVal(k,v,item[k]);item.lastUpdated=new Date().toISOString().slice(0,10);persist();closeEdit();renderAll()}function deleteGroup(idx){if(!confirm('Delete this item from this browser copy?'))return;currentList().splice(idx,1);persist();renderAll()}function deleteEditingItem(){if(editing){deleteGroup(editing.index);closeEdit()}}function addNewItem(){let list=currentList(),now=Date.now(),base={id:now,stableId:`${currentTab}-${now}`,name:'Full Product Name',brand:'Brand Name',lifeCategory:currentTab==='beauty'?'Skin':'',lifeSubcategory:'',category:currentTab==='beauty'?'Skin':'',subcategory:'',quantity:1,location:'',notes:'',image:'',lifeFilters:['All Year'],dateAdded:new Date().toISOString().slice(0,10),lastUpdated:new Date().toISOString().slice(0,10)};list.unshift(base);persist();renderAll();openEdit(0)}function downloadJSON(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v18_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)}function resetLocalEdits(){if(!confirm('Reset browser edits and return to packaged v18.0 inventory?'))return;localStorage.removeItem(STORAGE_KEY);inventory=clone(EMBEDDED_INVENTORY);renderAll()}function closeDetails(e){document.getElementById('detailsBackdrop').style.display='none'}
 document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));document.getElementById('search').addEventListener('input',e=>{searchText=e.target.value;renderAll()});
 
 
@@ -160,7 +160,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     indices.forEach(i=>currentList().splice(i,1));
     persist(); renderAll();
   };
-  window.downloadJSON=function(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v17_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)};
+  window.downloadJSON=function(){let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life-tracker-v18_0-edited-inventory-data.json';a.click();URL.revokeObjectURL(a.href)};
 })();
 
 
@@ -562,7 +562,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -850,7 +850,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -1235,7 +1235,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -1529,7 +1529,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+      a.download = 'life-tracker-v18_0-edited-inventory-data.json';
       a.click();
       URL.revokeObjectURL(a.href);
     };
@@ -1557,6 +1557,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     {name:'Loungewear',subs:[{name:'Hoodie',children:[]},{name:'Set',children:[]},{name:'Sweatpants',children:[]}]},
     {name:'Outerwear',subs:[{name:'Hoodie',children:[]},{name:'Jacket',children:[]},{name:'Windbreaker',children:[]}]},
     {name:'Shoes',subs:[{name:'Boots',children:[]},{name:'Flats',children:[]},{name:'Heels',children:[]},{name:'Sandals',children:[]},{name:'Sneakers',children:[]},{name:'Other Shoes',children:[]}]},
+    {name:'Swimwear',subs:[{name:'Bikinis',children:[]},{name:'Coverup',children:[]}]},
     {name:'Tops',subs:[{name:'Bodysuit',children:[]},{name:'Bra Top',children:[]},{name:'Long Sleeve',children:[]},{name:'Tank',children:[]},{name:'T-Shirt',children:[]}]},
     {name:'Try-On',subs:[]}
   ];
@@ -1635,8 +1636,8 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   }
 
   function normalizeInventoryV83(){
-    inventory.appVersion = 'v17.0';
-    inventory.exportType = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+    inventory.appVersion = 'v18.0';
+    inventory.exportType = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
     inventory.version = 'v8.3';
     normalizeClosetImagesOnInventory83(inventory);
     return inventory;
@@ -2219,7 +2220,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -2312,8 +2313,8 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       item.imageCount = imgs.length;
       if(Array.isArray(item.lifeFilters)) item.lifeFilters = item.lifeFilters.filter(x => x !== 'Desi');
     });
-    dataObj.appVersion = 'v17.0';
-    dataObj.exportType = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+    dataObj.appVersion = 'v18.0';
+    dataObj.exportType = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
     dataObj.version = 'v8.5';
     dataObj.dailyHub = {
       version: 'v8.5',
@@ -2428,7 +2429,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -2497,8 +2498,8 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       item.imageCount = imgs.length;
       if(Array.isArray(item.lifeFilters)) item.lifeFilters = item.lifeFilters.filter(x => x !== 'Desi');
     });
-    dataObj.appVersion = 'v17.0';
-    dataObj.exportType = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+    dataObj.appVersion = 'v18.0';
+    dataObj.exportType = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
     dataObj.version = 'v8.6';
     return dataObj;
   }
@@ -2681,7 +2682,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -2712,11 +2713,12 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     {name:'Loungewear',subs:[{name:'Hoodie',children:[]},{name:'Set',children:[]},{name:'Sweatpants',children:[]}]},
     {name:'Outerwear',subs:[{name:'Hoodie',children:[]},{name:'Jacket',children:[]},{name:'Windbreaker',children:[]}]},
     {name:'Shoes',subs:[{name:'Boots',children:[]},{name:'Flats',children:[]},{name:'Heels',children:[]},{name:'Sandals',children:[]},{name:'Sneakers',children:[]},{name:'Other Shoes',children:[]}]},
+    {name:'Swimwear',subs:[{name:'Bikinis',children:[]},{name:'Coverup',children:[]}]},
     {name:'Tops',subs:[{name:'Bodysuit',children:[]},{name:'Bra Top',children:[]},{name:'Long Sleeve',children:[]},{name:'Tank',children:[]},{name:'T-Shirt',children:[]}]},
     {name:'Try-On',subs:[]}
   ];
 
-  const tryOnFilterOptionsV87 = ['Fall/Winter','Spring/Summer','All Year','Tops','Bottoms','Outerwear','Active Wear','Shoes','Bags','Accessories','Hats','Jewelry','Dresses','Jumpsuits','Loungewear','Desi','Special Events','Co-ord Sets'];
+  const tryOnFilterOptionsV87 = ['Fall/Winter','Spring/Summer','All Year','Tops','Bottoms','Outerwear','Active Wear','Shoes','Bags','Accessories','Hats','Jewelry','Dresses','Jumpsuits','Loungewear','Swimwear','Desi','Special Events','Co-ord Sets'];
   window.tryOnStateV87 = window.tryOnStateV87 || {enabled:false, search:'', filters:[], outfit:{}, filterOpen:true, hairstyle:'loose-waves'};
 
   function closetImagesV87(item){
@@ -2737,9 +2739,9 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       item.imageCount = imgs.length;
       if(Array.isArray(item.lifeFilters)) item.lifeFilters = item.lifeFilters.filter(x => x !== 'Desi');
     });
-    dataObj.appVersion = 'v17.0';
-    dataObj.exportType = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
-    dataObj.version = 'v17.0';
+    dataObj.appVersion = 'v18.0';
+    dataObj.exportType = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
+    dataObj.version = 'v18.0';
     return dataObj;
   }
 
@@ -2907,7 +2909,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         return c2.toDataURL('image/png');
       }
       return c.toDataURL('image/png');
-    }catch(e){ console.warn('v17.0 cutout failed',e); return src; }
+    }catch(e){ console.warn('v18.0 cutout failed',e); return src; }
   }
 
   function placedSlotV97(slot){
@@ -3206,13 +3208,13 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const blob = new Blob([JSON.stringify(inventory,null,2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'life-tracker-v17_0-edited-inventory-data.json';
+    a.download = 'life-tracker-v18_0-edited-inventory-data.json';
     a.click();
     URL.revokeObjectURL(a.href);
   };
 
   normalizeInventoryV87(inventory);
-  console.log('Life Tracker v17.0 loaded: Shoes category and Try-On Studio retained.', {
+  console.log('Life Tracker v18.0 loaded: Shoes category and Try-On Studio retained.', {
     closetItems: (inventory.closetItems || []).length,
     closetImages: (inventory.closetItems || []).reduce((sum,i) => sum + closetImagesV87(i).length, 0)
   });
@@ -3220,30 +3222,30 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
 
 
 
-/* ===== v17.0 external inventory loader ===== */
+/* ===== v18.0 external inventory loader ===== */
 (function(){
   window.__lifeTrackerV101ExternalInventoryLoaded = true;
   async function loadExternalInventoryV101(){
     try{
-      const response = await fetch('inventory-data.json?v=15_0_' + Date.now(), {cache:'no-store'});
+      const response = await fetch('inventory-data.json?v=18_0_' + Date.now(), {cache:'no-store'});
       if(!response.ok) throw new Error('inventory-data.json failed: ' + response.status);
       const data = await response.json();
-      data.appVersion = 'v17.0';
-      data.version = 'v17.0';
-      data.packageId = data.packageId || 'life-tracker-v17.0-2026-09-04';
-      data.exportType = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+      data.appVersion = 'v18.0';
+      data.version = 'v18.0';
+      data.packageId = data.packageId || 'life-tracker-v18.0-2026-09-26';
+      data.exportType = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
       window.inventory = data;
       
       let finalData = data;
       try{
         if(window.__lifeTrackerLoadSavedV113){
           const saved = await window.__lifeTrackerLoadSavedV113();
-          if(saved && saved.appVersion === 'v17.0' && saved.packageId === data.packageId){
+          if(saved && saved.appVersion === 'v18.0' && saved.packageId === data.packageId){
             finalData = saved;
-            console.log('Life Tracker v17.0 restored saved browser inventory.');
+            console.log('Life Tracker v18.0 restored saved browser inventory.');
           }
         }
-      }catch(savedErr){ console.warn('v17.0 saved inventory restore skipped:', savedErr); }
+      }catch(savedErr){ console.warn('v18.0 saved inventory restore skipped:', savedErr); }
       window.inventory = finalData;
       if(typeof inventory !== 'undefined') inventory = finalData;
       try{
@@ -3251,15 +3253,15 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         localStorage.removeItem('lifeTracker_v8_7_inventory');
       }catch(e){}
       const saveState = document.getElementById('saveState');
-      if(saveState){ saveState.textContent = 'Loaded v17.0'; saveState.className = 'saved'; }
+      if(saveState){ saveState.textContent = 'Loaded v18.0'; saveState.className = 'saved'; }
       if(typeof renderAll === 'function' && currentTab) renderAll();
-      console.log('Life Tracker v17.0 external inventory loaded', {
+      console.log('Life Tracker v18.0 external inventory loaded', {
         beauty: finalData.beautyProducts?.length || 0,
         closet: finalData.closetItems?.length || 0,
         home: finalData.homeItems?.length || 0
       });
     }catch(error){
-      console.error('v17.0 external inventory load failed', error);
+      console.error('v18.0 external inventory load failed', error);
       const grid = document.getElementById('grid');
       if(grid) grid.innerHTML = '<div class="empty">Inventory failed to load. Please confirm inventory-data.json was uploaded with index.html.</div>';
     }
@@ -3426,7 +3428,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     if(!file) return;
     const preview=document.getElementById('homeImagePreviewV110');
     try{ const dataUrl=await imageFileToDataUrlV110(file); preview.dataset.image=dataUrl; preview.innerHTML=`<img src="${dataUrl}">`; if(typeof markUnsaved==='function') markUnsaved(); }
-    catch(err){ console.error('v17.0 home image upload failed',err); alert('Image upload failed. Try another image.'); }
+    catch(err){ console.error('v18.0 home image upload failed',err); alert('Image upload failed. Try another image.'); }
   };
 
   window.openHomeFormV110 = function(mode,index=null){
@@ -3466,7 +3468,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(typeof safeCloseEditV83==='function') safeCloseEditV83(); else {const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null;}
       if(typeof refreshAfterSaveV83==='function') refreshAfterSaveV83(); else renderAll();
       return false;
-    }catch(err){ console.error('v17.0 home save failed',err); alert('Home save failed: '+(err&&err.message?err.message:String(err))); return false; }
+    }catch(err){ console.error('v18.0 home save failed',err); alert('Home save failed: '+(err&&err.message?err.message:String(err))); return false; }
   };
 
   window.cardHTML = window.cardHTMLV83 = window.cardHTMLV110 = function(group){
@@ -3507,12 +3509,12 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     const result=oldRenderAllV110();
     return result;
   };
-  console.log('Life Tracker v17.0 targeted fixes loaded: Beauty upload, Home upload, Beauty zero quantity prompt, Home card name order.');
+  console.log('Life Tracker v18.0 targeted fixes loaded: Beauty upload, Home upload, Beauty zero quantity prompt, Home card name order.');
 })();
 
 
 
-/* ===== v17.0 Home inventory restore patch ===== */
+/* ===== v18.0 Home inventory restore patch ===== */
 (function(){
   const baseRenderAllV111 = window.renderAll;
   const baseSetTabV111 = window.setTab;
@@ -3620,12 +3622,12 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     }
     currentTab=tab; searchText=''; filters={}; expandedMajor=''; expandedSub=''; renderAll();
   };
-  console.log('Life Tracker v17.0 Home restore patch loaded', {homeItems: homeItemsV111().length});
+  console.log('Life Tracker v18.0 Home restore patch loaded', {homeItems: homeItemsV111().length});
 })();
 
 
 
-/* ===== v17.0 Home edit click/save fix - keep Beauty and Closet behavior unchanged ===== */
+/* ===== v18.0 Home edit click/save fix - keep Beauty and Closet behavior unchanged ===== */
 (function(){
   window.__lifeTrackerV112HomeEditFixLoaded = true;
   const esc112 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -3722,7 +3724,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       const title=document.getElementById('editTitle'); if(title) title.textContent=(mode==='add'?'Add Home Item':'Edit: '+name112(item));
       const fields=document.getElementById('editFields'); if(fields) fields.innerHTML=homeFormHTML112(item);
       const input=document.getElementById('homeImageInputV112');
-      if(input){ input.addEventListener('change', async function(){ const file=this.files&&this.files[0]; if(!file) return; const preview=document.getElementById('homeImagePreviewV112'); try{ const dataUrl=await imageFileToDataUrl112(file); if(preview){ preview.dataset.image=dataUrl; preview.innerHTML=`<img src="${dataUrl}">`; } if(typeof markUnsaved==='function') markUnsaved(); }catch(err){ console.error('v17.0 home image upload failed',err); alert('Image upload failed. Try another image.'); } }); }
+      if(input){ input.addEventListener('change', async function(){ const file=this.files&&this.files[0]; if(!file) return; const preview=document.getElementById('homeImagePreviewV112'); try{ const dataUrl=await imageFileToDataUrl112(file); if(preview){ preview.dataset.image=dataUrl; preview.innerHTML=`<img src="${dataUrl}">`; } if(typeof markUnsaved==='function') markUnsaved(); }catch(err){ console.error('v18.0 home image upload failed',err); alert('Image upload failed. Try another image.'); } }); }
       back.style.display='flex';
       return false;
     }catch(err){ console.error('v11.2 open home edit failed', err); alert('Home edit failed to open: '+(err?.message||err)); return false; }
@@ -3752,7 +3754,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(typeof safeCloseEditV83==='function') safeCloseEditV83(); else { const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null; }
       renderHomeInventoryV112();
       return false;
-    }catch(err){ console.error('v17.0 home save failed',err); alert('Home save failed: '+(err?.message||err)); return false; }
+    }catch(err){ console.error('v18.0 home save failed',err); alert('Home save failed: '+(err?.message||err)); return false; }
   };
   window.renderHomeInventoryV112 = function(){
     const rows=homeRows112(); const groups=grouped112(rows); renderHomeSidebar112();
@@ -3793,20 +3795,20 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     if(tab==='home') setTimeout(window.renderHomeInventoryV112, 0);
     return out;
   };
-  console.log('Life Tracker v17.0 Home edit fix loaded.');
+  console.log('Life Tracker v18.0 Home edit fix loaded.');
 })();
 
 
 
-/* ===== v17.0 QA retention patch: keep newest packaged JSON, then preserve in-browser edits safely ===== */
+/* ===== v18.0 QA retention patch: keep newest packaged JSON, then preserve in-browser edits safely ===== */
 (function(){
   window.__lifeTrackerV113RetentionPatchLoaded = true;
-  const VERSION = 'v17.0';
-  const PACKAGE_ID = 'life-tracker-v17.0-2026-09-04';
-  const EXPORT_TYPE = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
-  const DB_NAME = 'LifeTrackerInventory_v17_0';
+  const VERSION = 'v18.0';
+  const PACKAGE_ID = 'life-tracker-v18.0-2026-09-26';
+  const EXPORT_TYPE = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
+  const DB_NAME = 'LifeTrackerInventory_v18_0';
   const STORE = 'state';
-  const KEY = 'latest-v17.0';
+  const KEY = 'latest-v18.0';
   function normalizeV113(data){
     if(!data || typeof data !== 'object') return data;
     data.appVersion = VERSION;
@@ -3854,14 +3856,14 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       try{
         localStorage.setItem('lifeTracker_latest_version', VERSION);
         localStorage.setItem('lifeTracker_latest_saved_at', new Date().toISOString());
-        localStorage.setItem('lifeTracker_storage_mode', 'IndexedDB v17.0');
+        localStorage.setItem('lifeTracker_storage_mode', 'IndexedDB v18.0');
       }catch(e){}
       const s=document.getElementById('saveState'); if(s){s.textContent='Saved';s.className='saved';}
-      console.log('v17.0 save successful:', reason);
+      console.log('v18.0 save successful:', reason);
       return true;
     }catch(err){
-      console.warn('v17.0 IndexedDB save skipped/fell back:', err);
-      try{ sessionStorage.setItem('lifeTracker_v17_0_last_save_marker', new Date().toISOString()); }catch(e){}
+      console.warn('v18.0 IndexedDB save skipped/fell back:', err);
+      try{ sessionStorage.setItem('lifeTracker_v18_0_last_save_marker', new Date().toISOString()); }catch(e){}
       const s=document.getElementById('saveState'); if(s){s.textContent='Saved in page';s.className='saved';}
       return true;
     }
@@ -3875,7 +3877,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
         req.onsuccess=()=>{db.close(); const row=req.result; resolve(row && row.data ? normalizeV113(row.data) : null);};
         req.onerror=()=>{db.close(); reject(req.error || new Error('IndexedDB read failed'));};
       });
-    }catch(err){ console.warn('v17.0 saved inventory read skipped:', err); return null; }
+    }catch(err){ console.warn('v18.0 saved inventory read skipped:', err); return null; }
   }
   window.__lifeTrackerNormalizeV113 = normalizeV113;
   window.__lifeTrackerSaveV113 = saveV113;
@@ -3887,18 +3889,18 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   window.downloadJSON = function(){
     try{ normalizeV113(inventory); }catch(e){}
     let blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}),a=document.createElement('a');
-    a.href=URL.createObjectURL(blob); a.download='life-tracker-v17_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);
+    a.href=URL.createObjectURL(blob); a.download='life-tracker-v18_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);
   };
 })();
 
 
 
-/* ===== v17.0 Closet taxonomy, add/edit checkbox rules, and card display patch ===== */
+/* ===== v18.0 Closet taxonomy, add/edit checkbox rules, and card display patch ===== */
 (function(){
   window.__lifeTrackerV130ClosetPatchLoaded = true;
-  const VERSION = 'v17.0';
-  const PACKAGE_ID = 'life-tracker-v17.0-2026-09-04';
-  const EXPORT_TYPE = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+  const VERSION = 'v18.0';
+  const PACKAGE_ID = 'life-tracker-v18.0-2026-09-26';
+  const EXPORT_TYPE = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
   const SPECIAL = 'Special Events';
   const FAMILY = 'Family Friendly';
   const COORD = 'Co-ord Sets';
@@ -3915,6 +3917,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     {name:'Loungewear', subs:[{name:'Hoodies',children:[]},{name:'Sweatpants',children:[]},{name:'Tops',children:[]},{name:'Bottoms',children:[]}]},
     {name:'Outerwear', subs:[{name:'Jackets',children:[]},{name:'Coats',children:[]}]},
     {name:'Shoes', subs:[{name:'Boots',children:[]},{name:'Flats',children:[]},{name:'Heels',children:[]},{name:'Sandals',children:[]},{name:'Sneakers',children:[]},{name:'Other Shoes',children:[]}]},
+    {name:'Swimwear', subs:[{name:'Bikinis',children:[]},{name:'Coverup',children:[]}]},
     {name:'Tops', subs:[{name:'Fancy Tops & Blouses',children:[]},{name:'Bodysuits',children:[]},{name:'Bralettes',children:[]},{name:'Strapless',children:[]},{name:'T-Shirts',children:[]},{name:'Tank',children:[]},{name:'Long Sleeves',children:[]},{name:'Button Downs',children:[]},{name:'Sweaters',children:[]}]},
     {name:'Try-On', subs:[]}
   ];
@@ -3984,15 +3987,30 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(/jewel/i.test(s)) s='Jewelry Sets'; else if(/bag/i.test(s)) s='Bags'; else if(!['Jewelry Sets','Bags','Desi Accessories'].includes(s)) s='Desi Accessories';
     }
     if(c === 'Accessories'){
-      const accText = String(s + ' ' + n).toLowerCase();
-      if(/hat|cap|bucket/.test(accText)) s='Hats';
-      else if(/sunglass/.test(accText)) s='Sunglasses';
-      else if(/scarf|shawl/.test(accText)) s='Scarves';
-      else if(/bag|tote|clutch|purse/.test(accText)) s='Bags';
-      else if(/belt/.test(accText)) s='Belts';
-      else if(/glass|eyeglass/.test(accText)) s='Eyeglasses';
-      else if(/jewel|bracelet|necklace|earring|ring/.test(accText)) s='Jewelry';
-      else if(!['Bags','Belts','Eyeglasses','Hats','Jewelry','Scarves','Sunglasses','Other Accessories'].includes(s)) s='Other Accessories';
+      const validAcc = ['Bags','Belts','Eyeglasses','Hats','Jewelry','Scarves','Sunglasses','Other Accessories'];
+      const accSynonyms = {'bag':'Bags','bags':'Bags','purse':'Bags','tote':'Bags','clutch':'Bags','hat':'Hats','hats':'Hats','cap':'Hats','caps':'Hats','sunglass':'Sunglasses','sunglasses':'Sunglasses','scarf':'Scarves','scarves':'Scarves','shawl':'Scarves','belt':'Belts','belts':'Belts','eyeglasses':'Eyeglasses','eyeglass':'Eyeglasses','glasses':'Eyeglasses','jewelry':'Jewelry','jewellery':'Jewelry','jewel':'Jewelry'};
+      const rawSub = String(s || '').trim();
+      const normSub = accSynonyms[rawSub.toLowerCase()] || rawSub;
+      if(validAcc.includes(normSub)){
+        s = normSub;
+      } else {
+        const accText = String(n + ' ' + rawSub).toLowerCase();
+        if(/bag|tote|clutch|purse/.test(accText)) s='Bags';
+        else if(/sunglass/.test(accText)) s='Sunglasses';
+        else if(/scarf|shawl/.test(accText)) s='Scarves';
+        else if(/\b(hat|cap|bucket)\b/.test(accText)) s='Hats';
+        else if(/belt/.test(accText)) s='Belts';
+        else if(/eye\s*glass|eyeglass|\bglasses\b/.test(accText)) s='Eyeglasses';
+        else if(/jewel|bracelet|necklace|earring|ring/.test(accText)) s='Jewelry';
+        else s='Other Accessories';
+      }
+    }
+    if(c === 'Swimwear' || (!c && /bikini|swim|swimsuit|bathing suit|cover\s*up|coverup/.test(n))){
+      c = 'Swimwear';
+      const swimText = String((s || '') + ' ' + n).toLowerCase();
+      if(/cover\s*up|coverup/.test(swimText)) s = 'Coverup';
+      else if(/bikini|swim|swimsuit|bathing suit/.test(swimText)) s = 'Bikinis';
+      else if(!['Bikinis','Coverup'].includes(s)) s = 'Bikinis';
     }
     if(c === 'Jumpsuits') s = (/romper/i.test(s+' '+n)) ? 'Rompers' : 'Jumpsuit';
     if(c === 'Loungewear'){
@@ -4243,7 +4261,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   function openDBV130(){
     return new Promise((resolve,reject)=>{
       if(!window.indexedDB) return reject(new Error('IndexedDB unavailable'));
-      const req=indexedDB.open('LifeTrackerInventory_v17_0',1);
+      const req=indexedDB.open('LifeTrackerInventory_v18_0',1);
       req.onupgradeneeded=()=>{ const db=req.result; if(!db.objectStoreNames.contains('state')) db.createObjectStore('state',{keyPath:'key'}); };
       req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error||new Error('IndexedDB open failed'));
     });
@@ -4252,8 +4270,8 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     normalizeInventoryV130(); inventory.lastLocalEdit=new Date().toISOString();
     try{
       const db=await openDBV130();
-      await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readwrite'); tx.objectStore('state').put({key:'latest-v17.0', savedAt:new Date().toISOString(), reason, data:inventory}); tx.oncomplete=()=>{db.close(); resolve(true);}; tx.onerror=()=>{db.close(); reject(tx.error||new Error('IndexedDB save failed'));}; });
-      try{ localStorage.setItem('lifeTracker_latest_version', VERSION); localStorage.setItem('lifeTracker_latest_saved_at', new Date().toISOString()); localStorage.setItem('lifeTracker_storage_mode','IndexedDB v17.0'); }catch(e){}
+      await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readwrite'); tx.objectStore('state').put({key:'latest-v18.0', savedAt:new Date().toISOString(), reason, data:inventory}); tx.oncomplete=()=>{db.close(); resolve(true);}; tx.onerror=()=>{db.close(); reject(tx.error||new Error('IndexedDB save failed'));}; });
+      try{ localStorage.setItem('lifeTracker_latest_version', VERSION); localStorage.setItem('lifeTracker_latest_saved_at', new Date().toISOString()); localStorage.setItem('lifeTracker_storage_mode','IndexedDB v18.0'); }catch(e){}
       const s=document.getElementById('saveState') || document.getElementById('saveStateV83'); if(s){ s.textContent='Saved'; s.className='saved'; }
       return true;
     }catch(err){ console.warn('v13 save fallback:',err); const s=document.getElementById('saveState') || document.getElementById('saveStateV83'); if(s){ s.textContent='Saved in page'; s.className='saved'; } return true; }
@@ -4264,7 +4282,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   window.downloadJSON = function(){
     normalizeInventoryV130();
     const blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'});
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='life-tracker-v17_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='life-tracker-v18_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);
   };
   const prevSetTab130 = window.setTab;
   window.setTab = function(tab){
@@ -4274,15 +4292,15 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
     return out;
   };
   normalizeInventoryV130();
-  console.log('Life Tracker v17.0 Closet patch loaded', {closet:(inventory.closetItems||[]).length});
+  console.log('Life Tracker v18.0 Closet patch loaded', {closet:(inventory.closetItems||[]).length});
 })();
 
 
 
-/* ===== v17.0 targeted Home Inventory category/form/card patch ===== */
+/* ===== v18.0 targeted Home Inventory category/form/card patch ===== */
 (function(){
-  const VERSION132 = 'v17.0';
-  const EXPORT_TYPE132 = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+  const VERSION132 = 'v18.0';
+  const EXPORT_TYPE132 = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
   const esc132 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const HOME_MAJOR_132 = [
     {name:'Laundry', subs:[{name:'Laundry Products'},{name:'Laundry Tools'}]},
@@ -4381,7 +4399,7 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(preview){ preview.dataset.image = dataUrl; preview.innerHTML = `<img src="${dataUrl}">`; }
       if(typeof markUnsaved === 'function') markUnsaved();
       input.value = '';
-    }catch(err){ console.error('v17.0 home image upload failed', err); alert('Image upload failed. Try another image.'); }
+    }catch(err){ console.error('v18.0 home image upload failed', err); alert('Image upload failed. Try another image.'); }
   };
 
   window.openHomeFormV132 = function(mode, index=null){
@@ -4441,13 +4459,13 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
       if(editing && editing.mode === 'edit') list[editing.index] = item; else list.unshift(item);
       normalizeHomeInventory132();
       currentTab = 'home'; filters = {}; searchText = ''; const search = document.getElementById('search'); if(search) search.value = '';
-      if(typeof window.__lifeTrackerSaveV130 === 'function') await window.__lifeTrackerSaveV130('home-v17.0-save');
-      else if(typeof persistV83 === 'function') persistV83('home-v17.0-save');
+      if(typeof window.__lifeTrackerSaveV130 === 'function') await window.__lifeTrackerSaveV130('home-v18.0-save');
+      else if(typeof persistV83 === 'function') persistV83('home-v18.0-save');
       else if(typeof persist === 'function') persist();
       const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null; unsaved=false;
       renderAll();
       return false;
-    }catch(err){ console.error('v17.0 home save failed', err); alert('Home save failed: ' + (err?.message || err)); return false; }
+    }catch(err){ console.error('v18.0 home save failed', err); alert('Home save failed: ' + (err?.message || err)); return false; }
   };
   window.saveHomeFormV110 = window.saveHomeFormV112 = window.saveHomeFormV132;
 
@@ -4530,17 +4548,17 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   window.downloadJSON = function(){ normalizeHomeInventory132(); if(typeof prevDownload132 === 'function') return prevDownload132.apply(this, arguments); };
 
   normalizeHomeInventory132();
-  console.log('Life Tracker v17.0 Home patch loaded', {home:(inventory.homeItems||[]).length});
+  console.log('Life Tracker v18.0 Home patch loaded', {home:(inventory.homeItems||[]).length});
 })();
 
 
 
-/* ===== v17.0 Beauty/Home taxonomy, filters, cards, and save/export patch ===== */
+/* ===== v18.0 Beauty/Home taxonomy, filters, cards, and save/export patch ===== */
 (function(){
   window.__lifeTrackerV140PatchLoaded = true;
-  const VERSION140 = 'v17.0';
-  const PACKAGE_ID140 = 'life-tracker-v17.0-2026-09-04';
-  const EXPORT_TYPE140 = 'Life Tracker v17.0 package with latest inventory baseline and Beauty Sample checkbox persistence fix';
+  const VERSION140 = 'v18.0';
+  const PACKAGE_ID140 = 'life-tracker-v18.0-2026-09-26';
+  const EXPORT_TYPE140 = 'Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
   const esc140 = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const BEAUTY_MAJOR_V140 = [
     {name:'Skin',subs:[{name:'Eye Care',children:[]},{name:'Eye Creams',children:[]},{name:'Face Masks',children:['Exfoliating Masks','Hydrating Masks','Sheet Masks']},{name:'Face Wash',children:[]},{name:'Lip Treatments',children:[]},{name:'Makeup Remover',children:['Cleansing Balms','Micellar Water','Oil Cleansers']},{name:'Moisturizers',children:[]},{name:'Serums',children:[]},{name:'SPF',children:[]},{name:'Spot Treatments',children:[]},{name:'Toners',children:[]},{name:'Tools',children:['Face Towels','Facial Razors']}]},
@@ -4773,13 +4791,13 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   function renderHomeInventory140(){ const rows=homeRows140(); const groups=rows.map(r=>({items:[r.item],index:r.index,key:`home|${r.item.stableId||r.item.id||r.index}`})); renderHomeSidebar140(); const section=document.getElementById('sectionTitle'), total=document.getElementById('totalCount'), qty=document.getElementById('qtyTiny'), active=document.getElementById('activeFilters'), grid=document.getElementById('grid'); if(section) section.textContent='HOME INVENTORY'; if(total) total.textContent=groups.length; if(qty) qty.textContent=rows.reduce((s,r)=>s+itemQty140(r.item),0)||'—'; if(active) active.innerHTML=[filters.major,filters.sub,filters.filter,searchText?`Search: ${searchText}`:null].filter(Boolean).map(x=>`<span class="filter-pill">${esc140(x)}</span>`).join(''); if(!grid) return; if(!groups.length){ grid.className=''; grid.innerHTML='<div class="empty">No home inventory items found.</div>'; return; } grid.className='grid'; grid.innerHTML=groups.map(homeCardHTML140).join(''); }
 
   function safeCloseV140(){ try{ const back=document.getElementById('editBackdrop'); if(back) back.style.display='none'; editing=null; unsaved=false; }catch(e){} }
-  function openDBV140(){ return new Promise((resolve,reject)=>{ if(!window.indexedDB) return reject(new Error('IndexedDB unavailable')); const req=indexedDB.open('LifeTrackerInventory_v17_0',1); req.onupgradeneeded=()=>{ const db=req.result; if(!db.objectStoreNames.contains('state')) db.createObjectStore('state',{keyPath:'key'}); }; req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error||new Error('IndexedDB open failed')); }); }
-  async function saveInventoryV140(reason='save'){ normalizeInventoryV140(); inventory.lastLocalEdit=new Date().toISOString(); try{ const db=await openDBV140(); await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readwrite'); tx.objectStore('state').put({key:'latest-v17.0',savedAt:new Date().toISOString(),reason,data:inventory}); tx.oncomplete=()=>{db.close();resolve(true);}; tx.onerror=()=>{db.close();reject(tx.error||new Error('IndexedDB save failed'));}; }); try{ localStorage.setItem('lifeTracker_latest_version',VERSION140); localStorage.setItem('lifeTracker_latest_saved_at',new Date().toISOString()); localStorage.setItem('lifeTracker_storage_mode','IndexedDB v17.0'); }catch(e){} const s=document.getElementById('saveState')||document.getElementById('saveStateV83'); if(s){s.textContent='Saved';s.className='saved';} return true; }catch(err){ console.warn('v17 save fallback',err); try{ sessionStorage.setItem('lifeTracker_v17_0_last_save_marker',new Date().toISOString()); }catch(e){} const s=document.getElementById('saveState')||document.getElementById('saveStateV83'); if(s){s.textContent='Saved in page';s.className='saved';} return true; } }
-  async function loadSavedV140(){ try{ const db=await openDBV140(); return await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readonly'); const req=tx.objectStore('state').get('latest-v17.0'); req.onsuccess=()=>{db.close(); const row=req.result; resolve(row&&row.data?normalizeInventoryV140(row.data):null);}; req.onerror=()=>{db.close();reject(req.error||new Error('IndexedDB read failed'));}; }); }catch(err){ console.warn('v17 saved inventory read skipped:',err); return null; } }
+  function openDBV140(){ return new Promise((resolve,reject)=>{ if(!window.indexedDB) return reject(new Error('IndexedDB unavailable')); const req=indexedDB.open('LifeTrackerInventory_v18_0',1); req.onupgradeneeded=()=>{ const db=req.result; if(!db.objectStoreNames.contains('state')) db.createObjectStore('state',{keyPath:'key'}); }; req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error||new Error('IndexedDB open failed')); }); }
+  async function saveInventoryV140(reason='save'){ normalizeInventoryV140(); inventory.lastLocalEdit=new Date().toISOString(); try{ const db=await openDBV140(); await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readwrite'); tx.objectStore('state').put({key:'latest-v18.0',savedAt:new Date().toISOString(),reason,data:inventory}); tx.oncomplete=()=>{db.close();resolve(true);}; tx.onerror=()=>{db.close();reject(tx.error||new Error('IndexedDB save failed'));}; }); try{ localStorage.setItem('lifeTracker_latest_version',VERSION140); localStorage.setItem('lifeTracker_latest_saved_at',new Date().toISOString()); localStorage.setItem('lifeTracker_storage_mode','IndexedDB v18.0'); }catch(e){} const s=document.getElementById('saveState')||document.getElementById('saveStateV83'); if(s){s.textContent='Saved';s.className='saved';} return true; }catch(err){ console.warn('v17 save fallback',err); try{ sessionStorage.setItem('lifeTracker_v18_0_last_save_marker',new Date().toISOString()); }catch(e){} const s=document.getElementById('saveState')||document.getElementById('saveStateV83'); if(s){s.textContent='Saved in page';s.className='saved';} return true; } }
+  async function loadSavedV140(){ try{ const db=await openDBV140(); return await new Promise((resolve,reject)=>{ const tx=db.transaction('state','readonly'); const req=tx.objectStore('state').get('latest-v18.0'); req.onsuccess=()=>{db.close(); const row=req.result; resolve(row&&row.data?normalizeInventoryV140(row.data):null);}; req.onerror=()=>{db.close();reject(req.error||new Error('IndexedDB read failed'));}; }); }catch(err){ console.warn('v17 saved inventory read skipped:',err); return null; } }
   window.__lifeTrackerSaveV140 = window.__lifeTrackerSaveV113 = window.__lifeTrackerSaveV130 = saveInventoryV140;
   window.__lifeTrackerLoadSavedV140 = window.__lifeTrackerLoadSavedV113 = loadSavedV140;
   window.persist = window.__lifeTrackerPersistV85 = saveInventoryV140; try{ persist=saveInventoryV140; persistV83=saveInventoryV140; }catch(e){}
-  window.downloadJSON = function(){ normalizeInventoryV140(); const blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='life-tracker-v17_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href); };
+  window.downloadJSON = function(){ normalizeInventoryV140(); const blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='life-tracker-v18_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href); };
 
   const prevMajorConfig140 = window.majorConfig;
   const prevRenderSidebar140 = window.renderSidebar;
@@ -4799,13 +4817,114 @@ document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=
   normalizeInventoryV140();
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=>{ normalizeInventoryV140(); if(currentTab) renderAll(); });
   else setTimeout(()=>{ normalizeInventoryV140(); if(currentTab) renderAll(); },0);
-  console.log('Life Tracker v17.0 patch loaded', {beauty:(inventory.beautyProducts||[]).length, closet:(inventory.closetItems||[]).length, home:(inventory.homeItems||[]).length});
+  console.log('Life Tracker v18.0 patch loaded', {beauty:(inventory.beautyProducts||[]).length, closet:(inventory.closetItems||[]).length, home:(inventory.homeItems||[]).length});
 })();
 
 
 
-/* ===== v17.0 metadata safety marker ===== */
+/* ===== v18.0 metadata safety marker ===== */
 (function(){
   window.__lifeTrackerV170PatchLoaded = true;
-  try{ document.title = 'Life Tracker v17.0'; const v=document.querySelector('.version'); if(v) v.textContent='v 16.0'; }catch(e){}
+  try{ document.title = 'Life Tracker v18.0'; const v=document.querySelector('.version'); if(v) v.textContent='v 18.0'; }catch(e){}
+})();
+
+
+
+/* ===== v18.0 final QA patch: Swimwear, Accessories retention, and edit-view preservation ===== */
+(function(){
+  const VERSION='v18.0';
+  const PACKAGE_ID='life-tracker-v18.0-2026-09-26';
+  const EXPORT_TYPE='Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention';
+  const SWIM='Swimwear';
+  const VALID_ACCESSORIES=['Bags','Belts','Eyeglasses','Hats','Jewelry','Scarves','Sunglasses','Other Accessories'];
+  const ACCESSORY_SYNONYMS={bag:'Bags',bags:'Bags',purse:'Bags',tote:'Bags',clutch:'Bags',hat:'Hats',hats:'Hats',cap:'Hats',caps:'Hats',sunglass:'Sunglasses',sunglasses:'Sunglasses',scarf:'Scarves',scarves:'Scarves',shawl:'Scarves',belt:'Belts',belts:'Belts',eyeglass:'Eyeglasses',eyeglasses:'Eyeglasses',glasses:'Eyeglasses',jewelry:'Jewelry',jewellery:'Jewelry'};
+  function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function clone(o){try{return JSON.parse(JSON.stringify(o||{}));}catch(e){return {};}}
+  function list(){return (window.inventory && inventory.closetItems) || [];}
+  function itemName(i){return (i&&(i.fullProductName||i.itemName||i.name))||'';}
+  function itemCat(i){return (i&&(i.lifeCategory||i.category))||'';}
+  function itemSub(i){return (i&&(i.lifeSubcategory||i.subcategory))||'';}
+  function normalizeAccessorySub(sub,name){
+    const raw=String(sub||'').trim();
+    const direct=ACCESSORY_SYNONYMS[raw.toLowerCase()]||raw;
+    if(VALID_ACCESSORIES.includes(direct)) return direct;
+    const text=String(name+' '+raw).toLowerCase();
+    if(/bag|tote|clutch|purse/.test(text)) return 'Bags';
+    if(/sunglass/.test(text)) return 'Sunglasses';
+    if(/scarf|shawl/.test(text)) return 'Scarves';
+    if(/\b(hat|cap|bucket)\b/.test(text)) return 'Hats';
+    if(/belt/.test(text)) return 'Belts';
+    if(/eye\s*glass|eyeglass|\bglasses\b/.test(text)) return 'Eyeglasses';
+    if(/jewel|bracelet|necklace|earring|ring/.test(text)) return 'Jewelry';
+    return 'Other Accessories';
+  }
+  function normalizeSwimSub(sub,name){const text=String((sub||'')+' '+(name||'')).toLowerCase(); if(/cover\s*up|coverup/.test(text)) return 'Coverup'; return 'Bikinis';}
+  function normalizeClosetItemV180(item){
+    if(!item||typeof item!=='object') return item;
+    let c=itemCat(item), s=itemSub(item), n=itemName(item);
+    if(c==='Accessories') s=normalizeAccessorySub(s,n);
+    if(c===SWIM || /(bikini|swimsuit|swimwear|bathing suit)|cover\s*up|coverup/.test(String(c+' '+s+' '+n).toLowerCase())){ c=SWIM; s=normalizeSwimSub(s,n); }
+    if(c) item.category=item.lifeCategory=c;
+    if(s) item.subcategory=item.lifeSubcategory=s;
+    return item;
+  }
+  function normalizeInventoryV180(data=inventory){
+    if(!data||typeof data!=='object') return data;
+    data.appVersion=VERSION; data.version=VERSION; data.packageId=PACKAGE_ID; data.exportType=EXPORT_TYPE;
+    ['beautyProducts','closetItems','homeItems','outfits','dayLooks','savedLooks'].forEach(k=>{if(!Array.isArray(data[k])) data[k]=[];});
+    (data.closetItems||[]).forEach(normalizeClosetItemV180);
+    try{ if(typeof window.__lifeTrackerNormalizeV140==='function') window.__lifeTrackerNormalizeV140(data); }catch(e){}
+    (data.closetItems||[]).forEach(normalizeClosetItemV180);
+    data.appVersion=VERSION; data.version=VERSION; data.packageId=PACKAGE_ID; data.exportType=EXPORT_TYPE;
+    return data;
+  }
+  window.__lifeTrackerNormalizeV180=normalizeInventoryV180;
+
+  const prevMajorConfig=window.majorConfig;
+  window.majorConfig=function(){
+    const base=(typeof prevMajorConfig==='function'?prevMajorConfig.apply(this,arguments):[])||[];
+    if(currentTab!=='closet') return base;
+    const out=base.map(m=>m&&m.name==='Accessories'?{...m,subs:[{name:'Bags',children:[]},{name:'Belts',children:[]},{name:'Eyeglasses',children:[]},{name:'Hats',children:[]},{name:'Jewelry',children:[]},{name:'Scarves',children:[]},{name:'Sunglasses',children:[]},{name:'Other Accessories',children:[]}]}:m);
+    if(!out.some(m=>m&&m.name===SWIM)){
+      const tops=out.findIndex(m=>m&&m.name==='Tops');
+      out.splice(tops>=0?tops:out.length,0,{name:SWIM,subs:[{name:'Bikinis',children:[]},{name:'Coverup',children:[]}]});
+    }
+    return out;
+  };
+
+  const prevSave130=window.__lifeTrackerSaveV130;
+  const prevSave140=window.__lifeTrackerSaveV140;
+  async function saveV180(reason='save'){
+    normalizeInventoryV180(); inventory.lastLocalEdit=new Date().toISOString();
+    if(typeof prevSave140==='function') return await prevSave140(reason+'-v18');
+    if(typeof prevSave130==='function') return await prevSave130(reason+'-v18');
+    return true;
+  }
+  window.__lifeTrackerSaveV180=saveV180;
+  window.__lifeTrackerSaveV140=window.__lifeTrackerSaveV113=window.__lifeTrackerSaveV130=saveV180;
+  window.persist=window.__lifeTrackerPersistV85=saveV180;
+  try{persist=saveV180; persistV83=saveV180;}catch(e){}
+
+  function snapshotView(){return {tab:currentTab,filters:clone(filters),searchText:String(searchText||''),expandedMajor,expandedSub,scrollX:window.scrollX||0,scrollY:window.scrollY||0,wasEdit:!!(editing&&editing.mode==='edit')};}
+  function restoreView(s){
+    if(!s||!s.wasEdit) return;
+    currentTab=s.tab||currentTab; filters=s.filters||{}; searchText=s.searchText||''; expandedMajor=s.expandedMajor||''; expandedSub=s.expandedSub||'';
+    const search=document.getElementById('search'); if(search) search.value=searchText;
+    normalizeInventoryV180();
+    if(typeof renderAll==='function') renderAll();
+    setTimeout(()=>{try{window.scrollTo(s.scrollX||0,s.scrollY||0);}catch(e){}},0);
+  }
+  function wrapSave(fnName){
+    const old=window[fnName]; if(typeof old!=='function'||old.__v18Wrapped) return;
+    const wrapped=async function(){const state=snapshotView(); const result=await old.apply(this,arguments); restoreView(state); return result;};
+    wrapped.__v18Wrapped=true; window[fnName]=wrapped;
+  }
+  ['saveBeautyFormV140','saveBeautyForm','saveBeautyFormV72','saveClosetFormV130','saveHomeFormV140','saveHomeFormV132','saveHomeFormV112','saveHomeFormV110'].forEach(wrapSave);
+
+  const oldDownload=window.downloadJSON;
+  window.downloadJSON=function(){normalizeInventoryV180(); const blob=new Blob([JSON.stringify(inventory,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='life-tracker-v18_0-edited-inventory-data.json'; a.click(); URL.revokeObjectURL(a.href);};
+  normalizeInventoryV180();
+  try{document.title='Life Tracker v18.0'; const v=document.querySelector('.version'); if(v) v.textContent='v 18.0';}catch(e){}
+  window.__lifeTrackerV180PatchLoaded=true;
+  console.log('Life Tracker v18.0 patch loaded', {beauty:(inventory.beautyProducts||[]).length, closet:(inventory.closetItems||[]).length, home:(inventory.homeItems||[]).length});
 })();

@@ -1,1 +1,1 @@
-Life Tracker v17.0 deploy check: upload root contents to GitHub Pages. .nojekyll included.
+Life Tracker v18.0 deploy check: upload root contents to GitHub Pages. .nojekyll included.

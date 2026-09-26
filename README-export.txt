@@ -1,4 +1,4 @@
-Life Tracker v17.0 GitHub Files
+Life Tracker v18.0 GitHub Files
 
 Upload these files to the root of your GitHub Pages repository.
 
