@@ -1,1 +1,1 @@
-Life Tracker v18.0 deploy check: upload root contents to GitHub Pages. .nojekyll included.
+Upload ALL ZIP root contents. After deployment hard refresh, Closet unfiltered must show 200 cards; Bottoms 25, Accessories 28; Beauty 524 records, Home 30. Browser edits from v18 automatically reconcile to at least baseline records.

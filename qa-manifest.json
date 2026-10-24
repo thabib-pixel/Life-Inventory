@@ -1,0 +1,26 @@
+{
+  "version": "v19.0",
+  "baseline": "life-tracker-v17_0-edited-inventory-data (8)(1).json",
+  "counts": {
+    "beautyProducts": 524,
+    "closetItems": 200,
+    "homeItems": 30,
+    "outfits": 1,
+    "dayLooks": 0,
+    "savedLooks": 0
+  },
+  "bottoms": {
+    "Skirts": 6,
+    "Pants": 12,
+    "Shorts": 3,
+    "Capris": 2,
+    "Leggings": 1,
+    "Skort": 1
+  },
+  "accessories": {
+    "Bags": 15,
+    "Hats": 8,
+    "Scarves": 1,
+    "Sunglasses": 4
+  }
+}

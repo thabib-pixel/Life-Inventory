@@ -1,0 +1,50 @@
+LIFE TRACKER v19.0 — QA AND INVENTORY RETENTION REPORT
+Date: October 24, 2026
+Source baseline: life-tracker-v17_0-edited-inventory-data (8)(1).json
+Release: life-tracker-v19.0-github-files.zip
+
+DATA AUDIT — PASSED
+- Beauty: 524 records; Closet: 200 records; Home: 30 records; Outfits: 1 record.
+- Bottoms: 25 records (12 Pants, 6 Skirts, 3 Shorts, 2 Capris, 1 Leggings, 1 Skort).
+- Accessories: 28 records (15 Bags, 8 Hats, 4 Sunglasses, 1 Scarves).
+- Every original item, stable ID, numeric ID, field, category value, quantity, description, and image reference exactly matches the most recent user JSON export. Zero source item field differences.
+- All original stable IDs unique; no missing local image files; inline base64 image payloads valid.
+- ZIP CRC/structure, JavaScript syntax, and v19 download/storage/version tokens verified.
+- New Swimwear with Bikinis/Coverup, Home Seasonings & Spices, Beauty Sample controls retained.
+- 44 automated static/package integrity checks passed.
+
+REAL CHROMIUM BROWSER TESTS — PASSED IN TEST ENVIRONMENT
+- Loaded full 524/200/30/1 record baseline (test copy omitting image pixels for performance).
+- Unfiltered Closet displayed 200 individual cards; Home displayed 30 individual cards.
+- Bottoms filter displayed 25 cards; Accessories 28; Bags 15; Hats 8.
+- Beauty displayed 435 grouped product cards representing all 524 saved variant/record rows; Makeup filter displayed 211 grouped cards.
+- No uncaught JavaScript page errors observed in the full-data test.
+- Open/edit/save Closet; edit Bags and retain Bags; preserve stable IDs.
+- Add Swimwear Bikini; verify Bikinis/Coverup available in form; save and display new item.
+- Try-On Studio renders; item selection places garment; clear outfit works.
+- Beauty Sample unchecked by default; stays unchecked after save; stable IDs, descriptions preserved on edit.
+- Add/edit Home item, quantity badge, Restock Soon filter.
+- Search, export filename v19, filters, search, and scroll state retained after editing.
+- Delete an item, save explicit deletion tombstone, reset browser edits to packaged inventory.
+- Upload and save a small image in Beauty, Closet, Home; verify it remains on saved record.
+- Desktop interface visually inspected in Chromium; 390px mobile viewport renders without horizontal page overflow.
+
+BROWSER STORAGE AND RECOVERY — PASSED
+- Simulated legacy v18 IndexedDB copy with only 89 Closet items and user changes.
+- Actual app startup reconciled it to all 200 Closet items, preserving saved edits.
+- Saved restored 200 records into v19 IndexedDB (injected IndexedDB mock in an opaque-origin test page).
+- Edited a record, persisted it, and reloaded the same 200 records and latest edit from the simulated database.
+- 15 targeted JavaScript recovery checks passed, including 89-to-200 restoration, preserving extra user-added records, and intentional deletion persistence.
+
+NOT TESTED IN A REAL DEPLOYMENT
+- GitHub Pages published URL, user's own browser/cache, and actual production IndexedDB were not accessible for end-to-end deployment checks.
+- The browser suite used Chromium with fixture data/fake network; persistence suite used a simulated IndexedDB store because browser navigation to a local HTTP origin was restricted.
+- Image upload was exercised with a local test image; static asset paths for all personal photos were checked, but each of the 769 unique personal image references was not individually visually inspected.
+- Other rare permutations, equipment-specific browser behavior, and external/nonexistent backend services are outside confirmed coverage. Consequently, this report does not claim that literally every conceivable interaction was exercised.
+
+DEPLOYMENT INSTRUCTIONS
+1. Back up/export any newer edits in your existing v18 site if necessary.
+2. Extract the v19 ZIP; replace index.html, inventory-data.json, extracted.js and other root files, retaining images/.
+3. Commit and wait for GitHub Pages deployment, then hard-refresh the site.
+4. Select CLOSET without filters: verify 200 total and 25 Bottoms. The 89-item old browser copy should not hide records.
+5. Check Beauty, Home, and any saved changes; export a new v19 JSON backup.

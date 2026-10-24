@@ -1,1 +1,1 @@
-Life Tracker v18.0 backup package created from life-tracker-v16_0-edited-inventory-data.json. Counts: Beauty 525, Closet 146, Home 30.
+v19.0 baseline verified: Beauty 524, Closet 200, Home 30, Outfits 1. 25 Bottoms. No stable-ID loss. Source latest September 25, 2026 export.

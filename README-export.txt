@@ -1,14 +1,17 @@
-Life Tracker v18.0 GitHub Files
+LIFE TRACKER v19.0 — COMPLETE INVENTORY EDITION
 
-Upload these files to the root of your GitHub Pages repository.
+Built October 24, 2026 using your latest verified v17 edited export and the restored v18 app.
 
-Included updates:
-- Latest user-exported inventory JSON retained as the source of truth.
-- Beauty Sample checkbox fixed so it is not checked by default and unchecked saves stay unchecked.
-- Closet Accessories Hats sub-category retained.
-- Home Kitchen & Dining Seasonings & Spices retained.
+Counts: Beauty 524, Closet 200 (25 Bottoms), Home 30, Outfits 1.
 
-Counts:
-- Beauty: 525
-- Closet: 146
-- Home: 30
+Changes:
+- v19-specific storage and cache isolation; protects complete baseline from incomplete browser snapshots.
+- One-time migration of legitimate prior v18 browser edits into v19 without dropping packaged records.
+- Beauty edit now keeps original stable IDs, photos, dates and ancillary fields for existing variants.
+- Intentional deletes use tombstones so deleted packaged items do not resurrect.
+- Reset Local Edits refreshes the v19 packaged inventory and updates IndexedDB.
+- Existing Swimwear (Bikinis, Coverup), correct Accessories sub-categories, Beauty Sample, and edit-view filters remain.
+
+UPLOAD: Extract ZIP and upload ALL root contents to your GitHub Pages repository, replacing index.html, inventory-data.json, and retaining the images directory. Hard-refresh published website. Do not upload the ZIP itself as a lone file.
+
+Your personal browser can contain edits that have never been exported; use Export Updated JSON for an additional personal backup before switching versions.

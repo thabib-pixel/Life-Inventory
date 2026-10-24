@@ -1,5 +1,5 @@
 {
-  "exportType": "Life Tracker v18.0 package with latest inventory baseline, Swimwear category, Accessories save fix, and edit-view filter retention",
+  "exportType": "Life Tracker v19.0 package with latest complete export, 200-Closet safeguard, Swimwear, Accessories, and stable edit saves",
   "exportedAt": "2026-06-26T04:22:59.351Z",
   "beautyProducts": [
     {
@@ -41709,7 +41709,7 @@
       "stableId": "outfit-1777246746167"
     }
   ],
-  "appVersion": "v18.0",
+  "appVersion": "v19.0",
   "dayLooks": [],
   "savedLooks": [],
   "dailyHub": {
@@ -41718,10 +41718,11 @@
     "removedModule": "Life Planner",
     "releaseNotes": "Life Planner remains removed. v8.5 uses IndexedDB for image-heavy saved inventory data to avoid localStorage quota alerts."
   },
-  "version": "v18.0",
+  "version": "v19.0",
   "lastLocalEdit": "2026-09-25T16:57:19.974Z",
-  "lastPackagedAt": "2026-09-26T12:56:00-04:00",
-  "packageId": "life-tracker-v18.0-2026-09-26",
+  "lastPackagedAt": "2026-10-24T13:05:00-04:00",
+  "packageId": "life-tracker-v19.0-2026-10-24",
   "sourceBaseline": "life-tracker-v17_0-edited-inventory-data (8)(1).json",
-  "builtAt": "2026-09-26T12:56:00-04:00"
+  "builtAt": "2026-10-24T13:05:00-04:00",
+  "restorationNotes": "Full 200-record Closet baseline is preserved during startup and browser-save migrations; v19 deletes use explicit tombstones."
 }
