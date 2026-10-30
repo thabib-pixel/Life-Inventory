@@ -1,0 +1,64 @@
+LIFE TRACKER v20.0 — QA RESULTS
+
+BASELINE: life-tracker-v19_0-edited-inventory-data.json (uploaded by user)
+
+DATA RETENTION (deep equality for every stored inventory item):
+Beauty: 526 / 526 records retained
+Closet: 202 / 202 records retained
+Home: 30 / 30 records retained
+Outfits: 1 / 1 records retained
+DayLooks: 0 / 0; SavedLooks: 0 / 0
+No duplicate stable IDs across these collections.
+Closet Bottoms: 25; Accessories Bags: 15; Hats: 8.
+
+FUNCTIONAL QA — 27/27 Chromium tests passed in offline document harness:
+PASS — v20 title
+PASS — all raw inventory records loaded
+PASS — closet display all 202
+PASS — Bottoms category shows 25
+PASS — Closet save edit persists field
+PASS — Closet filter retained after edit
+PASS — Closet can reset category
+PASS — Accessories 28
+PASS — Bags 15
+PASS — Bag opens with correct category
+PASS — Bag stays bag after save
+PASS — Swimwear add & save
+PASS — Closet count increased after add
+PASS — Beauty renders product cards
+PASS — New Beauty Sample default false
+PASS — Beauty search displays matching item
+PASS — Makeup originally not Sample
+PASS — Sample flag saves true
+PASS — Search retained after Beauty edit
+PASS — Sample reopens true
+PASS — Sample flag persists false after unchecking
+PASS — Home renders all 30
+PASS — Home quantity save
+PASS — Home restock saved
+PASS — v20 export filename
+PASS — no browser page exceptions
+PASS — mobile horizontal overflow minimal
+
+INVENTORY RECOVERY TEST
+- Simulated a v20 browser save with only 89 Closet records -> recovered all 202 from packaged baseline and 25 Bottoms.
+- Retained newer edits already saved in v20.
+- Prevented older v19 saves from overwriting the newer uploaded v20 packaged baseline.
+- Confirmed no category, subcategory, ID, or image field regressions on fresh load.
+
+IMAGE VALIDITY TEST
+- All 252 unique embedded base64 images decoded and passed Pillow verification.
+- All 510 unique referenced local image files found and passed Pillow verification.
+- Zero missing or unreadable image assets in latest export.
+
+PACKAGE QUALITY
+- JavaScript syntax checked with node --check.
+- ZIP integrity check passed, GitHub repository root structure checked.
+- Version strings, exported filename and IndexedDB namespace all updated to v20.0.
+- Loading state is displayed until the full JSON fetch finishes, avoiding a misleading blank page.
+
+SCOPE LIMITATIONS
+- This environment blocks browser navigation to http://localhost and file URLs. UI workflows used Chromium set_content() with a reduced-image version of the complete inventory: all records and fields except large inline image data were present. The actual ZIP retains all original image data intact.
+- Browser tests verified edit behavior in memory but could not test IndexedDB persistence across a real network-origin page reload.
+- GitHub Pages deployment and production network caching have NOT been tested; after uploading, verify totals and an edit/save/reload workflow on the published site.
+- No claim is made that every possible interaction was tested; these are the concrete checks performed.

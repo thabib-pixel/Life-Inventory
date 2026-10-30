@@ -1,26 +1,72 @@
 {
-  "version": "v19.0",
-  "baseline": "life-tracker-v17_0-edited-inventory-data (8)(1).json",
+  "version": "v20.0",
+  "baseline_filename": "life-tracker-v19_0-edited-inventory-data.json",
   "counts": {
-    "beautyProducts": 524,
-    "closetItems": 200,
+    "beautyProducts": 526,
+    "closetItems": 202,
     "homeItems": 30,
     "outfits": 1,
     "dayLooks": 0,
     "savedLooks": 0
   },
-  "bottoms": {
-    "Skirts": 6,
-    "Pants": 12,
-    "Shorts": 3,
-    "Capris": 2,
-    "Leggings": 1,
-    "Skort": 1
+  "ids_unique": true,
+  "item_fields_deep_equal_to_latest_export": true,
+  "relative_images_verified": 510,
+  "missing_images": 0,
+  "js_syntax_passed": true,
+  "closet_bottoms": 25,
+  "closet_bags": 15,
+  "closet_hats": 8,
+  "versioned_indexeddb": "LifeTrackerInventory_v20_0",
+  "previous_v19_cache_overlay_disabled": true,
+  "browser_test": "27/27 direct Chromium UI interactions passed (offline document harness, reduced image fixtures)",
+  "ui_tests_passed": 27,
+  "ui_tests_total": 27,
+  "ui_tests_mode": "Chromium document-level harness; data:image payloads omitted in test fixture only; about:blank IndexedDB writes unavailable",
+  "recovery_test": "Simulated 89 saved Closet records -> 202; 25 Bottoms; preserved v20 edits; ignored older v19 conflicting edits.",
+  "final_inventory_exact_match": {
+    "beautyProducts": {
+      "raw": 526,
+      "package": 526,
+      "all_records_exactly_retained": true
+    },
+    "closetItems": {
+      "raw": 202,
+      "package": 202,
+      "all_records_exactly_retained": true
+    },
+    "homeItems": {
+      "raw": 30,
+      "package": 30,
+      "all_records_exactly_retained": true
+    },
+    "outfits": {
+      "raw": 1,
+      "package": 1,
+      "all_records_exactly_retained": true
+    },
+    "dayLooks": {
+      "raw": 0,
+      "package": 0,
+      "all_records_exactly_retained": true
+    },
+    "savedLooks": {
+      "raw": 0,
+      "package": 0,
+      "all_records_exactly_retained": true
+    }
   },
-  "accessories": {
-    "Bags": 15,
-    "Hats": 8,
-    "Scarves": 1,
-    "Sunglasses": 4
-  }
+  "image_integrity": {
+    "base64_unique": 252,
+    "base64_verified": 252,
+    "referenced_files_unique": 510,
+    "file_images_verified": 510,
+    "errors": []
+  },
+  "limitations": [
+    "The live GitHub Pages site was not accessed or verified.",
+    "Browser network navigation is blocked by the sandbox, so Chromium tests ran in a document-level harness with inline images omitted from the QA fixture only.",
+    "Actual IndexedDB write/read after a real domain reload could not be exercised in the sandbox; save flows were tested at the UI and merge-logic level.",
+    "Live deployment requires uploading inventory-data.json and images/ alongside index.html."
+  ]
 }

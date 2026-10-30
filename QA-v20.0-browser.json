@@ -1,0 +1,142 @@
+{
+  "passed": 27,
+  "total": 27,
+  "browser_mode": "Chromium document-level harness; data:image payloads omitted in test fixture only; about:blank IndexedDB writes unavailable",
+  "checks": [
+    {
+      "test": "v20 title",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "all raw inventory records loaded",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "closet display all 202",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Bottoms category shows 25",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Closet save edit persists field",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Closet filter retained after edit",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Closet can reset category",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Accessories 28",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Bags 15",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Bag opens with correct category",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Bag stays bag after save",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Swimwear add & save",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Closet count increased after add",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Beauty renders product cards",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "New Beauty Sample default false",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Beauty search displays matching item",
+      "pass": true,
+      "details": "1"
+    },
+    {
+      "test": "Makeup originally not Sample",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Sample flag saves true",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Search retained after Beauty edit",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Sample reopens true",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Sample flag persists false after unchecking",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Home renders all 30",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Home quantity save",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "Home restock saved",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "test": "v20 export filename",
+      "pass": true,
+      "details": "life-tracker-v20_0-edited-inventory-data.json"
+    },
+    {
+      "test": "no browser page exceptions",
+      "pass": true,
+      "details": "[]"
+    },
+    {
+      "test": "mobile horizontal overflow minimal",
+      "pass": true,
+      "details": "[390, 390]"
+    }
+  ]
+}

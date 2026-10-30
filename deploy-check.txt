@@ -1,1 +1,1 @@
-Upload ALL ZIP root contents. After deployment hard refresh, Closet unfiltered must show 200 cards; Bottoms 25, Accessories 28; Beauty 524 records, Home 30. Browser edits from v18 automatically reconcile to at least baseline records.
+v20.0 GitHub deployment: upload all contents of ZIP to repository root. Required: index.html, inventory-data.json, images/. Hard refresh after deployment. Confirm Beauty 526, Closet 202, Home 30, Outfits 1.
