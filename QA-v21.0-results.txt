@@ -1,0 +1,24 @@
+Life Tracker v21.0 — Release QA Summary
+
+Source: life-tracker-v20_0-edited-inventory-data.json (latest user upload)
+Inventory counts: Beauty 520; Closet 202; Home 30; Outfits 1; Day Looks 0; Saved Looks 0.
+Beauty delta from packaged v20.0: 5 added stable IDs, 11 removed. No deleted items were resurrected.
+
+STATIC / PACKAGE QA
+- 44/44 build-audit checks pass (including stable-ID uniqueness, exact equality of all inventory collection records against uploaded source, image validation, version metadata, JS syntax, ZIP CRC, and deployment structure).
+- All 558 referenced local image paths exist in the ZIP; all embedded images decode.
+- ZIP integrity: pass, 622 total entries before adding this QA file.
+
+BROWSER RENDERING QA
+- Chromium in-page evaluation with inventory-data.json intercepted in-memory (image base64 stripped from browser fixture only; full images are in released ZIP):
+- Beauty: all 520 records load, rendering 429 grouped product cards.
+- Closet: all 202 records load and 202 cards render.
+- Home: all 30 records load and 30 cards render.
+- No JavaScript page exceptions observed during the rendering check.
+
+LIMITATIONS
+- Chromium navigation to the local synthetic web host was blocked by the environment (net::ERR_BLOCKED_BY_ADMINISTRATOR). This prevented automated real-origin IndexedDB persistence and HTTP page reload tests. Do not interpret this QA as verification of every interaction on your published GitHub Pages site.
+- V20 interaction code is retained; the full deployed site, actual user browser storage, and production refresh performance are not verified here.
+
+DEPLOYMENT
+Extract and replace the GitHub repository's root files, including index.html, inventory-data.json and images/. Browser may take some time to load the complete 68 MB JSON and images. Verify first load of Beauty/Closet/Home, an edit, an export, and a reload on the published site.

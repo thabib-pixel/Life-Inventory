@@ -1,1 +1,1 @@
-v20.0 GitHub deployment: upload all contents of ZIP to repository root. Required: index.html, inventory-data.json, images/. Hard refresh after deployment. Confirm Beauty 526, Closet 202, Home 30, Outfits 1.
+v21.0 deployment checklist: check 520 Beauty, 202 Closet (25 Bottoms), 30 Home, 1 Outfit. Test add/edit, filters, export, and reload on deployed GitHub Pages.

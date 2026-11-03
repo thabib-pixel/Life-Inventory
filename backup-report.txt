@@ -1,1 +1,1 @@
-v19.0 baseline verified: Beauty 524, Closet 200, Home 30, Outfits 1. 25 Bottoms. No stable-ID loss. Source latest September 25, 2026 export.
+Latest user-uploaded v20.0 export is the source of truth for v21.0. All inventory item fields retained. Changes from packaged v20.0: Beauty +5 IDs, -11 IDs; Closet 202, Home 30, Outfits 1.
