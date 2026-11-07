@@ -1,0 +1,50 @@
+LIFE TRACKER v22.0 — QA REPORT
+Release date: November 5, 2026
+Baseline: life-tracker-v21_0-edited-inventory-data (2).json
+
+RETAINED SOURCE RECORDS
+- Beauty: 535
+- Closet: 202 (including 25 Bottoms, 15 Bags and 8 Hats)
+- Home: 30
+- Outfits: 1
+- Other saved top-level datasets/fields preserved.
+- All item records preserve their stable IDs and detailed properties exactly as they appear in the supplied export. Only release-level metadata and a new v22 deletion-tracking key were added/updated.
+
+BUILD / DATA VALIDATION
+- Valid JSON and unique record IDs in all saved collections.
+- 508 external image references resolve to packaged files.
+- 252 unique embedded product/closet/home image payloads decode and verify using Pillow.
+- 609 packaged external image files decode and verify using Pillow.
+- 24 HTML inline script blocks pass Node.js syntax checks.
+- GitHub Pages root contains index.html, inventory-data.json, .nojekyll and images/ folder.
+- ZIP integrity test passes; archive has no duplicate member names.
+- All 535 / 202 / 30 / 1 records appear in the packaged JSON.
+
+CHROMIUM IN-PAGE INTERACTION TESTING
+- 41/41 test assertions passed.
+- Full baseline records displayed from a lightweight image-substituted test payload:
+  Closet: 202 cards, Beauty: 434 grouped cards representing 535 records, Home: 30 cards.
+- Beauty Sample false/default/persistence, search and edit filter retention.
+- Closet Bottoms, Bags/Hats filters, edit persistence, new Swimwear/Bikinis item, delete, image-gallery upload, Try-On studio rendering.
+- Home edit quantities, Restock Soon, add, image upload, item rendering.
+- JSON export filename, reset-to-packaged inventory and mobile overflow.
+- Simulated legacy 89-item Closet save recovered all 202 packaged Closet records and preserved a saved edit.
+- Browser save/load through the v22 IndexedDB code path was simulated with an in-page API mock.
+- No uncaught Chromium JavaScript page errors in the test session.
+
+LOADING / DATA SAFETY CHANGES
+- Version-specific IndexedDB namespace: LifeTrackerInventory_v22_0 / latest-v22.0.
+- Previously saved versions cannot overwrite the new v22 baseline.
+- The initial inventory renders immediately after external JSON parsing. The app no longer writes a full ~74 MB baseline into IndexedDB before showing the cards. Edits still trigger persistent saves.
+
+LIMITATIONS
+- The Chromium browser cannot navigate to a local web server in this environment (net::ERR_BLOCKED_BY_ADMINISTRATOR).
+- Browser interactions used page.set_content with an image-light copy of the exact same inventory records and simulated IndexedDB; real origin-backed IndexedDB and GitHub Pages production deployment were NOT verified.
+- A first load must still download and parse the ~74 MB inventory JSON, so visible delay remains possible on some connections/devices.
+- No claim is made that every conceivable production behavior has been tested.
+
+RECOMMENDED DEPLOYMENT SPOT CHECK
+1. Replace GitHub repository root files (including inventory-data.json and full images directory).
+2. After publishing, hard refresh and allow all inventory to load.
+3. Verify Closet = 202; Bottoms = 25; Home = 30. Beauty displays 535 records as grouped cards.
+4. Edit one noncritical item, export JSON, reload page, and confirm the edit persisted in your actual browser.

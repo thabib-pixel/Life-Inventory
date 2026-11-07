@@ -1,1 +1,0 @@
-v21.0 deployment checklist: check 520 Beauty, 202 Closet (25 Bottoms), 30 Home, 1 Outfit. Test add/edit, filters, export, and reload on deployed GitHub Pages.

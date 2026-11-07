@@ -1,0 +1,170 @@
+{
+  "mode": "Offline Chromium with light-weight inventory image substitutes and simulated IndexedDB",
+  "checks": {
+    "Startup shows v22.0": {
+      "passed": true,
+      "detail": ""
+    },
+    "All 535/202/30/1 records loaded": {
+      "passed": true,
+      "detail": "[535, 202, 30, 1]"
+    },
+    "closet cards and grouping": {
+      "passed": true,
+      "detail": "[202, 202]"
+    },
+    "beauty cards and grouping": {
+      "passed": true,
+      "detail": "[434, 434]"
+    },
+    "home cards and grouping": {
+      "passed": true,
+      "detail": "[30, 30]"
+    },
+    "Bottoms all 25 retained": {
+      "passed": true,
+      "detail": "25"
+    },
+    "Bags filter 15": {
+      "passed": true,
+      "detail": "15"
+    },
+    "Hats filter 8": {
+      "passed": true,
+      "detail": "8"
+    },
+    "Closet text search": {
+      "passed": true,
+      "detail": "12"
+    },
+    "Bag opens as Bags": {
+      "passed": true,
+      "detail": "Bags"
+    },
+    "Bag remains Bags after save": {
+      "passed": true,
+      "detail": ""
+    },
+    "Closet filter retained after editing": {
+      "passed": true,
+      "detail": "{'major': 'Accessories', 'sub': 'Bags'}"
+    },
+    "Makeup non-sample checkbox false on edit": {
+      "passed": true,
+      "detail": ""
+    },
+    "Makeup Sample false preserved": {
+      "passed": true,
+      "detail": ""
+    },
+    "Beauty filter retained after editing": {
+      "passed": true,
+      "detail": "{'major': 'Makeup'}"
+    },
+    "Beauty stable IDs preserved across edit": {
+      "passed": true,
+      "detail": ""
+    },
+    "Home image upload creates preview": {
+      "passed": true,
+      "detail": ""
+    },
+    "Home edit quantity preserved": {
+      "passed": true,
+      "detail": "(5, 6)"
+    },
+    "Home uploaded image persists in edited item": {
+      "passed": true,
+      "detail": ""
+    },
+    "Home Restock Soon toggle": {
+      "passed": true,
+      "detail": "['Restock Soon']"
+    },
+    "Home cards still 30 after editing": {
+      "passed": true,
+      "detail": ""
+    },
+    "Home new-item save adds one record": {
+      "passed": true,
+      "detail": ""
+    },
+    "v22 saves to version-specific DB key": {
+      "passed": true,
+      "detail": ""
+    },
+    "Save/recovery restores edited Home and added item": {
+      "passed": true,
+      "detail": ""
+    },
+    "Incomplete 89-item Closet restored to 202": {
+      "passed": true,
+      "detail": "202"
+    },
+    "Recovered Closet keeps old saved edits": {
+      "passed": true,
+      "detail": ""
+    },
+    "Recovered Closet has all 25 Bottoms": {
+      "passed": true,
+      "detail": ""
+    },
+    "Export filename is v22": {
+      "passed": true,
+      "detail": "life-tracker-v22_0-edited-inventory-data.json"
+    },
+    "Closet image upload creates gallery data": {
+      "passed": true,
+      "detail": ""
+    },
+    "Swimwear new item saves as Bikinis": {
+      "passed": true,
+      "detail": "Bikinis"
+    },
+    "Closet new item increments to 203": {
+      "passed": true,
+      "detail": ""
+    },
+    "Closet delete restores 202": {
+      "passed": true,
+      "detail": ""
+    },
+    "New Beauty Sample defaults unchecked": {
+      "passed": true,
+      "detail": ""
+    },
+    "Beauty variant image upload works": {
+      "passed": true,
+      "detail": ""
+    },
+    "New Beauty item saves with Sample=false": {
+      "passed": true,
+      "detail": ""
+    },
+    "Beauty add increments to 536": {
+      "passed": true,
+      "detail": ""
+    },
+    "Try-On studio renders": {
+      "passed": true,
+      "detail": ""
+    },
+    "Reset restores the exact packaged record counts": {
+      "passed": true,
+      "detail": "[535, 202, 30]"
+    },
+    "Reset removes QA-only added Beauty/Home items": {
+      "passed": true,
+      "detail": ""
+    },
+    "Mobile avoids horizontal page overflow": {
+      "passed": true,
+      "detail": "{'screen': 390, 'document': 390}"
+    },
+    "No browser JS exceptions": {
+      "passed": true,
+      "detail": "[]"
+    }
+  },
+  "exceptions": []
+}

@@ -1,0 +1,25 @@
+{
+  "source": "life-tracker-v21_0-edited-inventory-data (2).json",
+  "output": "/mnt/data/life-tracker-v22.0-github-files.zip",
+  "counts": {
+    "beautyProducts": 535,
+    "closetItems": 202,
+    "homeItems": 30,
+    "outfits": 1
+  },
+  "checks": [
+    "PASS beautyProducts: 535 unique records",
+    "PASS closetItems: 202 unique records",
+    "PASS homeItems: 30 unique records",
+    "PASS outfits: 1 unique records",
+    "PASS dayLooks: 0 unique records",
+    "PASS savedLooks: 0 unique records",
+    "PASS every item field remains exactly as exported",
+    "PASS v22.0 version title/export/storage namespaces updated",
+    "PASS initial full-inventory view no longer waits on browser cache write",
+    "PASS 508 referenced image paths present; 690 inline image references retained",
+    "PASS ZIP includes full current index/JSON and prior images/asset resources"
+  ],
+  "sha256_source": "75b18cf24feb276e545283a2c2efc27d190d7cce0605ae24e358dcdd7d92fbbc",
+  "sha256_index": "73c534c596112e7a6cd9ad9cdd7ac34a551d8da342c03971797b94ef00530292"
+}
